@@ -22,6 +22,7 @@ public class frmHome extends javax.swing.JFrame {
         lbl1.setVisible(false);
         lbl2.setVisible(false);
         lbl3.setVisible(false);
+        lblEmpresa.setText(sistemacontable.SistemaContable.empresa);
        
     }
 
@@ -61,7 +62,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
-        lblBienvenida2 = new javax.swing.JLabel();
+        lblEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -246,20 +247,21 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida1.setText("SISTEMA CONTABLE");
         getContentPane().add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 60));
 
-        lblBienvenida2.setBackground(new java.awt.Color(72, 165, 234));
-        lblBienvenida2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblBienvenida2.setForeground(new java.awt.Color(72, 165, 234));
-        lblBienvenida2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBienvenida2.setText("CASA");
-        getContentPane().add(lblBienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
+        lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
+        lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        lblEmpresa.setForeground(new java.awt.Color(72, 165, 234));
+        lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEmpresa.setText("CASA");
+        getContentPane().add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        frmLogin lo = new frmLogin();
+        lo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblCompararMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseClicked
@@ -267,7 +269,9 @@ public class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCompararMouseClicked
 
     private void lblCrearEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearEstadosMouseClicked
-        // TODO add your handling code here:
+        frmCuentas cuentas = new frmCuentas();
+        cuentas.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_lblCrearEstadosMouseClicked
 
     private void lblVerEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerEstadosMouseClicked
@@ -353,7 +357,6 @@ public class frmHome extends javax.swing.JFrame {
     public static javax.swing.JLabel lblBienvenida16;
     public static javax.swing.JLabel lblBienvenida17;
     public static javax.swing.JLabel lblBienvenida18;
-    public static javax.swing.JLabel lblBienvenida2;
     public static javax.swing.JLabel lblBienvenida3;
     public static javax.swing.JLabel lblBienvenida4;
     public static javax.swing.JLabel lblBienvenida5;
@@ -364,6 +367,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblCerrar;
     public static javax.swing.JLabel lblComparar;
     public static javax.swing.JLabel lblCrearEstados;
+    public static javax.swing.JLabel lblEmpresa;
     public static javax.swing.JLabel lblVerEstados;
     private javax.swing.JPanel pnlComparar;
     private javax.swing.JPanel pnlNuevos;

@@ -5,7 +5,7 @@
  */
 package sistemacontable;
 
-import sistemacontable.frames.frmCuentas;
+import sistemacontable.frames.frmLogin;
 
 /**
  *
@@ -14,9 +14,10 @@ import sistemacontable.frames.frmCuentas;
 public class SistemaContable {
 
     public static int posCuenta;
+    public static String empresa;
     
     public static void main(String[] args) {
-        frmCuentas home = new frmCuentas();
+        frmLogin home = new frmLogin();
         home.setVisible(true);
     }
     

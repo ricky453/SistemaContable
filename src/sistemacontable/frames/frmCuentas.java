@@ -385,8 +385,9 @@ public class frmCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNuevaCuentaMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void dtcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dtcFechaFocusLost

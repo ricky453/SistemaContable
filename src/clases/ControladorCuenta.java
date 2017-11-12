@@ -24,7 +24,16 @@ public class ControladorCuenta {
             cn.st.executeUpdate("INSERT INTO cuentas(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
             
         } catch (SQLException ex) {
-            throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
+            throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
+        }
+    }
+    public static void AgregarEmpresa(Cuenta cu)throws ErrorSistemaContable{ 
+        try {
+            cn=new Conexion();
+            cn.st.executeUpdate("INSERT INTO empresa(IdEmpresa,Usuario,Empresa,Password) VALUES('"+cu.getIdEmpresa()+"','"+cu.getUsuario()+"','"+cu.getEmpresa()+"',"+cu.getPassword()+")");
+            
+        } catch (SQLException ex) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
         }
     }
     public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
@@ -182,6 +191,51 @@ public class ControladorCuenta {
             }
         }catch (Exception ex){
             throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerID", ex.getMessage());
+        } 
+        return IdMax;
+    
+    }
+    public static String ObtenerPassword(String cu)throws ErrorSistemaContable{
+        String pass="";   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT Password FROM empresa WHERE Usuario='"+cu+"'");
+        
+            while(rs.next()){
+                pass = rs.getString(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerPassword", ex.getMessage());
+        } 
+        return pass;
+    
+    }
+    public static String NombreEmpresa(String cu)throws ErrorSistemaContable{
+        String empresa="";   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT Empresa FROM empresa WHERE Usuario='"+cu+"'");
+        
+            while(rs.next()){
+                empresa = rs.getString(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerPassword", ex.getMessage());
+        } 
+        return empresa;
+    
+    }
+    public static int ObtenerMaxEmpresa()throws ErrorSistemaContable{
+        int IdMax=0;   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT MAX(IdEmpresa) FROM empresa");
+        
+            while(rs.next()){
+                IdMax = rs.getInt(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerMaxEmpresa", ex.getMessage());
         } 
         return IdMax;
     
