@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -307,6 +308,11 @@ public class frmCuentas extends javax.swing.JFrame {
             }
         });
         tblEstadoResultados.getTableHeader().setReorderingAllowed(false);
+        tblEstadoResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstadoResultadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEstadoResultados);
         if (tblEstadoResultados.getColumnModel().getColumnCount() > 0) {
             tblEstadoResultados.getColumnModel().getColumn(0).setResizable(false);
@@ -441,7 +447,7 @@ public class frmCuentas extends javax.swing.JFrame {
                 va.txtCuenta.setText(cuenta);    
                 va.txtValor.setText("");
                 va.txtValor.requestFocus();
-            }else{System.out.println("Ya esta");}
+            }else{JOptionPane.showMessageDialog(rootPane, "¡Ya está en la lista!");}
         }
     }//GEN-LAST:event_tblBalanceGeneralMouseClicked
 
@@ -453,6 +459,27 @@ public class frmCuentas extends javax.swing.JFrame {
             tblCuentas.setModel(modeloCuentasSeleccionadas);
         }
     }//GEN-LAST:event_tblCuentasKeyPressed
+
+    private void tblEstadoResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadoResultadosMouseClicked
+        if(evt.getClickCount()==2){ 
+            encontrado=false;
+            if(modeloCuentasSeleccionadas.getRowCount()>0){
+                int i = 0;
+                while(encontrado==false&&i<tblCuentas.getRowCount()){
+                    encontrado = tblCuentas.getValueAt(i,0).equals(tblEstadoResultados.getValueAt(tblEstadoResultados.getSelectedRow(), 0));
+                    i++;
+                }
+            }
+            if(encontrado==false){
+                cuenta = modeloResultados.getValueAt(tblEstadoResultados.getSelectedRow(), 0).toString();
+                SistemaContable.posCuenta = tblEstadoResultados.getSelectedRow();
+                va.setVisible(true);
+                va.txtCuenta.setText(cuenta);    
+                va.txtValor.setText("");
+                va.txtValor.requestFocus();
+            }else{JOptionPane.showMessageDialog(rootPane, "¡Ya está en la lista!");}
+        }
+    }//GEN-LAST:event_tblEstadoResultadosMouseClicked
 
     /**
      * @param args the command line arguments

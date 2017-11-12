@@ -8,12 +8,15 @@ package sistemacontable.frames;
 import clases.ControladorCuenta;
 import clases.Cuenta;
 import clases.ErrorSistemaContable;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static sistemacontable.frames.frmCuentas.lblSeleccionarCuentas;
+import static sistemacontable.frames.frmCuentas.tblCuentas;
+import static sistemacontable.frames.frmCuentas.tblEstadoResultados;
 
 /**
  *
@@ -28,6 +31,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     ArrayList<Cuenta> subtipoCuenta = new ArrayList();
     Object SubTipo[][];
     boolean encontrado;
+    boolean find;
     //frmPrincipal prin = new frmPrincipal();
     
     public frmNuevaCuenta() throws ErrorSistemaContable {
@@ -92,9 +96,24 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     }
     
     public void agregar(){
+        encontrado = false;
+        if(frmCuentas.tblBalanceGeneral.getRowCount()>0){
+            int i = 0;
+            while(encontrado==false&&i<frmCuentas.tblBalanceGeneral.getRowCount()){
+                encontrado = txtCuenta.getText().equals(frmCuentas.tblBalanceGeneral.getValueAt(i, 1));
+                i++;
+            }
+        }
+       if(frmCuentas.tblEstadoResultados.getRowCount()>0){
+            int i = 0;
+            while(encontrado==false&&i<frmCuentas.tblEstadoResultados.getRowCount()){
+                encontrado = txtCuenta.getText().equals(frmCuentas.tblEstadoResultados.getValueAt(i, 0));
+                i++;
+            }
+        }
+        if(encontrado==false){        
         int idCuenta;
         Cuenta agregado = new Cuenta();
-        encontrado = false;
         if(txtCuenta.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Escriba un nombre a la cuenta");
             txtCuenta.requestFocus();
@@ -118,6 +137,11 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
             }
             
         }
+    }else{
+            JOptionPane.showMessageDialog(rootPane, "¡Ya existe esa cuenta!");
+            txtCuenta.requestFocus();
+            txtCuenta.selectAll();
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -140,7 +164,6 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(72, 165, 234));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(700, 300));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -151,7 +174,6 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         btnAgregar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAgregar1.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar1.setText("Agregar Cuenta");
-        btnAgregar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         btnAgregar1.setContentAreaFilled(false);
         btnAgregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar1.setFocusPainted(false);
@@ -181,6 +203,11 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         txtCuenta.setBackground(new java.awt.Color(72, 165, 234));
         txtCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         txtCuenta.setBorder(null);
+        txtCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuentaKeyTyped(evt);
+            }
+        });
         jpnNuevaCuenta.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 400, 30));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
@@ -257,6 +284,33 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
             cmbSubTipo.setEnabled(true);
         }            
     }//GEN-LAST:event_cmbTipoItemStateChanged
+
+    private void txtCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuentaKeyTyped
+       char mayu=evt.getKeyChar();
+        char c =  evt.getKeyChar();
+        
+        if( c < (char) 'a' || c > (char) 'z'){
+            if( c < (char) 'A' || c > (char) 'Z'){
+                if(c != (char) KeyEvent.VK_SPACE){
+            if(c != (char) KeyEvent.VK_ENTER){
+            evt.consume();
+            }else{
+                
+            }
+            }
+        }
+        }
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+
+        
+    }//GEN-LAST:event_txtCuentaKeyTyped
 
     /**
      * @param args the command line arguments

@@ -81,7 +81,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblCerrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 10, -1));
+        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 10, -1));
 
         lblBienvenida2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblBienvenida2.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,8 +92,8 @@ public class frmHome extends javax.swing.JFrame {
                 lblBienvenida2MouseClicked(evt);
             }
         });
-        jPanel1.add(lblBienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 470, 60));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
+        jPanel1.add(lblBienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 60));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 500, 30));
 
         pnlComparar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,7 +121,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida18.setText("de los índices y así saber cuales períodos de fecha fueron");
         pnlComparar.add(lblBienvenida18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 410, 90));
+        jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 410, 90));
 
         pnlVer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -149,7 +149,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida10.setText("Verás el balance general, estado de resultados y los índices");
         pnlVer.add(lblBienvenida10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 410, 90));
+        jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 410, 90));
 
         pnlNuevos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,9 +177,9 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida6.setText("para luego compararlo con fechas distintas. No es posible ");
         pnlNuevos.add(lblBienvenida6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlNuevos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 410, 90));
+        jPanel1.add(pnlNuevos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 410, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 570, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 500, 450));
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         lblBienvenida.setForeground(new java.awt.Color(51, 51, 51));
@@ -225,7 +225,7 @@ public class frmHome extends javax.swing.JFrame {
                 btnCompararActionPerformed(evt);
             }
         });
-        getContentPane().add(btnComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 260, 50));
+        getContentPane().add(btnComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 260, 50));
 
         btnCrearEstados.setBackground(new java.awt.Color(57, 137, 186));
         btnCrearEstados.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -248,7 +248,7 @@ public class frmHome extends javax.swing.JFrame {
                 btnCrearEstadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 260, 50));
+        getContentPane().add(btnCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 260, 50));
 
         btnVerEstados.setBackground(new java.awt.Color(57, 137, 186));
         btnVerEstados.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -271,16 +271,16 @@ public class frmHome extends javax.swing.JFrame {
                 btnVerEstadosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 260, 50));
+        getContentPane().add(btnVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 260, 50));
 
         lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 40, 50));
+        getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 40, 50));
 
         lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 40, 50));
+        getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 40, 50));
 
         lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 40, 50));
+        getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 40, 50));
 
         pack();
         setLocationRelativeTo(null);
@@ -308,7 +308,9 @@ public class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCompararActionPerformed
 
     private void btnCrearEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEstadosActionPerformed
-        // TODO add your handling code here:
+        frmCuentas cuentas = new frmCuentas();
+        cuentas.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCrearEstadosActionPerformed
 
     private void btnVerEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstadosActionPerformed

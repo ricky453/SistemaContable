@@ -5,6 +5,7 @@
  */
 package sistemacontable.frames;
 
+import java.awt.event.KeyEvent;
 import sistemacontable.SistemaContable;
 import sistemacontable.frames.frmCuentas;
 
@@ -83,6 +84,11 @@ public class frmValor extends javax.swing.JFrame {
                 txtValorActionPerformed(evt);
             }
         });
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 120, 30));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
@@ -140,6 +146,30 @@ public class frmValor extends javax.swing.JFrame {
     private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
         agregarValor();
     }//GEN-LAST:event_txtValorActionPerformed
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        char s;
+        s = evt.getKeyChar();
+        int p=(int) evt.getKeyChar();
+
+        // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
+        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD && s!=KeyEvent.VK_BACK_SPACE && s!= KeyEvent.VK_ENTER) {
+            getToolkit().beep();
+            evt.consume();
+        }else{
+            if (p==46) {
+                String cadena=txtValor.getText();
+                int tamanio=cadena.length();
+                for (int i = 0; i <= tamanio; i++) {
+                    if (cadena.contains(".")) {
+                        evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                        getToolkit().beep();
+                        evt.consume();
+                    }
+                }
+            }
+        }      
+    }//GEN-LAST:event_txtValorKeyTyped
 
     /**
      * @param args the command line arguments
