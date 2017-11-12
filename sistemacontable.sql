@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2017 a las 00:38:02
+-- Tiempo de generación: 13-11-2017 a las 00:44:19
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -70,6 +70,14 @@ CREATE TABLE `financieros` (
   `IdEstadoFinanciero` int(2) NOT NULL,
   `Nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Volcado de datos para la tabla `financieros`
+--
+
+INSERT INTO `financieros` (`IdEstadoFinanciero`, `Nombre`) VALUES
+(1, 'BALANCE GENERAL'),
+(2, 'ESTADO DE RESULTADOS');
 
 -- --------------------------------------------------------
 
