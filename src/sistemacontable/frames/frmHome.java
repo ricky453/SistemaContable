@@ -36,7 +36,9 @@ public class frmHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
-        lblBienvenida2 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         pnlComparar = new javax.swing.JPanel();
         lblBienvenida15 = new javax.swing.JLabel();
@@ -53,15 +55,13 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida4 = new javax.swing.JLabel();
         lblBienvenida5 = new javax.swing.JLabel();
         lblBienvenida6 = new javax.swing.JLabel();
+        lblComparar = new javax.swing.JLabel();
+        lblCrearEstados = new javax.swing.JLabel();
+        lblVerEstados = new javax.swing.JLabel();
         lblBienvenida = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
-        btnComparar = new javax.swing.JButton();
-        btnCrearEstados = new javax.swing.JButton();
-        btnVerEstados = new javax.swing.JButton();
-        lbl3 = new javax.swing.JLabel();
-        lbl1 = new javax.swing.JLabel();
-        lbl2 = new javax.swing.JLabel();
+        lblBienvenida2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -81,19 +81,20 @@ public class frmHome extends javax.swing.JFrame {
                 lblCerrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 10, -1));
+        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 10, -1));
 
-        lblBienvenida2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblBienvenida2.setForeground(new java.awt.Color(255, 255, 255));
-        lblBienvenida2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBienvenida2.setText("CASA");
-        lblBienvenida2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBienvenida2MouseClicked(evt);
-            }
-        });
-        jPanel1.add(lblBienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 60));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 500, 30));
+        lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
+        jPanel1.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 30, 20));
+
+        lbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
+        jPanel1.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 30, 20));
+
+        lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
+        jPanel1.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 30, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 570, 30));
 
         pnlComparar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,7 +122,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida18.setText("de los índices y así saber cuales períodos de fecha fueron");
         pnlComparar.add(lblBienvenida18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 410, 90));
+        jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 410, 90));
 
         pnlVer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -149,7 +150,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida10.setText("Verás el balance general, estado de resultados y los índices");
         pnlVer.add(lblBienvenida10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 410, 90));
+        jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 410, 90));
 
         pnlNuevos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,110 +178,80 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida6.setText("para luego compararlo con fechas distintas. No es posible ");
         pnlNuevos.add(lblBienvenida6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
-        jPanel1.add(pnlNuevos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 410, 90));
+        jPanel1.add(pnlNuevos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 410, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 500, 450));
+        lblComparar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblComparar.setForeground(new java.awt.Color(51, 51, 51));
+        lblComparar.setText("Comparar Empresa");
+        lblComparar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblComparar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCompararMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCompararMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCompararMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, 40));
+
+        lblCrearEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblCrearEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblCrearEstados.setText("Crear Estados Financieros");
+        lblCrearEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCrearEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 40));
+
+        lblVerEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblVerEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblVerEstados.setText("Ver mis Estados");
+        lblVerEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblVerEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 570, 450));
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         lblBienvenida.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida.setText("2017");
-        lblBienvenida.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBienvenidaMouseClicked(evt);
-            }
-        });
-        getContentPane().add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 150, 70));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 430, 20));
+        getContentPane().add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 150, 50));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 360, 20));
 
         lblBienvenida1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblBienvenida1.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida1.setText("SISTEMA CONTABLE");
-        lblBienvenida1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBienvenida1MouseClicked(evt);
-            }
-        });
-        getContentPane().add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 310, 60));
+        getContentPane().add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 60));
 
-        btnComparar.setBackground(new java.awt.Color(57, 137, 186));
-        btnComparar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnComparar.setForeground(new java.awt.Color(72, 165, 234));
-        btnComparar.setText("Comparar Empresa");
-        btnComparar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
-        btnComparar.setContentAreaFilled(false);
-        btnComparar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnComparar.setFocusPainted(false);
-        btnComparar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCompararMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCompararMouseExited(evt);
-            }
-        });
-        btnComparar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompararActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 260, 50));
-
-        btnCrearEstados.setBackground(new java.awt.Color(57, 137, 186));
-        btnCrearEstados.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCrearEstados.setForeground(new java.awt.Color(72, 165, 234));
-        btnCrearEstados.setText("Crear nuevos Estados Financieros");
-        btnCrearEstados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
-        btnCrearEstados.setContentAreaFilled(false);
-        btnCrearEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCrearEstados.setFocusPainted(false);
-        btnCrearEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCrearEstadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCrearEstadosMouseExited(evt);
-            }
-        });
-        btnCrearEstados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearEstadosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 260, 50));
-
-        btnVerEstados.setBackground(new java.awt.Color(57, 137, 186));
-        btnVerEstados.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnVerEstados.setForeground(new java.awt.Color(72, 165, 234));
-        btnVerEstados.setText("Ver mis Estados Financieros");
-        btnVerEstados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
-        btnVerEstados.setContentAreaFilled(false);
-        btnVerEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVerEstados.setFocusPainted(false);
-        btnVerEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVerEstadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVerEstadosMouseExited(evt);
-            }
-        });
-        btnVerEstados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerEstadosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 260, 50));
-
-        lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 40, 50));
-
-        lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 40, 50));
-
-        lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25b8(0)_48.png"))); // NOI18N
-        getContentPane().add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 40, 50));
+        lblBienvenida2.setBackground(new java.awt.Color(72, 165, 234));
+        lblBienvenida2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        lblBienvenida2.setForeground(new java.awt.Color(72, 165, 234));
+        lblBienvenida2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBienvenida2.setText("CASA");
+        getContentPane().add(lblBienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
 
         pack();
         setLocationRelativeTo(null);
@@ -291,61 +262,47 @@ public class frmHome extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
-    private void lblBienvenidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBienvenidaMouseClicked
+    private void lblCompararMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblBienvenidaMouseClicked
+    }//GEN-LAST:event_lblCompararMouseClicked
 
-    private void lblBienvenida1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBienvenida1MouseClicked
+    private void lblCrearEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearEstadosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblBienvenida1MouseClicked
+    }//GEN-LAST:event_lblCrearEstadosMouseClicked
 
-    private void lblBienvenida2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBienvenida2MouseClicked
+    private void lblVerEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerEstadosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblBienvenida2MouseClicked
+    }//GEN-LAST:event_lblVerEstadosMouseClicked
 
-    private void btnCompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararActionPerformed
-
-    }//GEN-LAST:event_btnCompararActionPerformed
-
-    private void btnCrearEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEstadosActionPerformed
-        frmCuentas cuentas = new frmCuentas();
-        cuentas.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCrearEstadosActionPerformed
-
-    private void btnVerEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerEstadosActionPerformed
-
-    private void btnCrearEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearEstadosMouseEntered
+    private void lblCrearEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearEstadosMouseEntered
         pnlNuevos.setVisible(true);
         lbl1.setVisible(true);
-    }//GEN-LAST:event_btnCrearEstadosMouseEntered
+    }//GEN-LAST:event_lblCrearEstadosMouseEntered
 
-    private void btnCrearEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearEstadosMouseExited
+    private void lblCrearEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearEstadosMouseExited
         pnlNuevos.setVisible(false);
         lbl1.setVisible(false);
-    }//GEN-LAST:event_btnCrearEstadosMouseExited
+    }//GEN-LAST:event_lblCrearEstadosMouseExited
 
-    private void btnVerEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerEstadosMouseEntered
+    private void lblVerEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerEstadosMouseEntered
         pnlVer.setVisible(true);
         lbl2.setVisible(true);
-    }//GEN-LAST:event_btnVerEstadosMouseEntered
+    }//GEN-LAST:event_lblVerEstadosMouseEntered
 
-    private void btnVerEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerEstadosMouseExited
+    private void lblVerEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerEstadosMouseExited
         pnlVer.setVisible(false);
         lbl2.setVisible(false);
-    }//GEN-LAST:event_btnVerEstadosMouseExited
+    }//GEN-LAST:event_lblVerEstadosMouseExited
 
-    private void btnCompararMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompararMouseEntered
+    private void lblCompararMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseEntered
         pnlComparar.setVisible(true);
         lbl3.setVisible(true);
-    }//GEN-LAST:event_btnCompararMouseEntered
+    }//GEN-LAST:event_lblCompararMouseEntered
 
-    private void btnCompararMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompararMouseExited
+    private void lblCompararMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseExited
         pnlComparar.setVisible(false);
         lbl3.setVisible(false);
-    }//GEN-LAST:event_btnCompararMouseExited
+    }//GEN-LAST:event_lblCompararMouseExited
 
     /**
      * @param args the command line arguments
@@ -383,9 +340,6 @@ public class frmHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnComparar;
-    private javax.swing.JButton btnCrearEstados;
-    private javax.swing.JButton btnVerEstados;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -408,6 +362,9 @@ public class frmHome extends javax.swing.JFrame {
     public static javax.swing.JLabel lblBienvenida8;
     public static javax.swing.JLabel lblBienvenida9;
     private javax.swing.JLabel lblCerrar;
+    public static javax.swing.JLabel lblComparar;
+    public static javax.swing.JLabel lblCrearEstados;
+    public static javax.swing.JLabel lblVerEstados;
     private javax.swing.JPanel pnlComparar;
     private javax.swing.JPanel pnlNuevos;
     private javax.swing.JPanel pnlVer;

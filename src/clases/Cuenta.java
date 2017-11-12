@@ -21,6 +21,24 @@ public class Cuenta {
     public String Empresa;
     public String Valor;
     public Date Fecha;
+    public String Usuario;
+    public String Password;
+
+    public String getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(String Usuario) {
+        this.Usuario = Usuario;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
 
     public Date getFecha() {
         return Fecha;

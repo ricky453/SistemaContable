@@ -174,6 +174,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         btnAgregar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAgregar1.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar1.setText("Agregar Cuenta");
+        btnAgregar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         btnAgregar1.setContentAreaFilled(false);
         btnAgregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar1.setFocusPainted(false);
