@@ -58,6 +58,7 @@ public class frmCuentas extends javax.swing.JFrame {
         actualizarTablaResultados();
         dtcFecha.setDateFormatString("yyyy-MM-dd");
         dtcFecha.setDate(date);
+        lblEmpresa.setText(SistemaContable.empresa);
     }
 
     public void colorTablaActivos(){
