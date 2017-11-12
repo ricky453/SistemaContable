@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2017 a las 02:06:53
+-- Tiempo de generación: 12-11-2017 a las 22:26:20
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -52,6 +52,47 @@ INSERT INTO `cuentas` (`IdCuenta`, `Cuenta`, `IdEstadoFinanciero`, `IdTipoCuenta
 (11, 'VENTAS NETAS', 2, NULL, NULL),
 (12, 'EDIFICIO', 1, 1, 2),
 (13, 'CAPITAL CONTABLE', 1, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentasxempresa`
+--
+
+CREATE TABLE `cuentasxempresa` (
+  `Fecha` date NOT NULL,
+  `IdEmpresa` int(4) NOT NULL,
+  `IdCuenta` int(3) NOT NULL,
+  `Valor` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cuentasxempresa`
+--
+
+INSERT INTO `cuentasxempresa` (`Fecha`, `IdEmpresa`, `IdCuenta`, `Valor`) VALUES
+('2017-11-12', 1, 2, '600'),
+('2017-11-12', 1, 4, '400'),
+('2017-11-12', 1, 7, '500'),
+('2017-11-12', 1, 8, '700');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `IdEmpresa` int(4) NOT NULL,
+  `Empresa` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`IdEmpresa`, `Empresa`) VALUES
+(1, 'CASA');
 
 -- --------------------------------------------------------
 
@@ -126,6 +167,20 @@ ALTER TABLE `cuentas`
   ADD KEY `IdTipoSubCuenta` (`IdTipoSubCuenta`);
 
 --
+-- Indices de la tabla `cuentasxempresa`
+--
+ALTER TABLE `cuentasxempresa`
+  ADD PRIMARY KEY (`IdEmpresa`,`Fecha`,`IdCuenta`),
+  ADD KEY `IdCuenta` (`IdCuenta`),
+  ADD KEY `IdEmpresa` (`IdEmpresa`);
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`IdEmpresa`);
+
+--
 -- Indices de la tabla `financieros`
 --
 ALTER TABLE `financieros`
@@ -152,6 +207,11 @@ ALTER TABLE `tipocuenta`
 --
 ALTER TABLE `cuentas`
   MODIFY `IdCuenta` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `IdEmpresa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `financieros`
 --

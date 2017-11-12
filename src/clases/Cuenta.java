@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.Date;
+
 /**
  *
  * @author Ricky
@@ -18,6 +20,15 @@ public class Cuenta {
     public int IdEmpresa;
     public String Empresa;
     public String Valor;
+    public Date Fecha;
+
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(Date Fecha) {
+        this.Fecha = Fecha;
+    }
 
     public int getIdCuenta() {
         return IdCuenta;

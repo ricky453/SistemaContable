@@ -12,9 +12,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
@@ -38,7 +40,7 @@ public class frmCuentas extends javax.swing.JFrame {
     public static DefaultTableModel modeloCuentasSeleccionadas;
     ColorTabla r = new ColorTabla();
     String cuenta;
-    int IdCuenta;
+    int IdCuenta,IdEmpresa, IdFE;
     frmValor va = new frmValor();
     boolean encontrado;
     Date date = new Date();
@@ -53,8 +55,8 @@ public class frmCuentas extends javax.swing.JFrame {
         modeloCuentasSeleccionadas = (DefaultTableModel) tblCuentas.getModel();
         actualizarTablaBalance();
         actualizarTablaResultados();
+        dtcFecha.setDateFormatString("yyyy-MM-dd");
         dtcFecha.setDate(date);
-
     }
 
     public void colorTablaActivos(){
@@ -189,7 +191,7 @@ public class frmCuentas extends javax.swing.JFrame {
         lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEmpresa.setText("NOMBRE DE EMPRESA");
+        lblEmpresa.setText("CASA");
         jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 170, 30));
 
         jScrollPane3.setBackground(new java.awt.Color(72, 165, 234));
@@ -245,6 +247,7 @@ public class frmCuentas extends javax.swing.JFrame {
         btnGenerar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerar.setText("Generar Estados Financieros");
+        btnGenerar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         btnGenerar.setContentAreaFilled(false);
         btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGenerar.setFocusPainted(false);
@@ -253,7 +256,7 @@ public class frmCuentas extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        jpnSeleccion.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, 190, 40));
+        jpnSeleccion.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 250, 40));
 
         jLabel5.setBackground(new java.awt.Color(72, 165, 234));
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
@@ -387,17 +390,22 @@ public class frmCuentas extends javax.swing.JFrame {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         Cuenta agregado = new Cuenta();
         if(tblCuentas.getRowCount()!=0){
-            for(int i=0;i<tblCuentas.getRowCount();i++){
-                try {
-                    IdCuenta = ControladorCuenta.ObtenerIDCuenta(tblCuentas.getValueAt(i, 0).toString());
-                    System.out.println(IdCuenta);
-                    agregado.setIdEmpresa(1);
-                    agregado.setIdCuenta(IdCuenta);
-                    agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
-                    ControladorCuenta.Agregar(agregado);
-                } catch (ErrorSistemaContable ex) {
-                    Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                IdEmpresa = ControladorCuenta.ObtenerIDEmpresa(lblEmpresa.getText());
+                agregado.setFecha(dtcFecha.getDate());
+                agregado.setIdEmpresa(IdEmpresa);
+                for(int i=0;i<tblCuentas.getRowCount();i++){
+                    try {
+                        IdCuenta = ControladorCuenta.ObtenerIDCuenta(tblCuentas.getValueAt(i, 0).toString());
+                        agregado.setIdCuenta(IdCuenta);
+                        agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
+                        ControladorCuenta.Agregar(agregado);
+                    } catch (ErrorSistemaContable ex) {
+                        Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            } catch (ErrorSistemaContable ex) {
+                Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }else{System.out.println("Debe de agregar cuentas");}

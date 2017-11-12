@@ -29,14 +29,16 @@ public class ControladorCuenta {
     }
     public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
         try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sdf.format(cu.getFecha());
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuentasxempresa(IdEmpresa,IdCuenta,Valor) VALUES('"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
+            cn.st.executeUpdate("INSERT INTO cuentasxempresa(Fecha,IdEmpresa,IdCuenta,Valor) VALUES('"+fecha+"','"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
             
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
         }
     }
-    
+
     public static ArrayList<Cuenta> ObtenerCuentas(int IdEstadoFinanciero)throws ErrorSistemaContable{
     ArrayList<Object> cuenta = new ArrayList<Object>();
     
@@ -149,9 +151,24 @@ public class ControladorCuenta {
                 IdCuenta = rs.getInt(1);
             }
         }catch (Exception ex){
-            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerId", ex.getMessage());
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerIdCuenta", ex.getMessage());
         } 
         return IdCuenta;
+    
+    }
+    public static int ObtenerIDEmpresa(String em)throws ErrorSistemaContable{
+        int IdEmpresa=0;   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT IdEmpresa FROM empresa WHERE Empresa='"+em+"'");
+        
+            while(rs.next()){
+                IdEmpresa = rs.getInt(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerIdEmpresa", ex.getMessage());
+        } 
+        return IdEmpresa;
     
     }
     public static int ObtenerID()throws ErrorSistemaContable{
@@ -164,9 +181,10 @@ public class ControladorCuenta {
                 IdMax = rs.getInt(1);
             }
         }catch (Exception ex){
-            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerId", ex.getMessage());
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerID", ex.getMessage());
         } 
         return IdMax;
     
     }
+
 }
