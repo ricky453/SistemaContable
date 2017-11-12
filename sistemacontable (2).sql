@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2017 a las 22:26:20
+-- Tiempo de generación: 13-11-2017 a las 00:38:02
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -34,25 +34,6 @@ CREATE TABLE `cuentas` (
   `IdTipoSubCuenta` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `cuentas`
---
-
-INSERT INTO `cuentas` (`IdCuenta`, `Cuenta`, `IdEstadoFinanciero`, `IdTipoCuenta`, `IdTipoSubCuenta`) VALUES
-(1, 'COMPRAS', 2, NULL, NULL),
-(2, 'EFECTIVO', 1, 1, 1),
-(3, 'MOBILIARIO Y EQUIPO', 1, 1, 2),
-(4, 'CUENTAS POR PAGAR', 1, 2, 1),
-(5, 'DOCUMENTOS POR PAGAR', 1, 2, 1),
-(6, 'PRESTAMOS A LARGO PLAZO', 1, 2, 2),
-(7, 'CUENTAS POR COBRAR', 1, 1, 1),
-(8, 'DEPRECIACION MOBILIARIO Y EQUIPO', 1, 1, 2),
-(9, 'INVENTARIO INICIAL', 2, NULL, NULL),
-(10, 'INVENTARIO FINAL', 2, NULL, NULL),
-(11, 'VENTAS NETAS', 2, NULL, NULL),
-(12, 'EDIFICIO', 1, 1, 2),
-(13, 'CAPITAL CONTABLE', 1, 3, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -66,16 +47,6 @@ CREATE TABLE `cuentasxempresa` (
   `Valor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `cuentasxempresa`
---
-
-INSERT INTO `cuentasxempresa` (`Fecha`, `IdEmpresa`, `IdCuenta`, `Valor`) VALUES
-('2017-11-12', 1, 2, '600'),
-('2017-11-12', 1, 4, '400'),
-('2017-11-12', 1, 7, '500'),
-('2017-11-12', 1, 8, '700');
-
 -- --------------------------------------------------------
 
 --
@@ -84,15 +55,10 @@ INSERT INTO `cuentasxempresa` (`Fecha`, `IdEmpresa`, `IdCuenta`, `Valor`) VALUES
 
 CREATE TABLE `empresa` (
   `IdEmpresa` int(4) NOT NULL,
-  `Empresa` varchar(300) NOT NULL
+  `Usuario` varchar(50) NOT NULL,
+  `Empresa` varchar(300) NOT NULL,
+  `Password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`IdEmpresa`, `Empresa`) VALUES
-(1, 'CASA');
 
 -- --------------------------------------------------------
 
@@ -104,14 +70,6 @@ CREATE TABLE `financieros` (
   `IdEstadoFinanciero` int(2) NOT NULL,
   `Nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Volcado de datos para la tabla `financieros`
---
-
-INSERT INTO `financieros` (`IdEstadoFinanciero`, `Nombre`) VALUES
-(1, 'BALANCE GENERAL'),
-(2, 'ESTADO DE RESULTADOS');
 
 -- --------------------------------------------------------
 
@@ -206,12 +164,12 @@ ALTER TABLE `tipocuenta`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `IdCuenta` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `IdCuenta` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `IdEmpresa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdEmpresa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `financieros`
 --
