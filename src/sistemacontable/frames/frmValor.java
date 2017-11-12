@@ -6,15 +6,14 @@
 package sistemacontable.frames;
 
 import sistemacontable.SistemaContable;
-import sistemacontable.frames.frmPrincipal;
+import sistemacontable.frames.frmCuentas;
 
 /**
  *
  * @author Ricky
  */
 public class frmValor extends javax.swing.JFrame {
-    String [] valor;
-
+    
     
     public frmValor() {
         initComponents();
@@ -43,7 +42,6 @@ public class frmValor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(400, 270));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -51,8 +49,8 @@ public class frmValor extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 270));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("$");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 20, 50));
 
@@ -81,7 +79,7 @@ public class frmValor extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(72, 165, 234));
         jSeparator2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 130, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 120, 10));
 
         btnAgregar.setBackground(new java.awt.Color(57, 137, 186));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -122,7 +120,13 @@ public class frmValor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        int rowc = frmCuentas.modeloCuentasSeleccionadas.getRowCount();
+        String valor [] = new String[2];
+        valor[0]= txtCuenta.getText();
+        valor[1]= txtValor.getText();
+        frmCuentas.modeloCuentasSeleccionadas.addRow(valor);
+        frmCuentas.tblCuentas.setModel(frmCuentas.modeloCuentasSeleccionadas);
+        
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -176,6 +180,6 @@ public class frmValor extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblCerrar;
     public static javax.swing.JTextField txtCuenta;
-    private javax.swing.JTextField txtValor;
+    public static javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

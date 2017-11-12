@@ -11,7 +11,9 @@ import clases.ErrorSistemaContable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +28,7 @@ import sistemacontable.SistemaContable;
  *
  * @author Ricky
  */
-public class frmPrincipal extends javax.swing.JFrame {
+public class frmCuentas extends javax.swing.JFrame {
 
     JTableHeader tHeadActivos;
     JTableHeader tHeadPasivos;
@@ -36,9 +38,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     public static DefaultTableModel modeloCuentasSeleccionadas;
     ColorTabla r = new ColorTabla();
     String cuenta;
+    int IdCuenta;
     frmValor va = new frmValor();
+    boolean encontrado;
+    Date date = new Date();
     
-    public frmPrincipal() {
+    public frmCuentas() {
         initComponents();
         colorTablaActivos();
         colorTablaPasivos();
@@ -48,6 +53,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         modeloCuentasSeleccionadas = (DefaultTableModel) tblCuentas.getModel();
         actualizarTablaBalance();
         actualizarTablaResultados();
+        dtcFecha.setDate(date);
 
     }
 
@@ -90,7 +96,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 }
             }
          catch (ErrorSistemaContable ex) {
-             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);        
+             Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
          }
     } 
     public void actualizarTablaResultados(){
@@ -110,7 +116,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 }
             }
          catch (ErrorSistemaContable ex) {
-             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);        
+             Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
          }
     } 
     
@@ -127,11 +133,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         jpnSeleccion = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         dtcFecha = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
+        lblEmpresa = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        btnAgregar1 = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblNuevaCuenta = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -175,38 +183,49 @@ public class frmPrincipal extends javax.swing.JFrame {
                 dtcFechaFocusLost(evt);
             }
         });
-        jpnSeleccion.add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 150, 30));
+        jpnSeleccion.add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 150, 30));
 
-        jLabel2.setBackground(new java.awt.Color(72, 165, 234));
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(49, 58, 115));
-        jLabel2.setText("Fecha:");
-        jpnSeleccion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 50, 30));
+        lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
+        lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblEmpresa.setForeground(new java.awt.Color(255, 255, 255));
+        lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEmpresa.setText("NOMBRE DE EMPRESA");
+        jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 170, 30));
 
         jScrollPane3.setBackground(new java.awt.Color(72, 165, 234));
-        jScrollPane3.setBorder(null);
 
-        tblCuentas.setBackground(new java.awt.Color(72, 165, 234));
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cuenta", "Valor"
+                "Cuenta", "Valor $"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblCuentas.setGridColor(new java.awt.Color(154, 154, 154));
+        tblCuentas.setSelectionBackground(new java.awt.Color(72, 165, 234));
         tblCuentas.setShowHorizontalLines(false);
         tblCuentas.setShowVerticalLines(false);
         tblCuentas.getTableHeader().setReorderingAllowed(false);
+        tblCuentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblCuentasKeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblCuentas);
         if (tblCuentas.getColumnModel().getColumnCount() > 0) {
             tblCuentas.getColumnModel().getColumn(0).setResizable(false);
@@ -214,28 +233,39 @@ public class frmPrincipal extends javax.swing.JFrame {
             tblCuentas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jpnSeleccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 310, 470));
+        jpnSeleccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 310, 450));
 
         jLabel4.setBackground(new java.awt.Color(72, 165, 234));
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(49, 58, 115));
         jLabel4.setText("Cuentas seleccionadas:");
-        jpnSeleccion.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, 30));
+        jpnSeleccion.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 30));
 
-        btnAgregar1.setBackground(new java.awt.Color(57, 137, 186));
-        btnAgregar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAgregar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar1.setText("Generar Estados Financieros");
-        btnAgregar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btnAgregar1.setContentAreaFilled(false);
-        btnAgregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregar1.setFocusPainted(false);
-        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setBackground(new java.awt.Color(57, 137, 186));
+        btnGenerar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerar.setText("Generar Estados Financieros");
+        btnGenerar.setContentAreaFilled(false);
+        btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGenerar.setFocusPainted(false);
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregar1ActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
-        jpnSeleccion.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, 190, 40));
+        jpnSeleccion.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, 190, 40));
+
+        jLabel5.setBackground(new java.awt.Color(72, 165, 234));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(49, 58, 115));
+        jLabel5.setText("Fecha:");
+        jpnSeleccion.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 50, 30));
+
+        jLabel6.setBackground(new java.awt.Color(72, 165, 234));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(49, 58, 115));
+        jLabel6.setText("EMPRESA:");
+        jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 70, 30));
 
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
@@ -341,7 +371,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             nc.setVisible(true);
             //this.setEnabled(false);
         } catch (ErrorSistemaContable ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblNuevaCuentaMouseClicked
 
@@ -354,9 +384,24 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dtcFechaFocusLost
 
-    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregar1ActionPerformed
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        Cuenta agregado = new Cuenta();
+        if(tblCuentas.getRowCount()!=0){
+            for(int i=0;i<tblCuentas.getRowCount();i++){
+                try {
+                    IdCuenta = ControladorCuenta.ObtenerIDCuenta(tblCuentas.getValueAt(i, 0).toString());
+                    System.out.println(IdCuenta);
+                    agregado.setIdEmpresa(1);
+                    agregado.setIdCuenta(IdCuenta);
+                    agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
+                    ControladorCuenta.Agregar(agregado);
+                } catch (ErrorSistemaContable ex) {
+                    Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }else{System.out.println("Debe de agregar cuentas");}
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void lblSeleccionarCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSeleccionarCuentasMouseClicked
         // TODO add your handling code here:
@@ -372,13 +417,34 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowLostFocus
 
     private void tblBalanceGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBalanceGeneralMouseClicked
-        if(evt.getClickCount()==2){                //Estado(false);
-            cuenta = modeloBalance.getValueAt(tblBalanceGeneral.getSelectedRow(), 1).toString();
-            SistemaContable.posCuenta = tblBalanceGeneral.getSelectedRow();
-            va.setVisible(true);
-            va.txtCuenta.setText(cuenta);    
+        if(evt.getClickCount()==2){ 
+            encontrado=false;
+            if(modeloCuentasSeleccionadas.getRowCount()>0){
+                int i = 0;
+                while(encontrado==false&&i<tblCuentas.getRowCount()){
+                    encontrado = tblCuentas.getValueAt(i,0).equals(tblBalanceGeneral.getValueAt(tblBalanceGeneral.getSelectedRow(), 1));
+                    i++;
+                }
+            }
+            if(encontrado==false){
+                cuenta = modeloBalance.getValueAt(tblBalanceGeneral.getSelectedRow(), 1).toString();
+                SistemaContable.posCuenta = tblBalanceGeneral.getSelectedRow();
+                va.setVisible(true);
+                va.txtCuenta.setText(cuenta);    
+                va.txtValor.setText("");
+                va.txtValor.requestFocus();
+            }else{System.out.println("Ya esta");}
         }
     }//GEN-LAST:event_tblBalanceGeneralMouseClicked
+
+    private void tblCuentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyPressed
+        char c = evt.getKeyChar();
+        if(c == (char) KeyEvent.VK_DELETE){
+            int rowAct = tblCuentas.getSelectedRow();
+            modeloCuentasSeleccionadas.removeRow(rowAct);
+            tblCuentas.setModel(modeloCuentasSeleccionadas);
+        }
+    }//GEN-LAST:event_tblCuentasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -397,37 +463,40 @@ public class frmPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPrincipal().setVisible(true);
+                new frmCuentas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar1;
+    private javax.swing.JButton btnGenerar;
     private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jpnSeleccion;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblEmpresa;
     public static javax.swing.JLabel lblNuevaCuenta;
     public static javax.swing.JLabel lblSeleccionarCuentas;
     public static javax.swing.JTable tblBalanceGeneral;

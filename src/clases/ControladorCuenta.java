@@ -18,10 +18,19 @@ public class ControladorCuenta {
     static ResultSet rs;
     
     
-    public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
+    public static void AgregarCuentas(Cuenta cu)throws ErrorSistemaContable{ 
         try {
             cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO cuentas(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
+            
+        } catch (SQLException ex) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
+        }
+    }
+    public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
+        try {
+            cn=new Conexion();
+            cn.st.executeUpdate("INSERT INTO cuentasxempresa(IdEmpresa,IdCuenta,Valor) VALUES('"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
             
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
@@ -130,19 +139,34 @@ public class ControladorCuenta {
         ArrayList<Cuenta> tipocuenta=(ArrayList) tipo;
         return tipocuenta;
     }
-        public static int ObtenerID()throws ErrorSistemaContable{
-        int IdProveedor=0;   
+    public static int ObtenerIDCuenta(String cu)throws ErrorSistemaContable{
+        int IdCuenta=0;   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT IdCuenta FROM cuentas WHERE Cuenta='"+cu+"'");
+        
+            while(rs.next()){
+                IdCuenta = rs.getInt(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerId", ex.getMessage());
+        } 
+        return IdCuenta;
+    
+    }
+    public static int ObtenerID()throws ErrorSistemaContable{
+        int IdMax=0;   
         cn = new Conexion();
         try {
         rs = cn.st.executeQuery("SELECT MAX(IdCuenta) FROM cuentas");
         
             while(rs.next()){
-                IdProveedor = rs.getInt(1);
+                IdMax = rs.getInt(1);
             }
         }catch (Exception ex){
             throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerId", ex.getMessage());
         } 
-        return IdProveedor;
+        return IdMax;
     
     }
 }

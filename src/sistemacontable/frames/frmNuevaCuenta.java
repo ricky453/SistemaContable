@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static sistemacontable.frames.frmPrincipal.lblSeleccionarCuentas;
+import static sistemacontable.frames.frmCuentas.lblSeleccionarCuentas;
 
 /**
  *
@@ -110,7 +110,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
                 agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
                 }
-                ControladorCuenta.Agregar(agregado);
+                ControladorCuenta.AgregarCuentas(agregado);
                 JOptionPane.showMessageDialog(rootPane, "¡Cuenta agregada exitosamente!");
                 limpiar();
             } catch (ErrorSistemaContable ex) {
@@ -226,8 +226,8 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        frmPrincipal.lblSeleccionarCuentas.setForeground(java.awt.Color.black);
-        frmPrincipal.lblNuevaCuenta.setForeground(java.awt.Color.lightGray);
+        frmCuentas.lblSeleccionarCuentas.setForeground(java.awt.Color.black);
+        frmCuentas.lblNuevaCuenta.setForeground(java.awt.Color.lightGray);
         
         this.dispose();
         

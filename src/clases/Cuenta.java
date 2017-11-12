@@ -15,6 +15,9 @@ public class Cuenta {
     public int IdEstadoFinanciero;
     public String IdTipoCuenta;
     public String IdTipoSubCuenta;
+    public int IdEmpresa;
+    public String Empresa;
+    public String Valor;
 
     public int getIdCuenta() {
         return IdCuenta;
@@ -54,6 +57,30 @@ public class Cuenta {
 
     public void setIdTipoSubCuenta(String IdTipoSubCuenta) {
         this.IdTipoSubCuenta = IdTipoSubCuenta;
+    }
+
+    public int getIdEmpresa() {
+        return IdEmpresa;
+    }
+
+    public void setIdEmpresa(int IdEmpresa) {
+        this.IdEmpresa = IdEmpresa;
+    }
+
+    public String getEmpresa() {
+        return Empresa;
+    }
+
+    public void setEmpresa(String Empresa) {
+        this.Empresa = Empresa;
+    }
+
+    public String getValor() {
+        return Valor;
+    }
+
+    public void setValor(String Valor) {
+        this.Valor = Valor;
     }
     
 }
