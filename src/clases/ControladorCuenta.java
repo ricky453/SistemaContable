@@ -30,7 +30,7 @@ public class ControladorCuenta {
     public static void AgregarEmpresa(Cuenta cu)throws ErrorSistemaContable{ 
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO empresa(IdEmpresa,Usuario,Empresa,Password) VALUES('"+cu.getIdEmpresa()+"','"+cu.getUsuario()+"','"+cu.getEmpresa()+"',"+cu.getPassword()+")");
+            cn.st.executeUpdate("INSERT INTO empresa(IdEmpresa,Usuario,Empresa,Password) VALUES('"+cu.getIdEmpresa()+"','"+cu.getUsuario()+"','"+cu.getEmpresa()+"','"+cu.getPassword()+"')");
             
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
