@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2017 a las 00:44:19
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 7.1.1
+-- Host: localhost
+-- Generation Time: Nov 15, 2017 at 01:52 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,40 +19,40 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sistemacontable`
+-- Database: `sistemacontable`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cuentas`
+-- Table structure for table `cuenta`
 --
 
-CREATE TABLE `cuentas` (
-  `IdCuenta` int(3) NOT NULL,
-  `Cuenta` varchar(250) NOT NULL,
-  `IdEstadoFinanciero` int(2) NOT NULL,
-  `IdTipoCuenta` int(2) DEFAULT NULL,
-  `IdTipoSubCuenta` int(2) DEFAULT NULL
+CREATE TABLE `cuenta` (
+  `IdCuenta` int(11) NOT NULL,
+  `IdTipoCuenta` int(11) NOT NULL,
+  `IdEstadoFinanciero` int(11) NOT NULL,
+  `IdTipoSubcuenta` int(11) NOT NULL,
+  `Cuenta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cuentasxempresa`
+-- Table structure for table `cuentasanio`
 --
 
-CREATE TABLE `cuentasxempresa` (
-  `Fecha` date NOT NULL,
-  `IdEmpresa` int(4) NOT NULL,
-  `IdCuenta` int(3) NOT NULL,
-  `Valor` varchar(50) NOT NULL
+CREATE TABLE `cuentasanio` (
+  `IdCuenta` int(11) NOT NULL,
+  `Anio` int(11) NOT NULL,
+  `IdEmpresa` int(11) NOT NULL,
+  `Valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Table structure for table `empresa`
 --
 
 CREATE TABLE `empresa` (
@@ -63,7 +65,7 @@ CREATE TABLE `empresa` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `financieros`
+-- Table structure for table `financieros`
 --
 
 CREATE TABLE `financieros` (
@@ -72,7 +74,7 @@ CREATE TABLE `financieros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Volcado de datos para la tabla `financieros`
+-- Dumping data for table `financieros`
 --
 
 INSERT INTO `financieros` (`IdEstadoFinanciero`, `Nombre`) VALUES
@@ -82,7 +84,7 @@ INSERT INTO `financieros` (`IdEstadoFinanciero`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `subtipocuenta`
+-- Table structure for table `subtipocuenta`
 --
 
 CREATE TABLE `subtipocuenta` (
@@ -91,7 +93,7 @@ CREATE TABLE `subtipocuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `subtipocuenta`
+-- Dumping data for table `subtipocuenta`
 --
 
 INSERT INTO `subtipocuenta` (`IdTipoSubCuenta`, `Nombre`) VALUES
@@ -102,7 +104,7 @@ INSERT INTO `subtipocuenta` (`IdTipoSubCuenta`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipocuenta`
+-- Table structure for table `tipocuenta`
 --
 
 CREATE TABLE `tipocuenta` (
@@ -111,7 +113,7 @@ CREATE TABLE `tipocuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tipocuenta`
+-- Dumping data for table `tipocuenta`
 --
 
 INSERT INTO `tipocuenta` (`IdTipoCuenta`, `Nombre`) VALUES
@@ -120,80 +122,91 @@ INSERT INTO `tipocuenta` (`IdTipoCuenta`, `Nombre`) VALUES
 (3, 'PATRIMONIO');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `cuentas`
+-- Indexes for table `cuenta`
 --
-ALTER TABLE `cuentas`
+ALTER TABLE `cuenta`
   ADD PRIMARY KEY (`IdCuenta`),
-  ADD KEY `IdEstadoFinanciero` (`IdEstadoFinanciero`),
-  ADD KEY `IdTipoCuenta` (`IdTipoCuenta`),
-  ADD KEY `IdTipoSubCuenta` (`IdTipoSubCuenta`);
+  ADD UNIQUE KEY `IdTipoCuenta` (`IdTipoCuenta`),
+  ADD UNIQUE KEY `IdEstadoFinanciero` (`IdEstadoFinanciero`),
+  ADD UNIQUE KEY `IdTipoSubcuenta` (`IdTipoSubcuenta`);
 
 --
--- Indices de la tabla `cuentasxempresa`
+-- Indexes for table `cuentasanio`
 --
-ALTER TABLE `cuentasxempresa`
-  ADD PRIMARY KEY (`IdEmpresa`,`Fecha`,`IdCuenta`),
-  ADD KEY `IdCuenta` (`IdCuenta`),
+ALTER TABLE `cuentasanio`
+  ADD PRIMARY KEY (`Anio`),
+  ADD UNIQUE KEY `IdCuenta` (`IdCuenta`,`IdEmpresa`),
   ADD KEY `IdEmpresa` (`IdEmpresa`);
 
 --
--- Indices de la tabla `empresa`
+-- Indexes for table `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`IdEmpresa`);
 
 --
--- Indices de la tabla `financieros`
+-- Indexes for table `financieros`
 --
 ALTER TABLE `financieros`
   ADD PRIMARY KEY (`IdEstadoFinanciero`);
 
 --
--- Indices de la tabla `subtipocuenta`
+-- Indexes for table `subtipocuenta`
 --
 ALTER TABLE `subtipocuenta`
   ADD PRIMARY KEY (`IdTipoSubCuenta`);
 
 --
--- Indices de la tabla `tipocuenta`
+-- Indexes for table `tipocuenta`
 --
 ALTER TABLE `tipocuenta`
   ADD PRIMARY KEY (`IdTipoCuenta`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `cuentas`
+-- AUTO_INCREMENT for table `cuenta`
 --
-ALTER TABLE `cuentas`
-  MODIFY `IdCuenta` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `cuenta`
+  MODIFY `IdCuenta` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `empresa`
+-- AUTO_INCREMENT for table `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `IdEmpresa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdEmpresa` int(4) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT de la tabla `financieros`
+-- AUTO_INCREMENT for table `financieros`
 --
 ALTER TABLE `financieros`
   MODIFY `IdEstadoFinanciero` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `cuentas`
+-- Constraints for table `cuenta`
 --
-ALTER TABLE `cuentas`
-  ADD CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`IdTipoCuenta`) REFERENCES `tipocuenta` (`IdTipoCuenta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cuentas_ibfk_2` FOREIGN KEY (`IdEstadoFinanciero`) REFERENCES `financieros` (`IdEstadoFinanciero`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cuentas_ibfk_3` FOREIGN KEY (`IdTipoSubCuenta`) REFERENCES `subtipocuenta` (`IdTipoSubCuenta`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `cuenta`
+  ADD CONSTRAINT `cuenta_ibfk_1` FOREIGN KEY (`IdTipoSubcuenta`) REFERENCES `subtipocuenta` (`IdTipoSubCuenta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cuenta_ibfk_2` FOREIGN KEY (`IdTipoCuenta`) REFERENCES `tipocuenta` (`IdTipoCuenta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cuenta_ibfk_3` FOREIGN KEY (`IdEstadoFinanciero`) REFERENCES `financieros` (`IdEstadoFinanciero`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cuenta_ibfk_4` FOREIGN KEY (`IdCuenta`) REFERENCES `cuentasanio` (`IdCuenta`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cuentasanio`
+--
+ALTER TABLE `cuentasanio`
+  ADD CONSTRAINT `cuentasanio_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`IdEmpresa`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

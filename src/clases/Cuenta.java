@@ -102,6 +102,7 @@ public class Cuenta {
     public void setEmpresa(String Empresa) {
         this.Empresa = Empresa;
     }
+    
 
     public String getValor() {
         return Valor;
