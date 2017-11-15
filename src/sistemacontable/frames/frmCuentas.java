@@ -576,6 +576,8 @@ public class frmCuentas extends javax.swing.JFrame {
                         agregado.setIdCuenta(IdCuenta);
                         agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
                         ControladorCuenta.Agregar(agregado);
+                        JOptionPane.showMessageDialog(rootPane, "Se han generado las cuentas!");
+                        ObtenerDatosEstado();
                     } catch (ErrorSistemaContable ex) {
                         Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -584,7 +586,7 @@ public class frmCuentas extends javax.swing.JFrame {
                 Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        }else{System.out.println("Debe de agregar cuentas");}
+        }else{JOptionPane.showMessageDialog(rootPane, "Debe de agregar cuentas");}
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void lblSeleccionarCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSeleccionarCuentasMouseClicked
