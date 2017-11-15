@@ -395,7 +395,7 @@ public class frmCuentas extends javax.swing.JFrame {
                         IdCuenta = ControladorCuenta.ObtenerIDCuenta(tblCuentas.getValueAt(i, 0).toString());
                         agregado.setIdCuenta(IdCuenta);
                         agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
-                        ControladorCuenta.AgregarCuentas(agregado);
+                        ControladorCuenta.Agregar(agregado);
                     } catch (ErrorSistemaContable ex) {
                         Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
                     }

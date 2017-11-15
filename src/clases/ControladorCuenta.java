@@ -36,6 +36,16 @@ public class ControladorCuenta {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
         }
     }
+    public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
+        try {
+
+            cn=new Conexion();
+            cn.st.executeUpdate("INSERT INTO cuentasanio(Anio,IdEmpresa,IdCuenta,Valor) VALUES('"+cu.getFecha()+"','"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
+            
+        } catch (SQLException ex) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
+        }
+    }
     
     public static ArrayList<Cuenta> ReporteBG(int IdEstadoFinanciero)throws ErrorSistemaContable{
     ArrayList<Object> cuenta = new ArrayList<Object>();
@@ -171,7 +181,7 @@ public class ControladorCuenta {
         int IdCuenta=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT IdCuenta FROM cuentas WHERE Cuenta='"+cu+"'");
+        rs = cn.st.executeQuery("SELECT IdCuenta FROM cuenta WHERE Cuenta='"+cu+"'");
         
             while(rs.next()){
                 IdCuenta = rs.getInt(1);
