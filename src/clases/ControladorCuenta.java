@@ -21,8 +21,8 @@ public class ControladorCuenta {
     public static void AgregarCuentas(Cuenta cu)throws ErrorSistemaContable{ 
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+")");
-            cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
+            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
+            //cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
         }
@@ -32,8 +32,18 @@ public class ControladorCuenta {
             cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO empresa(IdEmpresa,Usuario,Empresa,Password) VALUES('"+cu.getIdEmpresa()+"','"+cu.getUsuario()+"','"+cu.getEmpresa()+"','"+cu.getPassword()+"')");
             
-        } catch (SQLException ex) {
+        } catch (SQLException ex) { 
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
+        }
+    }
+    public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
+        try {
+
+            cn=new Conexion();
+            cn.st.executeUpdate("INSERT INTO cuentasanio(Anio,IdEmpresa,IdCuenta,Valor) VALUES('"+cu.getFecha()+"','"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
+            
+        } catch (SQLException ex) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
         }
     }
     
@@ -105,6 +115,29 @@ public class ControladorCuenta {
         ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
         return cuentas;
     }
+    
+    public static ArrayList<Cuenta> MisEstados(String anio, String Empresa)throws ErrorSistemaContable{
+    ArrayList<Object> cuenta = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta` WHERE `cuenta`.IdEstadoFinanciero='"+anio+"' AND `cuentasanio`.Anio= '"+Empresa+"'");
+            while (rs.next()) {
+ 
+                cuenta.add(rs.getString(1));
+                cuenta.add(rs.getString(2));
+            }
+            
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerCuentas",e.getMessage());
+        }
+        
+        ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
+        return cuentas;
+    }
+    
     public static ArrayList<Cuenta> ObtenerEstados()throws ErrorSistemaContable{
     ArrayList<Object> estados = new ArrayList<Object>();
     
@@ -171,7 +204,7 @@ public class ControladorCuenta {
         int IdCuenta=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT IdCuenta FROM cuentas WHERE Cuenta='"+cu+"'");
+        rs = cn.st.executeQuery("SELECT IdCuenta FROM cuenta WHERE Cuenta='"+cu+"'");
         
             while(rs.next()){
                 IdCuenta = rs.getInt(1);
@@ -201,7 +234,7 @@ public class ControladorCuenta {
         int IdMax=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT MAX(IdCuenta) FROM cuentas");
+        rs = cn.st.executeQuery("SELECT MAX(IdCuenta) FROM cuenta");
         
             while(rs.next()){
                 IdMax = rs.getInt(1);

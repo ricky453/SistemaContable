@@ -121,8 +121,8 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 if(cmbEstado.getSelectedIndex()==1){
 
                 }else{
-                agregado.setIdTipoCuenta((int) Tipo[cmbTipo.getSelectedIndex()][0]);
-                agregado.setIdTipoSubCuenta((int) SubTipo[cmbSubTipo.getSelectedIndex()][0]);
+                agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
+                agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
                 }
                 ControladorCuenta.AgregarCuentas(agregado);
                 JOptionPane.showMessageDialog(rootPane, "¡Cuenta agregada exitosamente!");
@@ -194,7 +194,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
         lblAdv.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblAdv.setText("No posee clasificación.");
-        jpnNuevaCuenta.add(lblAdv, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 140, 50));
+        jpnNuevaCuenta.add(lblAdv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 170, 50));
 
         txtCuenta.setBackground(new java.awt.Color(72, 165, 234));
         txtCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
@@ -204,17 +204,17 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 txtCuentaKeyTyped(evt);
             }
         });
-        jpnNuevaCuenta.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 400, 30));
+        jpnNuevaCuenta.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 400, 30));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(72, 165, 234));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jpnNuevaCuenta.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 400, 10));
+        jpnNuevaCuenta.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 400, 10));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre de la Cuenta:");
-        jpnNuevaCuenta.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 140, 50));
+        jpnNuevaCuenta.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 160, 50));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -226,16 +226,16 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 cmbEstadoItemStateChanged(evt);
             }
         });
-        jpnNuevaCuenta.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 190, 30));
+        jpnNuevaCuenta.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 220, 30));
 
         cmbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoItemStateChanged(evt);
             }
         });
-        jpnNuevaCuenta.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 120, 30));
+        jpnNuevaCuenta.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 120, 30));
 
-        jpnNuevaCuenta.add(cmbSubTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 120, 30));
+        jpnNuevaCuenta.add(cmbSubTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));

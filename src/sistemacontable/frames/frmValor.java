@@ -57,24 +57,24 @@ public class frmValor extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel3.setText("$");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 20, 50));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 20, 50));
 
         txtCuenta.setEditable(false);
         txtCuenta.setBackground(new java.awt.Color(72, 165, 234));
         txtCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         txtCuenta.setForeground(new java.awt.Color(204, 204, 204));
         txtCuenta.setBorder(null);
-        jPanel1.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 190, 30));
+        jPanel1.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 190, 30));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(72, 165, 234));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 190, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 190, 10));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre de la Cuenta:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 140, 50));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 160, 50));
 
         txtValor.setBackground(new java.awt.Color(72, 165, 234));
         txtValor.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
@@ -89,12 +89,12 @@ public class frmValor extends javax.swing.JFrame {
                 txtValorKeyTyped(evt);
             }
         });
-        jPanel1.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 120, 30));
+        jPanel1.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 120, 30));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(72, 165, 234));
         jSeparator2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 120, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 120, 10));
 
         btnAgregar.setBackground(new java.awt.Color(57, 137, 186));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
