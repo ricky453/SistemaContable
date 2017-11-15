@@ -204,14 +204,28 @@ public class frmCuentas extends javax.swing.JFrame {
         if(tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA")||tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA ANTES DE IMPUESTOS")||tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA ANTES DE IMPUESTO")){
             SistemaContable.UtilidadNeta=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
         }else{
-            if(tblMisEstados.getValueAt(i, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS EN VENTAS")){
-                SistemaContable.GastoVentas=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            if(tblMisEstados.getValueAt(i, 0).equals("OTROS GASTOS")){
+                SistemaContable.OtrosGastos=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }else if(tblMisEstados.getValueAt(i, 0).equals("OTROS INGRESOS")||tblMisEstados.getValueAt(i, 0).equals("OTROS PRODUCTOS")){
+                SistemaContable.OtrosIngresos=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
             }
-            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
+            SistemaContable.UtilidadNeta = (SistemaContable.UtilidadOperativa+SistemaContable.OtrosIngresos)-SistemaContable.OtrosGastos;
         }
         
+           //   U T I L I D A D   P O R   D I S T R I B U I R 
+           
+        if(tblMisEstados.getValueAt(i, 0).equals("UTILIDAD DEL EJERCICIO")||tblMisEstados.getValueAt(i, 0).equals("UTILIDAD POR DISTRIBUIR")){
+            SistemaContable.UtilidadPorDistribuir=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(SistemaContable.UtilidadNeta<150000){
+                SistemaContable.Impuestos=0.25;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+            }else{
+                SistemaContable.Impuestos=0.30;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+               }
+            }
         }
-
     }
     
     public void colorTablaActivos(){

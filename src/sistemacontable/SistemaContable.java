@@ -31,7 +31,7 @@ public class SistemaContable {
     public static double OtrosGastos=0;
     public static double OtrosIngresos=0;
     public static double UtilidadPorDistribuir=0;
-    public static double Impuestos=0.25;
+    public static double Impuestos;
     public static double ReservaLegal=0.07;
     
     public static void main(String[] args) {
