@@ -21,8 +21,8 @@ public class ControladorCuenta {
     public static void AgregarCuentas(Cuenta cu)throws ErrorSistemaContable{ 
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+")");
-            cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
+            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
+            //cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
         }
@@ -32,7 +32,7 @@ public class ControladorCuenta {
             cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO empresa(IdEmpresa,Usuario,Empresa,Password) VALUES('"+cu.getIdEmpresa()+"','"+cu.getUsuario()+"','"+cu.getEmpresa()+"','"+cu.getPassword()+"')");
             
-        } catch (SQLException ex) {
+        } catch (SQLException ex) { 
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
         }
     }

@@ -263,8 +263,6 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(49, 58, 115));
         jLabel6.setText("EMPRESA:");
         jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 70, 30));
-
-        txtAnio.setText("     ");
         jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 140, 30));
 
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
@@ -390,7 +388,7 @@ public class frmCuentas extends javax.swing.JFrame {
         if(tblCuentas.getRowCount()!=0){
             try {
                 IdEmpresa = ControladorCuenta.ObtenerIDEmpresa(lblEmpresa.getText());
-                agregado.setFecha(Integer.parseInt(txtAnio.getText()));
+                agregado.setFecha(txtAnio.getText());
                 agregado.setIdEmpresa(IdEmpresa);
                 for(int i=0;i<tblCuentas.getRowCount();i++){
                     try {

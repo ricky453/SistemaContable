@@ -14,12 +14,12 @@ public class Cuenta {
     private int IdCuenta;
     private String Cuenta;
     private int IdEstadoFinanciero;
-    private int IdTipoCuenta;
-    private int IdTipoSubCuenta;
+    private String IdTipoCuenta;
+    private String IdTipoSubCuenta;
     private int IdEmpresa;
     private String Empresa;
     private String Valor;
-    private int Fecha;
+    private String Fecha;
     private String Usuario;
     private String Password;
 
@@ -39,11 +39,11 @@ public class Cuenta {
         this.Password = Password;
     }
 
-    public int getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(int Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
 
@@ -71,19 +71,19 @@ public class Cuenta {
         this.IdEstadoFinanciero = IdEstadoFinanciero;
     }
 
-    public int getIdTipoCuenta() {
+    public String getIdTipoCuenta() {
         return IdTipoCuenta;
     }
 
-    public void setIdTipoCuenta(int IdTipoCuenta) {
+    public void setIdTipoCuenta(String IdTipoCuenta) {
         this.IdTipoCuenta = IdTipoCuenta;
     }
 
-    public int getIdTipoSubCuenta() {
+    public String getIdTipoSubCuenta() {
         return IdTipoSubCuenta;
     }
 
-    public void setIdTipoSubCuenta(int IdTipoSubCuenta) {
+    public void setIdTipoSubCuenta(String IdTipoSubCuenta) {
         this.IdTipoSubCuenta = IdTipoSubCuenta;
     }
 
