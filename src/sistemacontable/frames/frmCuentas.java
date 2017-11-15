@@ -182,11 +182,11 @@ public class frmCuentas extends javax.swing.JFrame {
         jpnSeleccion.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 10, -1));
 
         lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
-        lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         lblEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmpresa.setText("CASA");
-        jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 170, 30));
+        jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 220, 30));
 
         jScrollPane3.setBackground(new java.awt.Color(72, 165, 234));
 
@@ -262,10 +262,10 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(49, 58, 115));
         jLabel6.setText("EMPRESA:");
-        jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 70, 30));
+        jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 70, 30));
 
         txtAnio.setText("     ");
-        jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 89, 140, 30));
+        jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 140, 30));
 
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
@@ -285,7 +285,7 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(49, 58, 115));
         jLabel1.setText("Estado de Resultados");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 160, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 210, 30));
 
         tblEstadoResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,7 +352,7 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(49, 58, 115));
         jLabel3.setText("Balance General");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 190, 30));
 
         lblSeleccionarCuentas.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblSeleccionarCuentas.setText("Seleccionar Cuentas");

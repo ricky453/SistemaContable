@@ -201,7 +201,7 @@ public class ControladorCuenta {
         int IdMax=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT MAX(IdCuenta) FROM cuentas");
+        rs = cn.st.executeQuery("SELECT MAX(IdCuenta) FROM cuenta");
         
             while(rs.next()){
                 IdMax = rs.getInt(1);
