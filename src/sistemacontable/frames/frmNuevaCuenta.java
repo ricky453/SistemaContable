@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistemacontable.frames;
 
 import clases.ControladorCuenta;
@@ -126,8 +121,8 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 if(cmbEstado.getSelectedIndex()==1){
 
                 }else{
-                agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
-                agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
+                agregado.setIdTipoCuenta((int) Tipo[cmbTipo.getSelectedIndex()][0]);
+                agregado.setIdTipoSubCuenta((int) SubTipo[cmbSubTipo.getSelectedIndex()][0]);
                 }
                 ControladorCuenta.AgregarCuentas(agregado);
                 JOptionPane.showMessageDialog(rootPane, "¡Cuenta agregada exitosamente!");

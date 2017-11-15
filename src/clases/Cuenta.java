@@ -5,24 +5,23 @@
  */
 package clases;
 
-import java.util.Date;
 
 /**
  *
  * @author Ricky
  */
 public class Cuenta {
-    public int IdCuenta;
-    public String Cuenta;
-    public int IdEstadoFinanciero;
-    public String IdTipoCuenta;
-    public String IdTipoSubCuenta;
-    public int IdEmpresa;
-    public String Empresa;
-    public String Valor;
-    public Date Fecha;
-    public String Usuario;
-    public String Password;
+    private int IdCuenta;
+    private String Cuenta;
+    private int IdEstadoFinanciero;
+    private int IdTipoCuenta;
+    private int IdTipoSubCuenta;
+    private int IdEmpresa;
+    private String Empresa;
+    private String Valor;
+    private int Fecha;
+    private String Usuario;
+    private String Password;
 
     public String getUsuario() {
         return Usuario;
@@ -40,11 +39,11 @@ public class Cuenta {
         this.Password = Password;
     }
 
-    public Date getFecha() {
+    public int getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(int Fecha) {
         this.Fecha = Fecha;
     }
 
@@ -72,19 +71,19 @@ public class Cuenta {
         this.IdEstadoFinanciero = IdEstadoFinanciero;
     }
 
-    public String getIdTipoCuenta() {
+    public int getIdTipoCuenta() {
         return IdTipoCuenta;
     }
 
-    public void setIdTipoCuenta(String IdTipoCuenta) {
+    public void setIdTipoCuenta(int IdTipoCuenta) {
         this.IdTipoCuenta = IdTipoCuenta;
     }
 
-    public String getIdTipoSubCuenta() {
+    public int getIdTipoSubCuenta() {
         return IdTipoSubCuenta;
     }
 
-    public void setIdTipoSubCuenta(String IdTipoSubCuenta) {
+    public void setIdTipoSubCuenta(int IdTipoSubCuenta) {
         this.IdTipoSubCuenta = IdTipoSubCuenta;
     }
 

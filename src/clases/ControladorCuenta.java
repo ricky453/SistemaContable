@@ -21,8 +21,8 @@ public class ControladorCuenta {
     public static void AgregarCuentas(Cuenta cu)throws ErrorSistemaContable{ 
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuentas(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
-            
+            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+")");
+            cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
         }
@@ -36,25 +36,41 @@ public class ControladorCuenta {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
         }
     }
-    public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
-        try {
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-            String fecha = sdf.format(cu.getFecha());
-            cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuentasxempresa(Fecha,IdEmpresa,IdCuenta,Valor) VALUES('"+fecha+"','"+cu.getIdEmpresa()+"','"+cu.getIdCuenta()+"',"+cu.getValor()+")");
-            
-        } catch (SQLException ex) {
-            throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
-        }
-    }
-
-    public static ArrayList<Cuenta> ObtenerCuentas(int IdEstadoFinanciero)throws ErrorSistemaContable{
+    
+    public static ArrayList<Cuenta> ReporteBG(int IdEstadoFinanciero)throws ErrorSistemaContable{
     ArrayList<Object> cuenta = new ArrayList<Object>();
     
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT CONCAT(`tipocuenta`.`Nombre`,' ',`subtipocuenta`.`Nombre`) AS TIPO, `cuentas`.`Cuenta` FROM `cuentas` LEFT JOIN `tipocuenta` ON `tipocuenta`.`IdTipoCuenta`=`cuentas`.`IdTipoCuenta` LEFT JOIN `subtipocuenta` ON `subtipocuenta`.`IdTipoSubCuenta`=`cuentas`.`IdTipoSubCuenta` WHERE IdEstadoFinanciero='"+IdEstadoFinanciero+"' ORDER BY TIPO");
+            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta` AS `cuenta`, `tipocuenta`.`Nombre` AS `tipocuenta`, `subtipocuenta`.`Nombre` AS `subtipo`, `financieros`.`IdEstadoFinanciero` AS `id`\n" +
+                                    "FROM `financieros`\n" +
+                                    "    LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdEstadoFinanciero` = `financieros`.`IdEstadoFinanciero`\n" +
+                                    "    LEFT JOIN `subtipocuenta` ON `cuentasanio`.`IdTipoSubCuenta` = `subtipocuenta`.`IdTipoSubCuenta`\n" +
+                                    "    LEFT JOIN `tipocuenta` ON `cuentasanio`.`IdTipoCuenta` = `tipocuenta`.`IdTipoCuenta`\n" +
+                                    "    LEFT JOIN `cuenta` ON `cuentasanio`.`IdCuenta` = `cuenta`.`IdCuenta`\n" +
+                                    "WHERE (`financieros`.`IdEstadoFinanciero` ='"+IdEstadoFinanciero+"') GROUP BY IdTipoCuenta;");
+            while (rs.next()) {
+ 
+                cuenta.add(rs.getString(1));
+                cuenta.add(rs.getString(2));
+            }
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerCuentas",e.getMessage());
+        }
+        
+        ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
+        return cuentas;
+    }
+    
+    public static ArrayList<Cuenta> ObtenerCuentas(int IdEstadoFinanciero)throws ErrorSistemaContable{
+        ArrayList<Object> cuenta = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT CONCAT(`tipocuenta`.`Nombre`,' ',`subtipocuenta`.`Nombre`) AS TIPO, `cuenta`.`Cuenta` FROM `cuenta` LEFT JOIN `tipocuenta` ON `tipocuenta`.`IdTipoCuenta`=`cuenta`.`IdTipoCuenta` LEFT JOIN `subtipocuenta` ON `subtipocuenta`.`IdTipoSubCuenta`=`cuenta`.`IdTipoSubCuenta` WHERE IdEstadoFinanciero='"+IdEstadoFinanciero+"' ORDER BY TIPO");
             while (rs.next()) {
  
                 cuenta.add(rs.getString(1));
@@ -75,11 +91,12 @@ public class ControladorCuenta {
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT Cuenta FROM cuentas WHERE IdEstadoFinanciero='"+IdEstadoFinanciero+"' ORDER BY Cuenta ASC");
+            rs=cn.st.executeQuery("SELECT Cuenta FROM cuenta WHERE IdEstadoFinanciero='"+IdEstadoFinanciero+"' ORDER BY Cuenta ASC");
             while (rs.next()) {
  
                 cuenta.add(rs.getString(1));
             }
+            
             
         } catch (SQLException e) {
             throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerCuentas",e.getMessage());

@@ -56,8 +56,7 @@ public class frmCuentas extends javax.swing.JFrame {
         modeloCuentasSeleccionadas = (DefaultTableModel) tblCuentas.getModel();
         actualizarTablaBalance();
         actualizarTablaResultados();
-        dtcFecha.setDateFormatString("yyyy-MM-dd");
-        dtcFecha.setDate(date);
+        
         lblEmpresa.setText(SistemaContable.empresa);
     }
 
@@ -136,7 +135,6 @@ public class frmCuentas extends javax.swing.JFrame {
 
         jpnSeleccion = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
-        dtcFecha = new com.toedter.calendar.JDateChooser();
         lblEmpresa = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
@@ -144,6 +142,7 @@ public class frmCuentas extends javax.swing.JFrame {
         btnGenerar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtAnio = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         lblNuevaCuenta = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -181,13 +180,6 @@ public class frmCuentas extends javax.swing.JFrame {
             }
         });
         jpnSeleccion.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 10, -1));
-
-        dtcFecha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                dtcFechaFocusLost(evt);
-            }
-        });
-        jpnSeleccion.add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 150, 30));
 
         lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
         lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
@@ -271,6 +263,9 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(49, 58, 115));
         jLabel6.setText("EMPRESA:");
         jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 70, 30));
+
+        txtAnio.setText("     ");
+        jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 89, 140, 30));
 
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
@@ -360,7 +355,6 @@ public class frmCuentas extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 30));
 
         lblSeleccionarCuentas.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblSeleccionarCuentas.setForeground(new java.awt.Color(51, 51, 51));
         lblSeleccionarCuentas.setText("Seleccionar Cuentas");
         lblSeleccionarCuentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -391,23 +385,19 @@ public class frmCuentas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
-    private void dtcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dtcFechaFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dtcFechaFocusLost
-
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         Cuenta agregado = new Cuenta();
         if(tblCuentas.getRowCount()!=0){
             try {
                 IdEmpresa = ControladorCuenta.ObtenerIDEmpresa(lblEmpresa.getText());
-                agregado.setFecha(dtcFecha.getDate());
+                agregado.setFecha(Integer.parseInt(txtAnio.getText()));
                 agregado.setIdEmpresa(IdEmpresa);
                 for(int i=0;i<tblCuentas.getRowCount();i++){
                     try {
                         IdCuenta = ControladorCuenta.ObtenerIDCuenta(tblCuentas.getValueAt(i, 0).toString());
                         agregado.setIdCuenta(IdCuenta);
                         agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
-                        ControladorCuenta.Agregar(agregado);
+                        ControladorCuenta.AgregarCuentas(agregado);
                     } catch (ErrorSistemaContable ex) {
                         Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -521,7 +511,6 @@ public class frmCuentas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
-    private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -539,5 +528,6 @@ public class frmCuentas extends javax.swing.JFrame {
     public static javax.swing.JTable tblBalanceGeneral;
     public static javax.swing.JTable tblCuentas;
     public static javax.swing.JTable tblEstadoResultados;
+    private javax.swing.JTextField txtAnio;
     // End of variables declaration//GEN-END:variables
 }
