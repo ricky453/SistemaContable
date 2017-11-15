@@ -291,4 +291,26 @@ public class ControladorCuenta {
     
     }
 
+        public static ArrayList<Cuenta> ObtenerFechas(String cu)throws ErrorSistemaContable{
+    ArrayList<Object> proveedor = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT DISTINCT Anio FROM cuentasanio LEFT JOIN `empresa` ON `cuentasanio`.`IdEmpresa`=`empresa`.`IdEmpresa` WHERE `empresa`.`Empresa`='"+cu+"'");
+            while (rs.next()) {
+ 
+                proveedor.add(rs.getString(1));
+
+            }
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorProveedor/Obtener",e.getMessage());
+        }
+        
+        ArrayList<Cuenta> proveedores=(ArrayList) proveedor;
+        return proveedores;
+    }
+    
+
 }

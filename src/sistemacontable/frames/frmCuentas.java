@@ -576,8 +576,12 @@ public class frmCuentas extends javax.swing.JFrame {
                         agregado.setIdCuenta(IdCuenta);
                         agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
                         ControladorCuenta.Agregar(agregado);
-                        JOptionPane.showMessageDialog(rootPane, "Se han generado las cuentas!");
                         ObtenerDatosEstado();
+
+                    } catch (ErrorSistemaContable ex) {
+                        Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }       JOptionPane.showMessageDialog(rootPane, "Se han generado las cuentas!");
                         System.out.println(SistemaContable.VentasNetas);
                         System.out.println(SistemaContable.ComprasTotales);
                         System.out.println(SistemaContable.ComprasNetas);
@@ -587,10 +591,6 @@ public class frmCuentas extends javax.swing.JFrame {
                         System.out.println(SistemaContable.UtilidadOperativa);
                         System.out.println(SistemaContable.UtilidadNeta);
                         System.out.println(SistemaContable.UtilidadPorDistribuir);
-                    } catch (ErrorSistemaContable ex) {
-                        Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
             } catch (ErrorSistemaContable ex) {
                 Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
             }
