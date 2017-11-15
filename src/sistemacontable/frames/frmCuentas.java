@@ -120,12 +120,12 @@ public class frmCuentas extends javax.swing.JFrame {
         if(tblMisEstados.getValueAt(i, 0).equals("COMPRAS TOTALES")){
             SistemaContable.ComprasTotales=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
         }else{
-            if(tblMisEstados.getValueAt(i, 0).equals("GASTOS EN COMPRAS")){
+            if(tblMisEstados.getValueAt(i, 0).equals("GASTOS EN COMPRAS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS DE COMPRAS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS DE COMPRA")){
                 GastosCompras=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
             }
             int c=0;
             while(c<tblMisEstados.getRowCount()){
-                if(tblMisEstados.getValueAt(c, 0).equals("VENTAS")||tblMisEstados.getValueAt(c, 0).equals("VENTAS TOTALES")){
+                if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+GastosCompras;
                 }   
             }
@@ -578,6 +578,15 @@ public class frmCuentas extends javax.swing.JFrame {
                         ControladorCuenta.Agregar(agregado);
                         JOptionPane.showMessageDialog(rootPane, "Se han generado las cuentas!");
                         ObtenerDatosEstado();
+                        System.out.println(SistemaContable.VentasNetas);
+                        System.out.println(SistemaContable.ComprasTotales);
+                        System.out.println(SistemaContable.ComprasNetas);
+                        System.out.println(SistemaContable.DisponibilidadMercanciasPeriodo);
+                        System.out.println(SistemaContable.CostoVendido);
+                        System.out.println(SistemaContable.UtilidadBruta);
+                        System.out.println(SistemaContable.UtilidadOperativa);
+                        System.out.println(SistemaContable.UtilidadNeta);
+                        System.out.println(SistemaContable.UtilidadPorDistribuir);
                     } catch (ErrorSistemaContable ex) {
                         Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
                     }
