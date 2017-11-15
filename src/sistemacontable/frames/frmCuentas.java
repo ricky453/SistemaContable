@@ -39,12 +39,18 @@ public class frmCuentas extends javax.swing.JFrame {
     public static DefaultTableModel modeloBalance;
     public static DefaultTableModel modeloResultados;
     public static DefaultTableModel modeloCuentasSeleccionadas;
+    public static DefaultTableModel modeloMisEstados;
     ColorTabla r = new ColorTabla();
     String cuenta;
     int IdCuenta,IdEmpresa, IdFE;
     frmValor va = new frmValor();
     boolean encontrado;
     Date date = new Date();
+    double RebajasSobreVentas = 0;
+    double DevolucionesSobreVentas = 0;
+    double GastosCompras = 0;
+    double RebajasSobreCompras = 0;
+    double DevolucionesSobreCompras = 0;
     
     public frmCuentas() {
         initComponents();
@@ -54,12 +60,160 @@ public class frmCuentas extends javax.swing.JFrame {
         modeloBalance = (DefaultTableModel) tblBalanceGeneral.getModel();
         modeloResultados = (DefaultTableModel) tblEstadoResultados.getModel();
         modeloCuentasSeleccionadas = (DefaultTableModel) tblCuentas.getModel();
+        modeloMisEstados = (DefaultTableModel) tblMisEstados.getModel();
         actualizarTablaBalance();
         actualizarTablaResultados();
         
         lblEmpresa.setText(SistemaContable.empresa);
     }
 
+    public void actualizarMisEstados(){
+            modeloMisEstados.setRowCount(0);           
+            ArrayList<Cuenta> listaMisEstados=new ArrayList();
+            Object fila[]=new Object[2];
+            try {
+            listaMisEstados=ControladorCuenta.MisEstados(txtAnio.getText(), SistemaContable.empresa);
+            Iterator<Cuenta> MisEstados=listaMisEstados.iterator();
+                while(MisEstados.hasNext()){
+                    fila[0]= MisEstados.next();
+                    fila[1]= MisEstados.next();
+                    modeloMisEstados.addRow(fila);
+                    tblMisEstados.setModel(modeloMisEstados);
+                }
+            }
+         catch (ErrorSistemaContable ex) {
+             Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
+         }
+    } 
+    
+    public void ObtenerDatosEstado(){
+        actualizarMisEstados();
+        int i = 0;
+        while(i<tblMisEstados.getRowCount()){
+            
+            //    V E N T A S    N E T A S
+            
+        if(tblMisEstados.getValueAt(i, 0).equals("VENTAS NETAS")){
+            SistemaContable.VentasNetas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE VENTAS")){
+                RebajasSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+                int a=0;
+                while(a<tblMisEstados.getRowCount()){
+                   if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN VENTAS")){
+                         DevolucionesSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
+                   }
+               }                
+            }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN VENTAS")){
+                DevolucionesSobreVentas=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }
+            int b=0;
+            while(b<tblMisEstados.getRowCount()){
+                if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
+                    SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(RebajasSobreVentas+DevolucionesSobreVentas);
+                }   
+            }
+        }  
+        
+              //     C O M P R A S    T O T A L E S
+              
+        if(tblMisEstados.getValueAt(i, 0).equals("COMPRAS TOTALES")){
+            SistemaContable.ComprasTotales=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("GASTOS EN COMPRAS")){
+                GastosCompras=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }
+            int c=0;
+            while(c<tblMisEstados.getRowCount()){
+                if(tblMisEstados.getValueAt(c, 0).equals("VENTAS")||tblMisEstados.getValueAt(c, 0).equals("VENTAS TOTALES")){
+                    SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+GastosCompras;
+                }   
+            }
+        }      
+        
+              //       C O M P R A S    N E T A S
+              
+        if(tblMisEstados.getValueAt(i, 0).equals("COMPRAS NETAS")){
+            SistemaContable.VentasNetas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN COMPRAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE COMPRAS")){
+                RebajasSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+                int d=0;
+                while(d<tblMisEstados.getRowCount()){
+                   if(tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES EN COMPRAS")){
+                         DevolucionesSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                   }
+               }                
+            }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN COMPRAS")){
+                DevolucionesSobreCompras=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }
+            int e=0;
+            while(e<tblMisEstados.getRowCount()){
+                if(tblMisEstados.getValueAt(e, 0).equals("COMPRAS TOTALES")){
+                    SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString()))-(RebajasSobreCompras+DevolucionesSobreCompras);
+                }   
+            }
+        }  
+        
+             //   D I S P O N I B I L I D A D    D E    M E R C A N C I A S    P A R A     E L    P E R I O D O
+        if(tblMisEstados.getValueAt(i, 0).equals("DISPONIBILIDAD DE MERCANCIAS PARA EL PERIODO")|| tblMisEstados.getValueAt(i, 0).equals("DISPONIBILIDAD DE MERCANCIAS")){
+            SistemaContable.DisponibilidadMercanciasPeriodo=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("INVENTARIO INICIAL")){
+                SistemaContable.DisponibilidadMercanciasPeriodo=(Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString())+SistemaContable.ComprasNetas);
+            }
+        }    
+        
+            //    C O S T O   D E   L O   V E N D I D O
+        
+        if(tblMisEstados.getValueAt(i, 0).equals("COSTO DE LO VENDIDO")){
+            SistemaContable.CostoVendido=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("INVENTARIO FINAL")){
+                SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo-(Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString()));
+            }
+        }    
+             
+           //    U T I L I D A D   B R U T A 
+            
+        if(tblMisEstados.getValueAt(i, 0).equals("UTILIDAD BRUTA")||tblMisEstados.getValueAt(i, 0).equals("MARGEN BRUTO EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("MARGEN BRUTO DE UTILIDAD")){
+            SistemaContable.UtilidadBruta=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
+        }
+        
+           //    U T I L I D A D   O P E R A T I V A
+        
+        if(tblMisEstados.getValueAt(i, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(i, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS DE OPERACION")){
+            SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-(Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString()));
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS EN VENTAS")){
+                SistemaContable.GastoVentas=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }else if(tblMisEstados.getValueAt(i, 0).equals("GASTO FINANCIERO")||tblMisEstados.getValueAt(i, 0).equals("GASTOS FINANCIEROS")){
+                SistemaContable.GastoFinanciero=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }else if(tblMisEstados.getValueAt(i, 0).equals("GASTO ADMINISTRATIVO")||tblMisEstados.getValueAt(i, 0).equals("GASTOS ADMINISTRATIVOS")){
+                SistemaContable.GastoAdministrativo=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }
+            SistemaContable.UtilidadOperativa = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
+        }   
+        if(tblMisEstados.getValueAt(i, 0).equals("UTILIDAD OPERATIVA")){
+            SistemaContable.UtilidadOperativa=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }
+        
+            //   U T I L I D A D    N E T A
+        if(tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA")||tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA ANTES DE IMPUESTOS")||tblMisEstados.getValueAt(i, 0).equals("UTILIDAD NETA ANTES DE IMPUESTO")){
+            SistemaContable.UtilidadNeta=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("GASTOS EN VENTAS")){
+                SistemaContable.GastoVentas=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+            }
+            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
+        }
+        
+        }
+
+    }
+    
     public void colorTablaActivos(){
         tHeadActivos = tblBalanceGeneral.getTableHeader();
         Font fuente = new Font("Segoe UI Light", Font.BOLD, 12);
@@ -133,6 +287,8 @@ public class frmCuentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMisEstados = new javax.swing.JTable();
         jpnSeleccion = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
@@ -152,6 +308,16 @@ public class frmCuentas extends javax.swing.JFrame {
         tblBalanceGeneral = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         lblSeleccionarCuentas = new javax.swing.JLabel();
+
+        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane4.setViewportView(tblMisEstados);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -517,6 +683,7 @@ public class frmCuentas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jpnSeleccion;
     private javax.swing.JLabel lblCerrar;
@@ -526,6 +693,7 @@ public class frmCuentas extends javax.swing.JFrame {
     public static javax.swing.JTable tblBalanceGeneral;
     public static javax.swing.JTable tblCuentas;
     public static javax.swing.JTable tblEstadoResultados;
+    private javax.swing.JTable tblMisEstados;
     private javax.swing.JTextField txtAnio;
     // End of variables declaration//GEN-END:variables
 }

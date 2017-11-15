@@ -115,6 +115,29 @@ public class ControladorCuenta {
         ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
         return cuentas;
     }
+    
+    public static ArrayList<Cuenta> MisEstados(String anio, String Empresa)throws ErrorSistemaContable{
+    ArrayList<Object> cuenta = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta` WHERE `cuenta`.IdEstadoFinanciero='"+anio+"' AND `cuentasanio`.Anio= '"+Empresa+"'");
+            while (rs.next()) {
+ 
+                cuenta.add(rs.getString(1));
+                cuenta.add(rs.getString(2));
+            }
+            
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerCuentas",e.getMessage());
+        }
+        
+        ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
+        return cuentas;
+    }
+    
     public static ArrayList<Cuenta> ObtenerEstados()throws ErrorSistemaContable{
     ArrayList<Object> estados = new ArrayList<Object>();
     
