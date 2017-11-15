@@ -72,7 +72,7 @@ public class frmCuentas extends javax.swing.JFrame {
             ArrayList<Cuenta> listaMisEstados=new ArrayList();
             Object fila[]=new Object[2];
             try {
-            listaMisEstados=ControladorCuenta.MisEstados(txtAnio.getText(), SistemaContable.empresa);
+            listaMisEstados=ControladorCuenta.MisEstados(2, txtAnio.getText(), SistemaContable.empresa);
             Iterator<Cuenta> MisEstados=listaMisEstados.iterator();
                 while(MisEstados.hasNext()){
                     fila[0]= MisEstados.next();
