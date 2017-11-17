@@ -731,9 +731,10 @@ public class frmHome extends javax.swing.JFrame {
     private void lblBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalanceMouseClicked
         try {
             Map parametro = new HashMap();
-            parametro.put("parameter1", cmbFecha.getSelectedItem());
+            String archivo = getClass().getResource("/reporte/balanceGeneral.jasper").getPath();
+            parametro.put("parameter1", cmbFecha.getSelectedItem().toString());
             Conexion cn = new Conexion();
-            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile("C:\\Users\\sergi\\Documents\\NetBeansProjects\\SistemaContable\\src\\reporte\\balanceGeneral.jasper");
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(archivo);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn.conexion);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
