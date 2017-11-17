@@ -34,6 +34,13 @@ public class SistemaContable {
     public static double Impuestos;
     public static double ReservaLegal=0.07;
     
+    //Otras variables
+    public static double RebajasSobreVentas = 0;
+    public static double DevolucionesSobreVentas = 0;
+    public static double GastosCompras = 0;
+    public static double RebajasSobreCompras = 0;
+    public static double DevolucionesSobreCompras = 0;
+    
     public static void main(String[] args) {
         frmLogin home = new frmLogin();
         home.setVisible(true);

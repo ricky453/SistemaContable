@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -22,6 +23,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import sistemacontable.SistemaContable;
 
 /**
  *
@@ -31,6 +33,8 @@ public class frmHome extends javax.swing.JFrame {
 
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
+    private static DefaultTableModel modeloMisEstados;
+    boolean salir, salir2;
             
     public frmHome() {
         initComponents();
@@ -42,10 +46,13 @@ public class frmHome extends javax.swing.JFrame {
         lbl3.setVisible(false);
         pnlVerEstados.setVisible(false);
         lblEmpresa.setText(sistemacontable.SistemaContable.empresa);
+        modeloMisEstados = (DefaultTableModel) tblMisEstados.getModel();
+        
        
     }
 
     public void CargarFechas() throws ErrorSistemaContable{
+        cmbFecha.removeAll();
         fechas = ControladorCuenta.ObtenerFechas(lblEmpresa.getText());
         miFechas = new Object[fechas.size()/1][1];
         
@@ -59,10 +66,281 @@ public class frmHome extends javax.swing.JFrame {
         }
        
     }
+    public void actualizarMisEstados(){
+        try {           
+            modeloMisEstados.setRowCount(0);
+            ArrayList<Cuenta> listaMisEstados=new ArrayList();
+            Object fila[]=new Object[2];
+            listaMisEstados=ControladorCuenta.MisEstados(2, cmbFecha.getSelectedItem().toString(), SistemaContable.empresa);
+            Iterator<Cuenta> MisEstados=listaMisEstados.iterator();
+            while(MisEstados.hasNext()){
+                fila[0]= MisEstados.next();
+                fila[1]= MisEstados.next();
+                modeloMisEstados.addRow(fila);
+                tblMisEstados.setModel(modeloMisEstados);
+            }
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+        public void ObtenerDatosEstado(){
+        actualizarMisEstados();
+        int i = 0;
+        while(i<tblMisEstados.getRowCount()){
+            
+        //    V E N T A S    N E T A S    
+        if(tblMisEstados.getValueAt(i, 0).equals("VENTAS NETAS")){
+            SistemaContable.VentasNetas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());   
+            ObtenerComprasTotales();
+            i=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE VENTAS")){
+                SistemaContable.RebajasSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+                int a=0;
+                while(a<tblMisEstados.getRowCount()){
+                   if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN VENTAS")){
+                         SistemaContable.DevolucionesSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
+                         int b=0;
+                         while(b<tblMisEstados.getRowCount()){
+                         if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
+                            SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
+                            ObtenerComprasTotales();
+                            i=tblMisEstados.getRowCount()-1;
+                            b=tblMisEstados.getRowCount()-1;
+                            a=tblMisEstados.getRowCount()-1;
+                            }b++;
+                        }
+                   }a++;
+               }int b=0;
+                while(b<tblMisEstados.getRowCount()){
+                    if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
+                        SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
+                        ObtenerComprasTotales();
+                        i=tblMisEstados.getRowCount()-1;
+                        b=tblMisEstados.getRowCount()-1;
+                    }b++;
+                }                
+            }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN VENTAS")){
+                SistemaContable.DevolucionesSobreVentas=Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+                int b=0;
+                while(b<tblMisEstados.getRowCount()){
+                    if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
+                        SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
+                        ObtenerComprasTotales();
+                        i=tblMisEstados.getRowCount()-1;
+                        b=tblMisEstados.getRowCount()-1;
+                    }b++;
+                }
+            }else if(tblMisEstados.getValueAt(i, 0).equals("VENTAS")||tblMisEstados.getValueAt(i, 0).equals("VENTAS TOTALES")){
+                    SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
+                    ObtenerComprasTotales();
+                    i=tblMisEstados.getRowCount()-1;
+                }
+            }i++;
+        }
+    }
+    public void ObtenerComprasTotales(){
+        //     C O M P R A S    T O T A L E S
+        int a = 0;
+        while(a<tblMisEstados.getRowCount()){
+                  
+        if(tblMisEstados.getValueAt(a, 0).equals("COMPRAS TOTALES")){
+            SistemaContable.ComprasTotales=Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
+            ObtenerComprasNetas();
+            a=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(a, 0).equals("GASTOS EN COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRA")){
+                SistemaContable.GastosCompras=Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
+                int c=0;
+                while(c<tblMisEstados.getRowCount()){
+                if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
+                    SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
+                    ObtenerComprasNetas();
+                    a=tblMisEstados.getRowCount()-1;
+                    c=tblMisEstados.getRowCount()-1;
+                    }c++;   
+                }
+            }
+            int c=0;
+            while(c<tblMisEstados.getRowCount()){
+                if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
+                    SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
+                    ObtenerComprasNetas();
+                    a=tblMisEstados.getRowCount()-1;
+                    c=tblMisEstados.getRowCount()-1;
+                    }c++;   
+                }
+            }a++;
+        }   
+    }
+    
+    public void ObtenerComprasNetas(){
+        int d = 0;
+        while(d<tblMisEstados.getRowCount()){
+        //       C O M P R A S    N E T A S
+        if(tblMisEstados.getValueAt(d, 0).equals("COMPRAS NETAS")){
+            SistemaContable.ComprasNetas = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());  
+            ObtenerDisponibilidad();
+            d=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(d, 0).equals("REBAJAS EN COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("REBAJAS SOBRE COMPRAS")){
+                SistemaContable.RebajasSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                int a=0;
+                while(a<tblMisEstados.getRowCount()){
+                   if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN COMPRAS")){
+                        SistemaContable.DevolucionesSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
+                        SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);  
+                        ObtenerDisponibilidad();
+                        d=tblMisEstados.getRowCount()-1;
+                        a=tblMisEstados.getRowCount()-1;
+                   }a++;
+               }
+               
+            }else if(tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES EN COMPRAS")){
+                SistemaContable.DevolucionesSobreVentas=Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
+                ObtenerDisponibilidad();
+                d=tblMisEstados.getRowCount()-1;
+                }                        
+                SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
+            }d++;
+        }
+    }
+   
+    public void ObtenerDisponibilidad(){
+        int e = 0;
+        while(e<tblMisEstados.getRowCount()){
+        //   D I S P O N I B I L I D A D    D E    M E R C A N C I A S    P A R A     E L    P E R I O D O
+        if(tblMisEstados.getValueAt(e, 0).equals("DISPONIBILIDAD DE MERCANCIAS PARA EL PERIODO")|| tblMisEstados.getValueAt(e, 0).equals("DISPONIBILIDAD DE MERCANCIAS")){
+            SistemaContable.DisponibilidadMercanciasPeriodo=Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString());
+            ObtenerCostoVendido();
+            e=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(e, 0).equals("INVENTARIO INICIAL")){
+                SistemaContable.DisponibilidadMercanciasPeriodo=(Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString())+SistemaContable.ComprasNetas);
+                ObtenerCostoVendido();
+                e=tblMisEstados.getRowCount()-1;
+                }
+            }
+            e++;   
+            SistemaContable.DisponibilidadMercanciasPeriodo = SistemaContable.ComprasNetas;
+        }if(SistemaContable.DisponibilidadMercanciasPeriodo == SistemaContable.ComprasNetas){
+            ObtenerCostoVendido();
+        }
+    }
+    
+    public void ObtenerCostoVendido(){
+        int f = 0;
+        while(f<tblMisEstados.getRowCount()){
+        //    C O S T O   D E   L O   V E N D I D O
+        if(tblMisEstados.getValueAt(f, 0).equals("COSTO DE LO VENDIDO")){
+            SistemaContable.CostoVendido=Double.parseDouble(tblMisEstados.getValueAt(f, 1).toString());
+            ObtenerUtilidadBruta();
+            f=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(f, 0).equals("INVENTARIO FINAL")){
+                SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo-(Double.parseDouble(tblMisEstados.getValueAt(f, 1).toString()));
+                ObtenerUtilidadBruta();
+                f=tblMisEstados.getRowCount()-1;
+                }else{                
+                      SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo;
+                }
+            }f++;   
+        }if(SistemaContable.CostoVendido==SistemaContable.DisponibilidadMercanciasPeriodo){
+            ObtenerUtilidadBruta();
+        }
+    }
+    public void ObtenerUtilidadBruta(){
+        int g = 0;
+        while(g<tblMisEstados.getRowCount()){
+        //    U T I L I D A D   B R U T A     
+        if(tblMisEstados.getValueAt(g, 0).equals("UTILIDAD BRUTA")||tblMisEstados.getValueAt(g, 0).equals("MARGEN BRUTO EN VENTAS")||tblMisEstados.getValueAt(g, 0).equals("MARGEN BRUTO DE UTILIDAD")){
+            SistemaContable.UtilidadBruta=Double.parseDouble(tblMisEstados.getValueAt(g, 1).toString());
+            ObtenerUtilidadOperativa();
+            g=tblMisEstados.getRowCount()-1;
+            salir = false;
+        }else{
+            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
+            salir = true;
+            }g++;
+        }if(salir==true){
+            ObtenerUtilidadOperativa();
+        }
+             
+    }
+    public void ObtenerUtilidadOperativa(){
+        int h = 0;
+        while(h<tblMisEstados.getRowCount()){
+                    
+        //    U T I L I D A D   O P E R A T I V A
+        if(tblMisEstados.getValueAt(h, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS DE OPERACION")){
+            SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-(Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString()));
+            ObtenerUtilidadNeta();
+            h=tblMisEstados.getRowCount()-1;
+            salir2=false;
+            
+        }else{
+            if(tblMisEstados.getValueAt(h, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS EN VENTAS")){
+                SistemaContable.GastoVentas=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            }else if(tblMisEstados.getValueAt(h, 0).equals("GASTO FINANCIERO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS FINANCIEROS")){
+                SistemaContable.GastoFinanciero=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            }else if(tblMisEstados.getValueAt(h, 0).equals("GASTO ADMINISTRATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS ADMINISTRATIVOS")){
+                SistemaContable.GastoAdministrativo=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            }
+            SistemaContable.UtilidadOperativa = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
+            salir2=true;
+        }   
+        if(tblMisEstados.getValueAt(h, 0).equals("UTILIDAD OPERATIVA")){
+            SistemaContable.UtilidadOperativa=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            ObtenerUtilidadNeta();
+            salir2=false;
+            }h++;
+        }if(salir2==true){
+            ObtenerUtilidadNeta();
+        }
+    }
+    public void ObtenerUtilidadNeta(){
+        int j = 0;
+        while(j<tblMisEstados.getRowCount()){
+        //   U T I L I D A D    N E T A
+        if(tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA")||tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA ANTES DE IMPUESTOS")||tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA ANTES DE IMPUESTO")){
+            SistemaContable.UtilidadNeta=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
+            ObtenerUtilidadDistribuir();
+            j=tblMisEstados.getRowCount()-1;
+        }else{
+            if(tblMisEstados.getValueAt(j, 0).equals("OTROS GASTOS")){
+                SistemaContable.OtrosGastos=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
+            }else if(tblMisEstados.getValueAt(j, 0).equals("OTROS INGRESOS")||tblMisEstados.getValueAt(j, 0).equals("OTROS PRODUCTOS")){
+                SistemaContable.OtrosIngresos=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
+            }
+            SistemaContable.UtilidadNeta = (SistemaContable.UtilidadOperativa+SistemaContable.OtrosIngresos)-SistemaContable.OtrosGastos;
+            }j++;
+        }ObtenerUtilidadDistribuir(); 
+    }        
+    public void ObtenerUtilidadDistribuir(){
+        int k = 0;
+        while(k<tblMisEstados.getRowCount()){
+        //   U T I L I D A D   P O R   D I S T R I B U I R    
+        if(tblMisEstados.getValueAt(k, 0).equals("UTILIDAD DEL EJERCICIO")||tblMisEstados.getValueAt(k, 0).equals("UTILIDAD POR DISTRIBUIR")){
+            SistemaContable.UtilidadPorDistribuir=Double.parseDouble(tblMisEstados.getValueAt(k, 1).toString());
+            k=tblMisEstados.getRowCount()-1;
+        }else{
+            if(SistemaContable.UtilidadNeta<150000){
+                SistemaContable.Impuestos=0.25;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+            }else{
+                SistemaContable.Impuestos=0.30;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                }
+            }k++;
+        }         
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMisEstados = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         lbl1 = new javax.swing.JLabel();
@@ -98,6 +376,16 @@ public class frmHome extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
+
+        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane4.setViewportView(tblMisEstados);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -294,11 +582,11 @@ public class frmHome extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblEstadoMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblEstadoMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblEstadoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblEstadoMouseExited(evt);
             }
         });
         pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, 40));
@@ -313,11 +601,11 @@ public class frmHome extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBalanceMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBalanceMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBalanceMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBalanceMouseExited(evt);
             }
         });
         pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 40));
@@ -329,7 +617,6 @@ public class frmHome extends javax.swing.JFrame {
         pnlVerEstados.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, 30));
 
         lblCerrar1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblCerrar1.setForeground(new java.awt.Color(0, 0, 0));
         lblCerrar1.setText("x");
         lblCerrar1.setToolTipText("Cerrar");
         lblCerrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -428,7 +715,17 @@ public class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_lblIndicesMouseClicked
 
     private void lblEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstadoMouseClicked
-
+        actualizarMisEstados();
+        ObtenerDatosEstado();
+                        System.out.println("VENTAS NETAS "+SistemaContable.VentasNetas);
+                        System.out.println("COMPRAS TOTALES "+ SistemaContable.ComprasTotales);
+                        System.out.println("COMPRAS NETAS "+ SistemaContable.ComprasNetas);
+                        System.out.println(SistemaContable.DisponibilidadMercanciasPeriodo);
+                        System.out.println(SistemaContable.CostoVendido);
+                        System.out.println(SistemaContable.UtilidadBruta);
+                        System.out.println(SistemaContable.UtilidadOperativa);
+                        System.out.println(SistemaContable.UtilidadNeta);
+                        System.out.println(SistemaContable.UtilidadPorDistribuir);
     }//GEN-LAST:event_lblEstadoMouseClicked
 
     private void lblBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalanceMouseClicked
@@ -516,6 +813,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl1;
@@ -548,5 +846,6 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNuevos;
     private javax.swing.JPanel pnlVer;
     private javax.swing.JPanel pnlVerEstados;
+    private javax.swing.JTable tblMisEstados;
     // End of variables declaration//GEN-END:variables
 }
