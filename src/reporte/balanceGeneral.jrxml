@@ -35,11 +35,11 @@ FROM `cuenta`
 		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
-	<variable name="pasivo" class="java.lang.Double" resetType="Column">
-		<variableExpression><![CDATA[($F{Cuenta}.equals("PASIVO")==true ? +$F{Valor} : +0.0)]]></variableExpression>
+	<variable name="pasivo" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{Cuenta}.compareTo("PASIVO") ? +$F{Valor} : +0.0)]]></variableExpression>
 	</variable>
 	<variable name="capital" class="java.lang.Double">
-		<variableExpression><![CDATA[( ($F{Cuenta}.equals("PATRIMONIO")==true? +$F{Valor} : +0.0)]]></variableExpression>
+		<variableExpression><![CDATA[( $F{Cuenta}.compareTo("PATRIMONIO")? +$F{Valor} : +0.0)]]></variableExpression>
 	</variable>
 	<variable name="suma" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{pasivo}+$V{capital}]]></variableExpression>
@@ -112,10 +112,6 @@ FROM `cuenta`
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Anio}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="255" y="0" width="300" height="64" uuid="3b4f6947-3a70-4d34-9351-3825355a48c6"/>
-				<imageExpression><![CDATA["leaf_banner_gray.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
