@@ -5,13 +5,23 @@
  */
 package sistemacontable.frames;
 
+import clases.Conexion;
 import clases.ControladorCuenta;
 import clases.Cuenta;
 import clases.ErrorSistemaContable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -422,7 +432,20 @@ public class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEstadoMouseClicked
 
     private void lblBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalanceMouseClicked
-        // TODO add your handling code here:
+        try {
+            Map parametro = new HashMap();
+            parametro.put("parameter1", cmbFecha.getSelectedItem());
+            Conexion cn = new Conexion();
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile("C:\\Users\\sergi\\Documents\\NetBeansProjects\\SistemaContable\\src\\reporte\\balanceGeneral.jasper");
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn.conexion);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle("BALANCE GENERAL");
+        } catch (JRException ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblBalanceMouseClicked
 
     private void lblCerrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrar1MouseClicked
