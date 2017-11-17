@@ -116,13 +116,13 @@ public class ControladorCuenta {
         return cuentas;
     }
     
-    public static ArrayList<Cuenta> MisEstados(String anio, String Empresa)throws ErrorSistemaContable{
+    public static ArrayList<Cuenta> MisEstados(int idEstado, String anio, String Empresa)throws ErrorSistemaContable{
     ArrayList<Object> cuenta = new ArrayList<Object>();
     
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta` WHERE `cuenta`.IdEstadoFinanciero='"+anio+"' AND `cuentasanio`.Anio= '"+Empresa+"'");
+            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta`  LEFT JOIN `empresa` ON `cuentasanio`.`IdEmpresa`=`empresa`.`IdEmpresa` WHERE `cuenta`.IdEstadoFinanciero='"+idEstado+"' AND `cuentasanio`.Anio= '"+anio+"' AND `empresa`.`Empresa`='"+Empresa+"' ");
             while (rs.next()) {
  
                 cuenta.add(rs.getString(1));
