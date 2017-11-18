@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e3ae922-8e50-4d9d-bc0f-14667fe78dc3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="349"/>
+	<field name="c1" class="java.lang.String"/>
+	<field name="c2" class="java.lang.String"/>
+	<field name="c3" class="java.lang.String"/>
+	<field name="c4" class="java.lang.String"/>
+	<field name="c5" class="java.lang.String"/>
+	<field name="c6" class="java.lang.String"/>
+	<field name="c7" class="java.lang.String"/>
+	<field name="c8" class="java.lang.String"/>
+	<field name="c9" class="java.lang.String"/>
+	<field name="c10" class="java.lang.String"/>
+	<field name="c11" class="java.lang.String"/>
+	<field name="c12" class="java.lang.String"/>
+	<field name="c13" class="java.lang.String"/>
+	<field name="c14" class="java.lang.String"/>
+	<field name="c15" class="java.lang.String"/>
+	<field name="c16" class="java.lang.String"/>
+	<field name="c17" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="0" width="323" height="41" uuid="b5a02aae-9e53-40ee-9cef-778b9350fbc7"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Estado de Resultados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="751" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="39" width="242" height="20" uuid="1a6e1639-33e3-4010-8bcb-4bcc95cdbad8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Devoluciones y Rebajas en Ventas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="324" y="39" width="178" height="20" uuid="40bb4b86-4a0d-4c1c-9315-fb254c003805"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="64" width="174" height="20" uuid="ce450694-e64f-4f86-90e0-c779d550404e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: VENTAS NETAS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="324" y="64" width="178" height="20" uuid="8b45742b-b30c-4757-81e6-7e5db66befe4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="128" width="100" height="20" uuid="672c852d-2111-4b78-a936-6c517e02a8cc"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Compras]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="148" width="139" height="20" uuid="ceac2c04-3207-4b81-97dc-763c52692ec5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="148" width="187" height="20" uuid="74e97855-2ac3-400e-8dd0-b8533ff020f4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[más: Gastos en Compras:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="175" width="139" height="20" uuid="b1975dd2-399e-4909-bdbb-f234ddf51fc6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="175" width="199" height="20" uuid="4bf6f951-b3f3-461b-bac9-8f44f2287188"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: COMPRAS TOTALES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="195" width="139" height="20" uuid="e8098fd1-3234-4c04-afcc-4447e7de30c0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="224" width="139" height="20" uuid="05997f43-b032-45b3-a464-66b48dfe1b61"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="289" width="139" height="20" uuid="032459fa-4f62-487a-88f4-994029d05753"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="344" width="139" height="20" uuid="e99cc90d-ac39-4ca5-b05c-ed89d9e5b13b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="383" width="139" height="20" uuid="885ed9f3-1298-41a7-a19b-06b75d6aaf5e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="530" width="139" height="20" uuid="aea44044-9e33-4dc6-b9fb-162282acd553"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="579" width="139" height="20" uuid="2af2eb81-52d4-4c91-a323-aad670a4389e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="599" width="123" height="20" uuid="2c9af49f-84dd-4d6d-92b1-4552fabdc8e6"/>
+				<textFieldExpression><![CDATA[$F{c12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="619" width="123" height="20" uuid="c09a3416-ae20-4362-ae12-06d3bee46f08"/>
+				<textFieldExpression><![CDATA[$F{c13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="654" width="139" height="20" uuid="26461744-33fb-4bb5-98b9-c2c5c4a8f2b1"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="674" width="123" height="20" uuid="5e8120d8-b168-4421-92ab-cc69739111e2"/>
+				<textFieldExpression><![CDATA[$F{c15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="694" width="123" height="20" uuid="9388c93f-6610-4fbd-addb-f3bac836a8aa"/>
+				<textFieldExpression><![CDATA[$F{c16}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="726" width="139" height="20" uuid="adac80c6-de60-4c3e-9dae-7f6047ed38f3"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c17}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="12" width="168" height="20" uuid="90ff5fc6-b8ed-41c0-ba1e-6ccb0eeec12d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Ventas Totales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="100" width="214" height="20" uuid="cb7b8cc6-d5ee-45ab-9cb0-a10000e94a5a"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Costo de los Bienes Vendidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="195" width="254" height="20" uuid="998ebaca-cc1d-44fd-bb1e-121173807197"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Devoluciones y Rebajas en Compras:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="224" width="199" height="20" uuid="ba26b9f0-2f9f-40c0-8d02-9245ce249eb0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: COMPRAS NETAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="244" width="187" height="20" uuid="160f9cb4-e654-436f-9f39-33923ab6d362"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[más: Inventario Inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="279" width="214" height="20" uuid="b9b4d293-801d-44a2-9edc-039097e1f43b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: DISPONIBILIDAD DE LA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="299" width="242" height="20" uuid="afe17e19-42c3-4db3-a34c-f950ec3832dd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[MERCANCÍA PARA EL PERÍODO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="319" width="254" height="20" uuid="006699b4-8c72-4dd6-b595-f10aaac88b8f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Inventario Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="344" width="230" height="20" uuid="89e2040a-dd6a-46a0-a169-f2f09b0d9a5c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: COSTO DE LO VENDIDO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="325" y="58" width="177" height="1" uuid="c896d96e-11ce-4b6c-8b43-4af6422d0002"/>
+			</line>
+			<line>
+				<reportElement x="363" y="168" width="139" height="1" uuid="c2d2da63-e8e8-4178-adab-f74c1cde7fe2"/>
+			</line>
+			<line>
+				<reportElement x="363" y="215" width="139" height="1" uuid="14e5cb9e-3385-45ee-b91c-6ac791566cd9"/>
+			</line>
+			<line>
+				<reportElement x="363" y="263" width="139" height="1" uuid="d4c2a59e-5921-488a-8956-7eb8df43e1e8"/>
+			</line>
+			<line>
+				<reportElement x="363" y="319" width="139" height="1" uuid="4586346f-42b8-4da5-9ccc-316606884c7d"/>
+			</line>
+			<staticText>
+				<reportElement x="70" y="383" width="168" height="20" uuid="4bfaede4-6ff2-4e11-8b02-23290e4ea4e6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Gastos Operativos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="403" width="254" height="20" uuid="87d449cb-74e3-45bd-98dd-079a1f6ba0c1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Gastos de Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="423" width="254" height="20" uuid="ca58b448-0b71-4e2a-bed8-7e5d5c5c1d11"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Gastos Administrativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="443" width="254" height="20" uuid="4b502866-f09b-40c2-ab8f-a3ab0b87eeed"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Gastos Financieros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="530" width="230" height="20" uuid="dafc8205-ac07-4a1c-b7fd-1964c8e4d19f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: UTILIDAD BRUTA:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="363" y="518" width="139" height="1" uuid="afb3eecf-b183-4844-bad6-6e9636bc9404"/>
+			</line>
+			<staticText>
+				<reportElement x="70" y="479" width="174" height="20" uuid="5b7d94c5-4c18-4910-90dd-92ed9018bfd5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Ventas Netas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="499" width="254" height="20" uuid="51e55977-67f2-4aad-9767-0a4060fb7b95"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Costo de lo Vendido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="479" width="139" height="20" uuid="dc7f7cc0-77d9-480b-b1cd-98bba4770188"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="498" width="139" height="20" uuid="2994bc17-32c8-4341-ab89-724fabea8404"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c8}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="550" width="254" height="20" uuid="97e02bfa-8410-4984-b09b-7c47e46c8dbb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Gastos Operativos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="550" width="139" height="20" uuid="ec7bbdb6-119b-49ad-9e10-585974224f7a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c9}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="363" y="570" width="139" height="1" uuid="06cea18f-7df2-45a3-a9f1-4f79a11dd6cc"/>
+			</line>
+			<staticText>
+				<reportElement x="71" y="579" width="230" height="20" uuid="f3930aa7-eb6d-457f-93df-c2e12abb761c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: UTILIDAD OPERATIVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="599" width="254" height="20" uuid="7dd2f451-7b0d-41df-ad36-316c6800b7c1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Otros Gastos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="619" width="254" height="20" uuid="6795c375-659c-4c8f-8cb7-57f2f3a83261"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[más: Otros Ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="654" width="230" height="20" uuid="e1da8cf9-7c44-4d22-b381-9c53eea2314b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Igual a: UTILIDAD NETA ANTES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="674" width="254" height="20" uuid="a8f4ba29-6fe4-4a59-ad10-cc68beab9443"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Reserva Legal (7%):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="694" width="254" height="20" uuid="bf6bae16-9ba0-47d8-83c0-93b8d5db2dda"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[menos: Impuestos:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="363" y="638" width="139" height="1" uuid="8ad7c01e-9233-426a-8446-eedf650c47f9"/>
+			</line>
+			<line>
+				<reportElement x="363" y="713" width="139" height="1" uuid="30efa646-12ac-4784-bbe8-9509e14371fa"/>
+			</line>
+			<staticText>
+				<reportElement x="70" y="726" width="254" height="20" uuid="812ac990-7098-49dd-9acd-e886477333a4"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Igual a: UTILIDAD POR DISTRIBUIR:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

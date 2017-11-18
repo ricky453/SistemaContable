@@ -9,18 +9,22 @@ import clases.Conexion;
 import clases.ControladorCuenta;
 import clases.Cuenta;
 import clases.ErrorSistemaContable;
+import clases.Estado;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import sistemacontable.SistemaContable;
@@ -34,6 +38,7 @@ public class frmHome extends javax.swing.JFrame {
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
     private static DefaultTableModel modeloMisEstados;
+    private static DefaultTableModel EstadosParaReporte;
     boolean salir, salir2,salir3,salir4, salir5, salir6, salir7, salir8;
             
     public frmHome() {
@@ -47,6 +52,7 @@ public class frmHome extends javax.swing.JFrame {
         pnlVerEstados.setVisible(false);
         lblEmpresa.setText(sistemacontable.SistemaContable.empresa);
         modeloMisEstados = (DefaultTableModel) tblMisEstados.getModel();
+        EstadosParaReporte = (DefaultTableModel) tblEstadosReporte.getModel();
         
        
     }
@@ -66,6 +72,53 @@ public class frmHome extends javax.swing.JFrame {
         }
        
     }
+    public void generarEstado(){
+        Estado em;// Instaciamos la clase empleado
+        List <Estado>lista = new ArrayList<>(); //Creamos una lista de empleados con ArrayList para obtener cada empleado
+        for(int i=0; i<tblEstadosReporte.getRowCount(); i++){ // Iterena cada fila de la tabla
+            em = new Estado(tblEstadosReporte.getValueAt(i, 0).toString(),tblEstadosReporte.getValueAt(i,1).toString(), //Tomamos de la tabla el valor de cada columna y creamos un objeto empleado
+            tblEstadosReporte.getValueAt(i, 2).toString(),tblEstadosReporte.getValueAt(i, 3).toString(),tblEstadosReporte.getValueAt(i,4).toString(),
+            tblEstadosReporte.getValueAt(i,5).toString(),tblEstadosReporte.getValueAt(i,6).toString(),tblEstadosReporte.getValueAt(i,7).toString(),
+            tblEstadosReporte.getValueAt(i,8).toString(),tblEstadosReporte.getValueAt(i,9).toString(),tblEstadosReporte.getValueAt(i,10).toString(),
+            tblEstadosReporte.getValueAt(i,11).toString(),tblEstadosReporte.getValueAt(i,12).toString(),tblEstadosReporte.getValueAt(i,13).toString(),
+            tblEstadosReporte.getValueAt(i,14).toString(),tblEstadosReporte.getValueAt(i,15).toString(),tblEstadosReporte.getValueAt(i,16).toString());
+            lista.add(em); //Agregamos el objeto empleado a la lista
+        }
+        JasperReport reporte; // Instaciamos el objeto reporte
+        String path = getClass().getResource("/reporte/estadoResultados2.jasper").getPath(); //Ponemos la localizacion del reporte creado
+        try {
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path); //Se carga el reporte de su localizacion
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista)); //Agregamos los parametros para llenar el reporte
+            JasperViewer viewer = new JasperViewer(jprint, false); //Se crea la vista del reportes
+            viewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Se declara con dispose_on_close para que no se cierre el programa cuando se cierre el reporte
+            viewer.setVisible(true); //Se vizualiza el reporte
+        } catch (JRException ex) {
+           
+        }
+    }
+    public void generarTablaReporteEstado(){      
+            EstadosParaReporte.setRowCount(0);
+            Object fila[]=new Object[17];
+            fila[0]= SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas;
+            fila[1]= SistemaContable.VentasNetas;
+            fila[2]= SistemaContable.GastosCompras; 
+            fila[3]= SistemaContable.ComprasTotales;
+            fila[4]= SistemaContable.RebajasSobreCompras+SistemaContable.DevolucionesSobreCompras;
+            fila[5]= SistemaContable.ComprasNetas;
+            fila[6]= SistemaContable.DisponibilidadMercanciasPeriodo;
+            fila[7]= SistemaContable.CostoVendido;
+            fila[8]= SistemaContable.UtilidadBruta;
+            fila[9]= SistemaContable.GastosOperativos;    
+            fila[10]= SistemaContable.UtilidadOperativa; 
+            fila[11]= SistemaContable.OtrosGastos;
+            fila[12]= SistemaContable.OtrosIngresos;
+            fila[13]= SistemaContable.UtilidadNeta;
+            fila[14]= SistemaContable.ReservaLegal;
+            fila[15]= SistemaContable.Impuestos;
+            fila[16]= SistemaContable.UtilidadPorDistribuir;
+            EstadosParaReporte.addRow(fila);
+            tblEstadosReporte.setModel(EstadosParaReporte);
+    }
     public void actualizarMisEstados(){
         try {           
             modeloMisEstados.setRowCount(0);
@@ -82,8 +135,9 @@ public class frmHome extends javax.swing.JFrame {
         } catch (ErrorSistemaContable ex) {
             Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-        public void ObtenerDatosEstado(){
+    }
+
+    public void ObtenerDatosEstado(){
         actualizarMisEstados();
         int i = 0;
         while(i<tblMisEstados.getRowCount()){
@@ -368,13 +422,13 @@ public class frmHome extends javax.swing.JFrame {
             k=tblMisEstados.getRowCount()-1;
         }else{
             if(SistemaContable.UtilidadNeta<150000){
-                SistemaContable.Impuestos=0.25;
+                SistemaContable.Impuestos=0.25*SistemaContable.UtilidadNeta;
                 SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*0.25));
             }else{
-                SistemaContable.Impuestos=0.30;
+                SistemaContable.Impuestos=0.30*SistemaContable.UtilidadNeta;
                 SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*0.30));
                 }
             }k++;
         }         
@@ -385,6 +439,8 @@ public class frmHome extends javax.swing.JFrame {
 
         jScrollPane4 = new javax.swing.JScrollPane();
         tblMisEstados = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEstadosReporte = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         lbl1 = new javax.swing.JLabel();
@@ -430,6 +486,16 @@ public class frmHome extends javax.swing.JFrame {
             }
         ));
         jScrollPane4.setViewportView(tblMisEstados);
+
+        tblEstadosReporte.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "RebajasDevVenta", "VentasNetas", "GastosCompras", "ComprasTotales", "RebajasDevCompras", "ComprasNetas", "Disponibilidad", "CostoVendido", "UtilidadBruta", "GastoOperativo", "UtilidadOperativa", "OtrosGastos", "OtrosIngresos", "UtilidadNeta", "ReservaLegal", "Impuestos", "UtilidadDistribuir"
+            }
+        ));
+        jScrollPane1.setViewportView(tblEstadosReporte);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -761,6 +827,8 @@ public class frmHome extends javax.swing.JFrame {
     private void lblEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstadoMouseClicked
         actualizarMisEstados();
         ObtenerDatosEstado();
+        generarTablaReporteEstado();
+        generarEstado();
                         System.out.println("VENTAS NETAS "+SistemaContable.VentasNetas);
                         System.out.println("COMPRAS TOTALES "+ SistemaContable.ComprasTotales);
                         System.out.println("COMPRAS NETAS "+ SistemaContable.ComprasNetas);
@@ -858,6 +926,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -891,6 +960,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNuevos;
     private javax.swing.JPanel pnlVer;
     private javax.swing.JPanel pnlVerEstados;
+    private javax.swing.JTable tblEstadosReporte;
     private javax.swing.JTable tblMisEstados;
     // End of variables declaration//GEN-END:variables
 }

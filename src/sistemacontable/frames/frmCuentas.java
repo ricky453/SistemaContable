@@ -81,7 +81,7 @@ public class frmCuentas extends javax.swing.JFrame {
              Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
          }
     } 
-        public void ObtenerDatosEstado(){
+    public void ObtenerDatosEstado(){
         actualizarMisEstados();
         int i = 0;
         while(i<tblMisEstados.getRowCount()){
@@ -145,9 +145,8 @@ public class frmCuentas extends javax.swing.JFrame {
                     salir3=true;
                 }
             }i++;
-            if(salir3==true){
-                ObtenerComprasTotales();
-            }
+        }if(salir3==true){
+             ObtenerComprasTotales();
         }
     }
     public void ObtenerComprasTotales(){
@@ -367,13 +366,13 @@ public class frmCuentas extends javax.swing.JFrame {
             k=tblMisEstados.getRowCount()-1;
         }else{
             if(SistemaContable.UtilidadNeta<150000){
-                SistemaContable.Impuestos=0.25;
+                SistemaContable.Impuestos=0.25*SistemaContable.UtilidadNeta;
                 SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*0.25));
             }else{
-                SistemaContable.Impuestos=0.30;
+                SistemaContable.Impuestos=0.30*SistemaContable.UtilidadNeta;
                 SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*0.30));
                 }
             }k++;
         }         
