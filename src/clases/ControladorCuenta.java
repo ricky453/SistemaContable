@@ -159,13 +159,13 @@ public class ControladorCuenta {
         return estadosfinancieros;
     }
     
-    public static ArrayList<Cuenta> ObtenerTipo()throws ErrorSistemaContable{
+    public static ArrayList<Cuenta> ObtenerTipo(int id1, int id2, int id3)throws ErrorSistemaContable{
     ArrayList<Object> tipo = new ArrayList<Object>();
     
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT * FROM tipocuenta");
+            rs=cn.st.executeQuery("SELECT * FROM tipocuenta WHERE IdTipoCuenta='"+id1+"' OR IdTipoCuenta='"+id2+"' OR IdTipoCuenta='"+id3+"'");
             while (rs.next()) {
  
                 tipo.add(rs.getString(1));
@@ -180,13 +180,13 @@ public class ControladorCuenta {
         return tipocuenta;
     }
     
-    public static ArrayList<Cuenta> ObtenerSubTipo()throws ErrorSistemaContable{
+    public static ArrayList<Cuenta> ObtenerSubTipo(int id1, int id2, int id3)throws ErrorSistemaContable{
     ArrayList<Object> tipo = new ArrayList<Object>();
     
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT * FROM subtipocuenta");
+            rs=cn.st.executeQuery("SELECT * FROM subtipocuenta WHERE IdTipoSubCuenta='"+id1+"' OR IdTipoSubCuenta='"+id2+"' OR IdTipoSubCuenta='"+id3+"'");
             while (rs.next()) {
  
                 tipo.add(rs.getString(1));

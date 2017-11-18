@@ -32,10 +32,10 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     public frmNuevaCuenta() throws ErrorSistemaContable {
         initComponents();
         CargarEstados();
-        CargarTipos();
-        CargarSubTipos();
         lblAdv.setVisible(false);
         txtCuenta.requestFocus();
+       // lbl1.setVisible(false);
+        //chkGasto.setVisible(false);
        
     }
 
@@ -51,11 +51,27 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
             Estados[fila][1]=iterador.next();
             cmbEstado.addItem(""+Estados[fila][1]);
             fila++;
-        }
+        }CargarTipos();
        
     }
     public void CargarTipos() throws ErrorSistemaContable{
-        tipoCuenta = ControladorCuenta.ObtenerTipo();
+    cmbTipo.removeAllItems();
+
+    if(cmbEstado.getSelectedItem().equals("BALANCE GENERAL")){
+        tipoCuenta = ControladorCuenta.ObtenerTipo(1,2,3);
+        Tipo = new Object[tipoCuenta.size()/2][2];
+        int contador=0,fila=0;
+        Iterator<Cuenta> iterador= tipoCuenta.iterator();
+        String temporal="";
+        while (iterador.hasNext()){
+            Tipo[fila][0]=iterador.next();
+            Tipo[fila][1]=iterador.next();
+            cmbTipo.addItem(""+Tipo[fila][1]);
+            fila++;
+        }
+        CargarSubTipos();
+    }else if(cmbEstado.getSelectedItem().equals("ESTADO DE RESULTADOS")){
+        tipoCuenta = ControladorCuenta.ObtenerTipo(4,4,4);
         Tipo = new Object[tipoCuenta.size()/2][2];
         
         int contador=0,fila=0;
@@ -67,9 +83,17 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
             cmbTipo.addItem(""+Tipo[fila][1]);
             fila++;
         }
+        CargarSubTipos();
+    }else{
+        
+    }
+
     }
     public void CargarSubTipos() throws ErrorSistemaContable{
-        subtipoCuenta = ControladorCuenta.ObtenerSubTipo();
+        cmbSubTipo.removeAllItems();
+        subtipoCuenta.clear();
+        if(cmbTipo.getSelectedItem().equals("ACTIVO")||cmbTipo.getSelectedItem().equals("PASIVO")||cmbTipo.getSelectedItem().equals("PATRIMONIO")){
+        subtipoCuenta = ControladorCuenta.ObtenerSubTipo(1,2,3);
         SubTipo = new Object[subtipoCuenta.size()/2][2];
         
         int contador=0,fila=0;
@@ -80,6 +104,20 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
             SubTipo[fila][1]=iterador.next();
             cmbSubTipo.addItem(""+SubTipo[fila][1]);
             fila++;
+            }
+        }else if(cmbTipo.getSelectedItem().equals("GASTOS")){
+        subtipoCuenta = ControladorCuenta.ObtenerSubTipo(4,5,6);
+        SubTipo = new Object[subtipoCuenta.size()/2][2];
+        
+        int contador=0,fila=0;
+        Iterator<Cuenta> iterador= subtipoCuenta.iterator();
+        String temporal="";
+        while (iterador.hasNext()){
+            SubTipo[fila][0]=iterador.next();
+            SubTipo[fila][1]=iterador.next();
+            cmbSubTipo.addItem(""+SubTipo[fila][1]);
+            fila++;
+            }
         }
     }
     public void limpiar(){
@@ -119,7 +157,12 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 agregado.setCuenta(txtCuenta.getText());
                 agregado.setIdEstadoFinanciero(Integer.parseInt(Estados[cmbEstado.getSelectedIndex()][0].toString()));
                 if(cmbEstado.getSelectedIndex()==1){
-
+                     if(chkGasto.isSelected()){
+                           agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
+                           agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
+                     }else{
+                         
+                     }
                 }else{
                 agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
                 agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
@@ -157,6 +200,8 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         cmbTipo = new javax.swing.JComboBox<>();
         cmbSubTipo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        chkGasto = new javax.swing.JCheckBox();
+        lbl1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(72, 165, 234));
@@ -249,12 +294,24 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         });
         jpnNuevaCuenta.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 120, 30));
 
-        jpnNuevaCuenta.add(cmbSubTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 120, 30));
+        jpnNuevaCuenta.add(cmbSubTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 180, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tipo:");
         jpnNuevaCuenta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 140, 50));
+
+        chkGasto.setBackground(new java.awt.Color(72, 165, 234));
+        chkGasto.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        chkGasto.setForeground(new java.awt.Color(255, 255, 255));
+        chkGasto.setText("Es Gasto");
+        chkGasto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkGastoItemStateChanged(evt);
+            }
+        });
+        jpnNuevaCuenta.add(chkGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(453, 120, 80, 30));
+        jpnNuevaCuenta.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 60, 10));
 
         getContentPane().add(jpnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 300));
 
@@ -275,13 +332,28 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
     private void cmbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEstadoItemStateChanged
         if(cmbEstado.getSelectedIndex()==1){
-            cmbTipo.setVisible(false);
-            cmbSubTipo.setVisible(false);
-            lblAdv.setVisible(true);
+            try {
+                cmbTipo.setVisible(false);
+                cmbSubTipo.setVisible(false);
+                lblAdv.setVisible(true);
+                lbl1.setVisible(true);
+                chkGasto.setVisible(true);
+                CargarTipos();
+            } catch (ErrorSistemaContable ex) {
+                Logger.getLogger(frmNuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
-            cmbTipo.setVisible(true);
-            cmbSubTipo.setVisible(true);
-            lblAdv.setVisible(false);
+            try {
+                cmbTipo.setVisible(true);
+                cmbSubTipo.setVisible(true);
+                lblAdv.setVisible(false);
+                lbl1.setVisible(false);
+                chkGasto.setVisible(false);
+                chkGasto.setSelected(false);
+                CargarTipos();
+            } catch (ErrorSistemaContable ex) {
+                Logger.getLogger(frmNuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_cmbEstadoItemStateChanged
 
@@ -329,6 +401,18 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void chkGastoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkGastoItemStateChanged
+        if(chkGasto.isSelected()){
+            lblAdv.setVisible(false);
+            cmbTipo.setVisible(true);
+            cmbSubTipo.setVisible(true);
+        }else{
+            lblAdv.setVisible(true);
+            cmbTipo.setVisible(false);
+            cmbSubTipo.setVisible(false);
+        }
+    }//GEN-LAST:event_chkGastoItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +454,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar1;
+    private javax.swing.JCheckBox chkGasto;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbSubTipo;
     private javax.swing.JComboBox<String> cmbTipo;
@@ -378,6 +463,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jpnNuevaCuenta;
+    private javax.swing.JSeparator lbl1;
     private javax.swing.JLabel lblAdv;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JTextField txtCuenta;
