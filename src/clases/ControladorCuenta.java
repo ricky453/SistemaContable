@@ -137,15 +137,7 @@ public class ControladorCuenta {
         ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
         return cuentas;
     }
-    public static void AgregarEstados(Cuenta cu)throws ErrorSistemaContable{ 
-        try {
-            cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO cuenta(IdCuenta,Cuenta,IdEstadoFinanciero,IdTipoCuenta,IdTipoSubCuenta) VALUES('"+cu.getIdCuenta()+"','"+cu.getCuenta()+"','"+cu.getIdEstadoFinanciero()+"',"+cu.getIdTipoCuenta()+","+cu.getIdTipoSubCuenta()+")");
-            //cn.st.executeUpdate("INSERT INTO cuentasanio VALUES('"+cu.getIdCuenta()+"', '"+cu.getEmpresa()+"', '"+cu.getIdEstadoFinanciero()+"', '"+cu.getIdTipoSubCuenta()+"', '"+cu.getFecha()+"', '"+cu.getValor()+"')");
-        } catch (SQLException ex) {
-            throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
-        }
-    }
+
     public static ArrayList<Cuenta> ObtenerEstados()throws ErrorSistemaContable{
     ArrayList<Object> estados = new ArrayList<Object>();
     
