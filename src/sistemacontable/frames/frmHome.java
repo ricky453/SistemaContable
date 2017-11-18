@@ -34,7 +34,7 @@ public class frmHome extends javax.swing.JFrame {
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
     private static DefaultTableModel modeloMisEstados;
-    boolean salir, salir2,salir3;
+    boolean salir, salir2,salir3,salir4, salir5, salir6;
             
     public frmHome() {
         initComponents();
@@ -97,7 +97,6 @@ public class frmHome extends javax.swing.JFrame {
         }else{
             if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE VENTAS")){
                 SistemaContable.RebajasSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
-                System.out.println(SistemaContable.RebajasSobreVentas);
                 int a=0;
                 while(a<tblMisEstados.getRowCount()){
                    if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN VENTAS")){
@@ -158,6 +157,7 @@ public class frmHome extends javax.swing.JFrame {
             SistemaContable.ComprasTotales=Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
             ObtenerComprasNetas();
             a=tblMisEstados.getRowCount()-1;
+            salir3=false;
         }else{
             if(tblMisEstados.getValueAt(a, 0).equals("GASTOS EN COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRA")){
                 SistemaContable.GastosCompras=Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
@@ -166,8 +166,11 @@ public class frmHome extends javax.swing.JFrame {
                 if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
                     ObtenerComprasNetas();
+                    System.out.println("Gastos de Compras de "+SistemaContable.GastosCompras);
+                    System.out.println("Compras totales de "+SistemaContable.ComprasTotales);
                     a=tblMisEstados.getRowCount()-1;
                     c=tblMisEstados.getRowCount()-1;
+                    salir3=false;
                     }c++;   
                 }
             }
@@ -175,12 +178,14 @@ public class frmHome extends javax.swing.JFrame {
             while(c<tblMisEstados.getRowCount()){
                 if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
-                    ObtenerComprasNetas();
-                    a=tblMisEstados.getRowCount()-1;
+                    salir3=true;
                     c=tblMisEstados.getRowCount()-1;
                     }c++;   
                 }
             }a++;
+            if(salir3==true){
+                ObtenerComprasNetas();
+            }
         }   
     }
     
@@ -192,6 +197,7 @@ public class frmHome extends javax.swing.JFrame {
             SistemaContable.ComprasNetas = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());  
             ObtenerDisponibilidad();
             d=tblMisEstados.getRowCount()-1;
+            salir5=false;
         }else{
             if(tblMisEstados.getValueAt(d, 0).equals("REBAJAS EN COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("REBAJAS SOBRE COMPRAS")){
                 SistemaContable.RebajasSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
@@ -203,38 +209,44 @@ public class frmHome extends javax.swing.JFrame {
                         ObtenerDisponibilidad();
                         d=tblMisEstados.getRowCount()-1;
                         a=tblMisEstados.getRowCount()-1;
+                        salir5=false;
                    }a++;
                }
                
             }else if(tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES EN COMPRAS")){
                 SistemaContable.DevolucionesSobreCompras=Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                salir5=true;
+                }                        
+            }d++;
+            if(salir5==true){
                 SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
                 ObtenerDisponibilidad();
-                d=tblMisEstados.getRowCount()-1;
-                }                        
-                SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
-            }d++;
+            }
+
         }
     }
    
     public void ObtenerDisponibilidad(){
         int e = 0;
+        salir6=true;
         while(e<tblMisEstados.getRowCount()){
         //   D I S P O N I B I L I D A D    D E    M E R C A N C I A S    P A R A     E L    P E R I O D O
         if(tblMisEstados.getValueAt(e, 0).equals("DISPONIBILIDAD DE MERCANCIAS PARA EL PERIODO")|| tblMisEstados.getValueAt(e, 0).equals("DISPONIBILIDAD DE MERCANCIAS")){
             SistemaContable.DisponibilidadMercanciasPeriodo=Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString());
             ObtenerCostoVendido();
             e=tblMisEstados.getRowCount()-1;
+            salir6=false;
         }else{
             if(tblMisEstados.getValueAt(e, 0).equals("INVENTARIO INICIAL")){
                 SistemaContable.DisponibilidadMercanciasPeriodo=(Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString())+SistemaContable.ComprasNetas);
                 ObtenerCostoVendido();
                 e=tblMisEstados.getRowCount()-1;
+                salir6=false;
                 }
             }
             e++;   
+        }if(salir6 == true){
             SistemaContable.DisponibilidadMercanciasPeriodo = SistemaContable.ComprasNetas;
-        }if(SistemaContable.DisponibilidadMercanciasPeriodo == SistemaContable.ComprasNetas){
             ObtenerCostoVendido();
         }
     }
