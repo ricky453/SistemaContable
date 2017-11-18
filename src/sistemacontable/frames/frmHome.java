@@ -147,9 +147,8 @@ public class frmHome extends javax.swing.JFrame {
                     salir3=true;
                 }
             }i++;
-            if(salir3==true){
-                ObtenerComprasTotales();
-            }
+        }if(salir3==true){
+             ObtenerComprasTotales();
         }
     }
     public void ObtenerComprasTotales(){
