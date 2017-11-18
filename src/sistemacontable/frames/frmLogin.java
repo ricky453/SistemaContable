@@ -29,6 +29,30 @@ public class frmLogin extends javax.swing.JFrame {
         txtUsuarioNuevo.requestFocus();
         loader.setVisible(false);
     }
+    
+    public void registrar(){
+            if(!txtUsuarioNuevo.equals("")||!txtNombreEmpresa.equals("")||!pwdPasswordNueva.equals("")){
+            try {
+                Cuenta cuenta = new Cuenta();
+                try {
+                    max = ControladorCuenta.ObtenerMaxEmpresa();
+                } catch (ErrorSistemaContable ex) {
+                    Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cuenta.setIdEmpresa(max+1);
+                cuenta.setUsuario(txtUsuarioNuevo.getText());
+                cuenta.setEmpresa(txtNombreEmpresa.getText());
+                cuenta.setPassword(pwdPasswordNueva.getText());
+                ControladorCuenta.AgregarEmpresa(cuenta);
+                nombre = txtNombreEmpresa.getText();
+                iniciarSesion();
+            } catch (ErrorSistemaContable ex) {
+                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else { JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        }
+          
+    }
 
     public void iniciarSesion(){
         loader.show();
@@ -134,6 +158,11 @@ public class frmLogin extends javax.swing.JFrame {
         pwdPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 pwdPasswordFocusGained(evt);
+            }
+        });
+        pwdPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdPasswordActionPerformed(evt);
             }
         });
 
@@ -284,6 +313,11 @@ public class frmLogin extends javax.swing.JFrame {
         pwdPasswordNueva.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 pwdPasswordNuevaFocusGained(evt);
+            }
+        });
+        pwdPasswordNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdPasswordNuevaActionPerformed(evt);
             }
         });
 
@@ -522,27 +556,12 @@ int xx;
     }//GEN-LAST:event_pwdPasswordFocusGained
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if(!txtUsuarioNuevo.equals("")||!txtNombreEmpresa.equals("")||!pwdPasswordNueva.equals("")){
-            try {
-                Cuenta cuenta = new Cuenta();
-                try {
-                    max = ControladorCuenta.ObtenerMaxEmpresa();
-                } catch (ErrorSistemaContable ex) {
-                    Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                cuenta.setIdEmpresa(max+1);
-                cuenta.setUsuario(txtUsuarioNuevo.getText());
-                cuenta.setEmpresa(txtNombreEmpresa.getText());
-                cuenta.setPassword(pwdPasswordNueva.getText());
-                ControladorCuenta.AgregarEmpresa(cuenta);
-                nombre = txtNombreEmpresa.getText();
-                iniciarSesion();
-            } catch (ErrorSistemaContable ex) {
-                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else { JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        if(rbtConfirmar.isSelected()){
+            registrar();  
+        }else{
+            JOptionPane.showMessageDialog(exit, "¡Debe comprobar que es humano!");
         }
-            
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -561,6 +580,31 @@ int xx;
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void pwdPasswordNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdPasswordNuevaActionPerformed
+        if(rbtConfirmar.isSelected()){
+            registrar();  
+        }else{
+            JOptionPane.showMessageDialog(exit, "¡Debe comprobar que es humano!");
+        }
+        
+    }//GEN-LAST:event_pwdPasswordNuevaActionPerformed
+
+    private void pwdPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdPasswordActionPerformed
+        try {
+            password = ControladorCuenta.ObtenerPassword(txtUsuario.getText());
+            
+            if(password.equals(pwdPassword.getText())){
+                nombre = ControladorCuenta.NombreEmpresa(txtUsuario.getText());
+                iniciarSesion();
+            }else{
+                JOptionPane.showMessageDialog(null,"¡Usuario o contraseña incorrecta!.");
+                txtUsuario.requestFocus();
+            }
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_pwdPasswordActionPerformed
                        
                                        
 

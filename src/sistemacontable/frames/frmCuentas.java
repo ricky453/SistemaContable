@@ -157,7 +157,6 @@ public class frmCuentas extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblMisEstados = new javax.swing.JTable();
         jpnSeleccion = new javax.swing.JPanel();
-        lblCerrar = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
@@ -175,6 +174,7 @@ public class frmCuentas extends javax.swing.JFrame {
         tblBalanceGeneral = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         lblSeleccionarCuentas = new javax.swing.JLabel();
+        lblCerrar = new javax.swing.JLabel();
 
         tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,24 +202,12 @@ public class frmCuentas extends javax.swing.JFrame {
         jpnSeleccion.setBackground(new java.awt.Color(72, 165, 234));
         jpnSeleccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblCerrar.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
-        lblCerrar.setText("x");
-        lblCerrar.setToolTipText("Cerrar");
-        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCerrarMouseClicked(evt);
-            }
-        });
-        jpnSeleccion.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 10, -1));
-
         lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
         lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         lblEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmpresa.setText("CASA");
-        jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 220, 30));
+        jpnSeleccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 220, 30));
 
         jScrollPane3.setBackground(new java.awt.Color(72, 165, 234));
 
@@ -262,13 +250,13 @@ public class frmCuentas extends javax.swing.JFrame {
             tblCuentas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jpnSeleccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 310, 450));
+        jpnSeleccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 310, 450));
 
         jLabel4.setBackground(new java.awt.Color(72, 165, 234));
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(49, 58, 115));
         jLabel4.setText("Cuentas seleccionadas:");
-        jpnSeleccion.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 30));
+        jpnSeleccion.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, 30));
 
         btnGenerar.setBackground(new java.awt.Color(57, 137, 186));
         btnGenerar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -283,20 +271,20 @@ public class frmCuentas extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        jpnSeleccion.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 250, 40));
+        jpnSeleccion.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 630, 250, 40));
 
         jLabel5.setBackground(new java.awt.Color(72, 165, 234));
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(49, 58, 115));
         jLabel5.setText("Fecha:");
-        jpnSeleccion.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 50, 30));
+        jpnSeleccion.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 50, 30));
 
         jLabel6.setBackground(new java.awt.Color(72, 165, 234));
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(49, 58, 115));
         jLabel6.setText("EMPRESA:");
-        jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 70, 30));
-        jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 140, 30));
+        jpnSeleccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 70, 30));
+        jpnSeleccion.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 30));
 
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
@@ -310,7 +298,7 @@ public class frmCuentas extends javax.swing.JFrame {
                 lblNuevaCuentaMouseClicked(evt);
             }
         });
-        getContentPane().add(lblNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, 40));
+        getContentPane().add(lblNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, 80));
 
         jLabel1.setBackground(new java.awt.Color(72, 165, 234));
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
@@ -346,7 +334,7 @@ public class frmCuentas extends javax.swing.JFrame {
             tblEstadoResultados.getColumnModel().getColumn(0).setPreferredWidth(250);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 570, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 570, 220));
 
         tblBalanceGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -392,7 +380,20 @@ public class frmCuentas extends javax.swing.JFrame {
                 lblSeleccionarCuentasMouseClicked(evt);
             }
         });
-        getContentPane().add(lblSeleccionarCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, 40));
+        getContentPane().add(lblSeleccionarCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 80));
+
+        lblCerrar.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e4ad(0)_48.png"))); // NOI18N
+        lblCerrar.setToolTipText("Cerrar");
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 80));
 
         pack();
         setLocationRelativeTo(null);
@@ -417,6 +418,10 @@ public class frmCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        if(txtAnio.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe de agregar un año primero");
+            txtAnio.requestFocus();
+        }else{
         Cuenta agregado = new Cuenta();
         if(tblCuentas.getRowCount()!=0){
             try {
@@ -429,11 +434,15 @@ public class frmCuentas extends javax.swing.JFrame {
                         agregado.setIdCuenta(IdCuenta);
                         agregado.setValor(tblCuentas.getValueAt(i, 1).toString());
                         ControladorCuenta.Agregar(agregado);
-
                     } catch (ErrorSistemaContable ex) {
                         Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }    
+                }
+                JOptionPane.showMessageDialog(rootPane, "Se han generado los reportes!");   
+                frmHome ho = new frmHome();
+                ho.setVisible(true);
+                ho.pnlVerEstados.setVisible(true);
+                this.setVisible(false);
 
             } catch (ErrorSistemaContable ex) {
                 Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
@@ -441,7 +450,7 @@ public class frmCuentas extends javax.swing.JFrame {
             
         }else{JOptionPane.showMessageDialog(rootPane, "Debe de agregar cuentas");}
     }//GEN-LAST:event_btnGenerarActionPerformed
-
+    }
     private void lblSeleccionarCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSeleccionarCuentasMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lblSeleccionarCuentasMouseClicked
