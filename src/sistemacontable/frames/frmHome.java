@@ -295,6 +295,7 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerUtilidadOperativa();
             g=tblMisEstados.getRowCount()-1;
             salir = false;
+            break;
         }else{
             SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
             salir = true;
@@ -314,6 +315,7 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerUtilidadNeta();
             h=tblMisEstados.getRowCount()-1;
             salir2=false;
+            break;
             
         }else{
             if(tblMisEstados.getValueAt(h, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS EN VENTAS")){
