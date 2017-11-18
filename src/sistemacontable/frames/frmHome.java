@@ -34,7 +34,7 @@ public class frmHome extends javax.swing.JFrame {
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
     private static DefaultTableModel modeloMisEstados;
-    boolean salir, salir2;
+    boolean salir, salir2,salir3;
             
     public frmHome() {
         initComponents();
@@ -93,9 +93,11 @@ public class frmHome extends javax.swing.JFrame {
             SistemaContable.VentasNetas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());   
             ObtenerComprasTotales();
             i=tblMisEstados.getRowCount()-1;
+            salir3=false;
         }else{
             if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE VENTAS")){
                 SistemaContable.RebajasSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
+                System.out.println(SistemaContable.RebajasSobreVentas);
                 int a=0;
                 while(a<tblMisEstados.getRowCount()){
                    if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN VENTAS")){
@@ -108,6 +110,7 @@ public class frmHome extends javax.swing.JFrame {
                             i=tblMisEstados.getRowCount()-1;
                             b=tblMisEstados.getRowCount()-1;
                             a=tblMisEstados.getRowCount()-1;
+                            salir3=false;
                             }b++;
                         }
                    }a++;
@@ -115,9 +118,13 @@ public class frmHome extends javax.swing.JFrame {
                 while(b<tblMisEstados.getRowCount()){
                     if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
                         SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
+                        System.out.println(SistemaContable.VentasNetas);
+                        System.out.println("Rebajas de "+SistemaContable.RebajasSobreVentas);
+                        System.out.println("Devoluciones de "+SistemaContable.DevolucionesSobreVentas);
                         ObtenerComprasTotales();
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
+                        salir3=false;
                     }b++;
                 }                
             }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN VENTAS")){
@@ -129,14 +136,17 @@ public class frmHome extends javax.swing.JFrame {
                         ObtenerComprasTotales();
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
+                        salir3=false;
                     }b++;
                 }
             }else if(tblMisEstados.getValueAt(i, 0).equals("VENTAS")||tblMisEstados.getValueAt(i, 0).equals("VENTAS TOTALES")){
                     SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
-                    ObtenerComprasTotales();
-                    i=tblMisEstados.getRowCount()-1;
+                    salir3=true;
                 }
             }i++;
+            if(salir3==true){
+                ObtenerComprasTotales();
+            }
         }
     }
     public void ObtenerComprasTotales(){
@@ -197,7 +207,7 @@ public class frmHome extends javax.swing.JFrame {
                }
                
             }else if(tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("DEVOLUCIONES EN COMPRAS")){
-                SistemaContable.DevolucionesSobreVentas=Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                SistemaContable.DevolucionesSobreCompras=Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
                 SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
                 ObtenerDisponibilidad();
                 d=tblMisEstados.getRowCount()-1;
@@ -339,8 +349,6 @@ public class frmHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblMisEstados = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         lbl1 = new javax.swing.JLabel();
@@ -376,16 +384,8 @@ public class frmHome extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
-
-        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane4.setViewportView(tblMisEstados);
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMisEstados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -651,6 +651,18 @@ public class frmHome extends javax.swing.JFrame {
         lblEmpresa.setText("CASA");
         getContentPane().add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
 
+        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane4.setViewportView(tblMisEstados);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -720,12 +732,12 @@ public class frmHome extends javax.swing.JFrame {
                         System.out.println("VENTAS NETAS "+SistemaContable.VentasNetas);
                         System.out.println("COMPRAS TOTALES "+ SistemaContable.ComprasTotales);
                         System.out.println("COMPRAS NETAS "+ SistemaContable.ComprasNetas);
-                        System.out.println(SistemaContable.DisponibilidadMercanciasPeriodo);
-                        System.out.println(SistemaContable.CostoVendido);
-                        System.out.println(SistemaContable.UtilidadBruta);
-                        System.out.println(SistemaContable.UtilidadOperativa);
-                        System.out.println(SistemaContable.UtilidadNeta);
-                        System.out.println(SistemaContable.UtilidadPorDistribuir);
+                        System.out.println("DISPONIBILIDAD "+SistemaContable.DisponibilidadMercanciasPeriodo);
+                        System.out.println("COSTO DE LO VENDIDO "+SistemaContable.CostoVendido);
+                        System.out.println("UTILIDAD BRUTA "+SistemaContable.UtilidadBruta);
+                        System.out.println("UTILIDAD OPERATIVA "+SistemaContable.UtilidadOperativa);
+                        System.out.println("UTILIDAD NETA "+SistemaContable.UtilidadNeta);
+                        System.out.println("UTILIDAD POR DISTRIBUIR "+SistemaContable.UtilidadPorDistribuir);
     }//GEN-LAST:event_lblEstadoMouseClicked
 
     private void lblBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalanceMouseClicked
