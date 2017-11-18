@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb7c429c-6638-47b8-9aa5-5ac8382415ab">
-	<queryString language="SQL">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametroAnio" class="java.lang.String"/>
+	<queryString>
 		<![CDATA[SELECT cuenta.IdCuenta,cuenta.Cuenta,cuentasanio.Valor FROM Cuenta INNER JOIN cuentasanio ON cuenta.IdCuenta=cuentasanio.IdCuenta WHERE
-cuentasanio.Anio='2020']]>
+cuentasanio.Anio=$P{parametroAnio}]]>
 	</queryString>
 	<field name="IdCuenta" class="java.lang.Integer"/>
 	<field name="Cuenta" class="java.lang.String"/>
