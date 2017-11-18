@@ -154,8 +154,20 @@ public class frmValor extends javax.swing.JFrame {
 
         // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
         if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD && s!=KeyEvent.VK_BACK_SPACE && s!= KeyEvent.VK_ENTER) {
+            if (p==45) {
+                String cadena=txtValor.getText();
+                int tamanio=cadena.length();
+                for (int i = 0; i <= tamanio; i++) {
+                    if (cadena.contains("-")) {
+                        evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                        getToolkit().beep();
+                        evt.consume();
+                    }
+                }
+            }else{
             getToolkit().beep();
             evt.consume();
+            }
         }else{
             if (p==46) {
                 String cadena=txtValor.getText();
