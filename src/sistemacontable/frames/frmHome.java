@@ -34,7 +34,7 @@ public class frmHome extends javax.swing.JFrame {
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
     private static DefaultTableModel modeloMisEstados;
-    boolean salir, salir2,salir3,salir4, salir5, salir6;
+    boolean salir, salir2,salir3,salir4, salir5, salir6, salir7, salir8;
             
     public frmHome() {
         initComponents();
@@ -94,6 +94,7 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerComprasTotales();
             i=tblMisEstados.getRowCount()-1;
             salir3=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(i, 0).equals("REBAJAS EN VENTAS")||tblMisEstados.getValueAt(i, 0).equals("REBAJAS SOBRE VENTAS")){
                 SistemaContable.RebajasSobreVentas = Double.parseDouble(tblMisEstados.getValueAt(i, 1).toString());
@@ -110,6 +111,7 @@ public class frmHome extends javax.swing.JFrame {
                             b=tblMisEstados.getRowCount()-1;
                             a=tblMisEstados.getRowCount()-1;
                             salir3=false;
+                            break;
                             }b++;
                         }
                    }a++;
@@ -124,6 +126,7 @@ public class frmHome extends javax.swing.JFrame {
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
+                        break;
                     }b++;
                 }                
             }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN VENTAS")){
@@ -136,6 +139,7 @@ public class frmHome extends javax.swing.JFrame {
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
+                        break;
                     }b++;
                 }
             }else if(tblMisEstados.getValueAt(i, 0).equals("VENTAS")||tblMisEstados.getValueAt(i, 0).equals("VENTAS TOTALES")){
@@ -158,6 +162,7 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerComprasNetas();
             a=tblMisEstados.getRowCount()-1;
             salir3=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(a, 0).equals("GASTOS EN COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("GASTOS DE COMPRA")){
                 SistemaContable.GastosCompras=Double.parseDouble(tblMisEstados.getValueAt(a, 1).toString());
@@ -171,6 +176,7 @@ public class frmHome extends javax.swing.JFrame {
                     a=tblMisEstados.getRowCount()-1;
                     c=tblMisEstados.getRowCount()-1;
                     salir3=false;
+                    break;
                     }c++;   
                 }
             }
@@ -180,13 +186,13 @@ public class frmHome extends javax.swing.JFrame {
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
                     salir3=true;
                     c=tblMisEstados.getRowCount()-1;
+                    break;
                     }c++;   
                 }
             }a++;
-            if(salir3==true){
-                ObtenerComprasNetas();
-            }
-        }   
+        }if(salir3==true){
+            ObtenerComprasNetas();
+        }
     }
     
     public void ObtenerComprasNetas(){
@@ -198,6 +204,7 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerDisponibilidad();
             d=tblMisEstados.getRowCount()-1;
             salir5=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(d, 0).equals("REBAJAS EN COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("REBAJAS SOBRE COMPRAS")){
                 SistemaContable.RebajasSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
@@ -210,6 +217,7 @@ public class frmHome extends javax.swing.JFrame {
                         d=tblMisEstados.getRowCount()-1;
                         a=tblMisEstados.getRowCount()-1;
                         salir5=false;
+                        break;
                    }a++;
                }
                
@@ -218,11 +226,9 @@ public class frmHome extends javax.swing.JFrame {
                 salir5=true;
                 }                        
             }d++;
-            if(salir5==true){
-                SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
-                ObtenerDisponibilidad();
-            }
-
+        }if(salir5==true){
+            SistemaContable.ComprasNetas = SistemaContable.ComprasTotales - (SistemaContable.DevolucionesSobreCompras+SistemaContable.RebajasSobreCompras);   
+            ObtenerDisponibilidad();
         }
     }
    
@@ -236,12 +242,14 @@ public class frmHome extends javax.swing.JFrame {
             ObtenerCostoVendido();
             e=tblMisEstados.getRowCount()-1;
             salir6=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(e, 0).equals("INVENTARIO INICIAL")){
                 SistemaContable.DisponibilidadMercanciasPeriodo=(Double.parseDouble(tblMisEstados.getValueAt(e, 1).toString())+SistemaContable.ComprasNetas);
                 ObtenerCostoVendido();
                 e=tblMisEstados.getRowCount()-1;
                 salir6=false;
+                break;
                 }
             }
             e++;   
@@ -253,22 +261,28 @@ public class frmHome extends javax.swing.JFrame {
     
     public void ObtenerCostoVendido(){
         int f = 0;
+        salir7=false;
         while(f<tblMisEstados.getRowCount()){
         //    C O S T O   D E   L O   V E N D I D O
         if(tblMisEstados.getValueAt(f, 0).equals("COSTO DE LO VENDIDO")){
             SistemaContable.CostoVendido=Double.parseDouble(tblMisEstados.getValueAt(f, 1).toString());
             ObtenerUtilidadBruta();
             f=tblMisEstados.getRowCount()-1;
+            salir7=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(f, 0).equals("INVENTARIO FINAL")){
                 SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo-(Double.parseDouble(tblMisEstados.getValueAt(f, 1).toString()));
                 ObtenerUtilidadBruta();
                 f=tblMisEstados.getRowCount()-1;
+                salir7=false;
+                break;
                 }else{                
-                      SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo;
+                      salir7=true;
                 }
             }f++;   
-        }if(SistemaContable.CostoVendido==SistemaContable.DisponibilidadMercanciasPeriodo){
+        }if(salir7==true){
+            SistemaContable.CostoVendido=SistemaContable.DisponibilidadMercanciasPeriodo;
             ObtenerUtilidadBruta();
         }
     }
@@ -329,15 +343,20 @@ public class frmHome extends javax.swing.JFrame {
             SistemaContable.UtilidadNeta=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
             ObtenerUtilidadDistribuir();
             j=tblMisEstados.getRowCount()-1;
+            salir8=false;
+            break;
         }else{
             if(tblMisEstados.getValueAt(j, 0).equals("OTROS GASTOS")){
                 SistemaContable.OtrosGastos=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
             }else if(tblMisEstados.getValueAt(j, 0).equals("OTROS INGRESOS")||tblMisEstados.getValueAt(j, 0).equals("OTROS PRODUCTOS")){
                 SistemaContable.OtrosIngresos=Double.parseDouble(tblMisEstados.getValueAt(j, 1).toString());
-            }
+                }
+                salir8=true;
+                }j++;
+            }if(salir8==true){
             SistemaContable.UtilidadNeta = (SistemaContable.UtilidadOperativa+SistemaContable.OtrosIngresos)-SistemaContable.OtrosGastos;
-            }j++;
-        }ObtenerUtilidadDistribuir(); 
+            ObtenerUtilidadDistribuir(); 
+        }
     }        
     public void ObtenerUtilidadDistribuir(){
         int k = 0;
@@ -349,10 +368,12 @@ public class frmHome extends javax.swing.JFrame {
         }else{
             if(SistemaContable.UtilidadNeta<150000){
                 SistemaContable.Impuestos=0.25;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
             }else{
                 SistemaContable.Impuestos=0.30;
-                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*SistemaContable.ReservaLegal)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
+                SistemaContable.ReservaLegal=SistemaContable.UtilidadNeta*0.07;
+                SistemaContable.UtilidadPorDistribuir=SistemaContable.UtilidadNeta-((SistemaContable.UtilidadNeta*0.07)+(SistemaContable.UtilidadNeta*SistemaContable.Impuestos));
                 }
             }k++;
         }         
@@ -361,6 +382,8 @@ public class frmHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMisEstados = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
         lbl1 = new javax.swing.JLabel();
@@ -396,8 +419,16 @@ public class frmHome extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblMisEstados = new javax.swing.JTable();
+
+        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane4.setViewportView(tblMisEstados);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -662,18 +693,6 @@ public class frmHome extends javax.swing.JFrame {
         lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmpresa.setText("CASA");
         getContentPane().add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
-
-        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane4.setViewportView(tblMisEstados);
-
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);

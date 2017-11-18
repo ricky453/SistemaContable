@@ -32,7 +32,7 @@ public class SistemaContable {
     public static double OtrosIngresos=0;
     public static double UtilidadPorDistribuir=0;
     public static double Impuestos;
-    public static double ReservaLegal=0.07;
+    public static double ReservaLegal=0;
     
     //Otras variables
     public static double RebajasSobreVentas = 0;
