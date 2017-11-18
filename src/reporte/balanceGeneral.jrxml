@@ -35,11 +35,11 @@ FROM `cuenta`
 		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
-	<variable name="pasivo" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{Cuenta}.compareTo("PASIVO") ? +$F{Valor} : +0.0)]]></variableExpression>
+	<variable name="pasivo" class="java.lang.Double" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[( $F{tipocuenta}.equals( "PASIVO" ) ? +$F{Valor} : +0.0)]]></variableExpression>
 	</variable>
-	<variable name="capital" class="java.lang.Double">
-		<variableExpression><![CDATA[( $F{Cuenta}.compareTo("PATRIMONIO")? +$F{Valor} : +0.0)]]></variableExpression>
+	<variable name="capital" class="java.lang.Double" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[( $F{tipocuenta}.equals("PATRIMONIO") ? +$F{Valor} : 0.0)]]></variableExpression>
 	</variable>
 	<variable name="suma" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{pasivo}+$V{capital}]]></variableExpression>
