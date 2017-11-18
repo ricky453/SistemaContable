@@ -470,6 +470,7 @@ public class frmHome extends javax.swing.JFrame {
         lblBalance = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblCerrar1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         lblComparar = new javax.swing.JLabel();
         lblCrearEstados = new javax.swing.JLabel();
         lblVerEstados = new javax.swing.JLabel();
@@ -525,25 +526,25 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida15.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida15.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida15.setText("más eficientes.");
+        lblBienvenida15.setText("eficiente.");
         pnlComparar.add(lblBienvenida15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, 390, 20));
 
         lblBienvenida16.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida16.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida16.setText("Al tener 2 o más estados financieros en fechas distintas");
+        lblBienvenida16.setText("Al tener 2 o más estados financieros en fechas distintas de tu empresa,");
         pnlComparar.add(lblBienvenida16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 390, 20));
 
         lblBienvenida17.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida17.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida17.setText("de tu empresa, podrás hacer una comparación por medio");
+        lblBienvenida17.setText("podrás hacer una comparación por medio de todos los índices y así");
         pnlComparar.add(lblBienvenida17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 390, 20));
 
         lblBienvenida18.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida18.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida18.setText("de los índices y así saber cuales períodos de fecha fueron");
+        lblBienvenida18.setText("poder conocer los períodos de fecha en los que la empresa fue más");
         pnlComparar.add(lblBienvenida18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
         jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 410, 90));
@@ -559,19 +560,19 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida4.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida4.setText("Podrás crear nuevos estados financieros a partir de cuentas ");
+        lblBienvenida4.setText("Podrás crear nuevos estados financieros a partir de cuentas y sus saldos.");
         pnlNuevos.add(lblBienvenida4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 390, 20));
 
         lblBienvenida5.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida5.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida5.setText("y sus saldos. Cada vez que crees un estado financiero se ");
+        lblBienvenida5.setText("Cada vez que crees un estado financiero se guardará para luego poder");
         pnlNuevos.add(lblBienvenida5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 390, 20));
 
         lblBienvenida6.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida6.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida6.setText("guardará para luego compararlo con fechas distintas. ");
+        lblBienvenida6.setText("revisarlo y  compararlo si es que posees más estados en otros años.");
         pnlNuevos.add(lblBienvenida6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
         jPanel1.add(pnlNuevos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 410, 90));
@@ -587,19 +588,19 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida8.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida8.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida8.setText("Aquí están guardados todos los estados financieros de tu");
+        lblBienvenida8.setText("Aquí están guardados todos los estados financieros de tu empresa");
         pnlVer.add(lblBienvenida8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 390, 20));
 
         lblBienvenida9.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida9.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida9.setText("empresa con la opción de seleccionarlos por una fecha.");
+        lblBienvenida9.setText("con la opción de seleccionarlos por una fecha.");
         pnlVer.add(lblBienvenida9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 390, 20));
 
         lblBienvenida10.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida10.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBienvenida10.setText("Verás el balance general, estado de resultados y los índices");
+        lblBienvenida10.setText("Verás el balance general, estado de resultados y todos los índices");
         pnlVer.add(lblBienvenida10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
 
         jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 90, 410, 90));
@@ -624,7 +625,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblIndicesMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 390, 230, 50));
+        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 230, 50));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(255, 255, 255));
@@ -643,8 +644,9 @@ public class frmHome extends javax.swing.JFrame {
                 lblEstadoMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 230, 50));
+        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 230, 50));
 
+        cmbFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         pnlVerEstados.add(cmbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 190, 30));
 
         lblBalance.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
@@ -664,7 +666,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblBalanceMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 230, 50));
+        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 230, 50));
 
         jLabel1.setBackground(new java.awt.Color(72, 165, 234));
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -682,6 +684,7 @@ public class frmHome extends javax.swing.JFrame {
             }
         });
         pnlVerEstados.add(lblCerrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 30, 20));
+        pnlVerEstados.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 640, -1));
 
         jPanel1.add(pnlVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 640, 620));
 
@@ -941,6 +944,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;

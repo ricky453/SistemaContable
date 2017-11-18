@@ -110,6 +110,16 @@ public class frmLogin extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setUndecorated(true);
 
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -307,7 +317,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         pwdPasswordNueva.setBackground(new java.awt.Color(72, 165, 234));
         pwdPasswordNueva.setForeground(new java.awt.Color(255, 255, 255));
-        pwdPasswordNueva.setText("jPasswordField1");
         pwdPasswordNueva.setBorder(null);
         pwdPasswordNueva.setCaretColor(new java.awt.Color(255, 255, 255));
         pwdPasswordNueva.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -471,17 +480,11 @@ int xx;
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        // TODO add your handling code here:
 
-        xx = evt.getX();
-        xy = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
-        // TODO add your handling code here:
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x-xx,y-xy);
+
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
@@ -557,11 +560,15 @@ int xx;
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if(rbtConfirmar.isSelected()){
-            registrar();  
+            if(txtNombreEmpresa.equals("")||txtUsuarioNuevo.equals("")||pwdPasswordNueva.equals("")){
+                registrar();  
+            }else{
+                JOptionPane.showMessageDialog(null, "¡Rellene todos los campos!");
+            }
+            
         }else{
-            JOptionPane.showMessageDialog(exit, "¡Debe comprobar que es humano!");
+            JOptionPane.showMessageDialog(null, "¡Debe comprobar que es humano!");
         }
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -583,11 +590,15 @@ int xx;
 
     private void pwdPasswordNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdPasswordNuevaActionPerformed
         if(rbtConfirmar.isSelected()){
-            registrar();  
+            if(txtNombreEmpresa.equals("")||txtUsuarioNuevo.equals("")||pwdPasswordNueva.equals("")){
+                registrar();  
+            }else{
+                JOptionPane.showMessageDialog(null, "¡Rellene todos los campos!");
+            }
+            
         }else{
-            JOptionPane.showMessageDialog(exit, "¡Debe comprobar que es humano!");
+            JOptionPane.showMessageDialog(null, "¡Debe comprobar que es humano!");
         }
-        
     }//GEN-LAST:event_pwdPasswordNuevaActionPerformed
 
     private void pwdPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdPasswordActionPerformed
@@ -605,6 +616,20 @@ int xx;
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pwdPasswordActionPerformed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+                // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x-xx,y-xy);
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+                // TODO add your handling code here:
+
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
                        
                                        
 

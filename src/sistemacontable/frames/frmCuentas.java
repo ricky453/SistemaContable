@@ -102,7 +102,7 @@ public class frmCuentas extends javax.swing.JFrame {
         tHeadCuentas.setForeground(jpnSeleccion.getBackground());
         tHeadCuentas.setFont(fuente);
     }
-    public void actualizarTablaBalance(){
+    public static void actualizarTablaBalance(){
             modeloBalance.setRowCount(0);           
             ArrayList<Cuenta> listaBalance=new ArrayList();
             Object fila[]=new Object[2];
@@ -123,7 +123,7 @@ public class frmCuentas extends javax.swing.JFrame {
              Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
          }
     } 
-    public void actualizarTablaResultados(){
+    public static void actualizarTablaResultados(){
             modeloResultados.setRowCount(0);           
             ArrayList<Cuenta> listaResultados=new ArrayList();
             Object fila[]=new Object[1];

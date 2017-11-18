@@ -126,6 +126,8 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                 }
                 ControladorCuenta.AgregarCuentas(agregado);
                 JOptionPane.showMessageDialog(rootPane, "¡Cuenta agregada exitosamente!");
+                sistemacontable.frames.frmCuentas.actualizarTablaBalance();
+                sistemacontable.frames.frmCuentas.actualizarTablaResultados();
                 limpiar();
             } catch (ErrorSistemaContable ex) {
                 Logger.getLogger(frmNuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,9 +162,21 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
         setBackground(new java.awt.Color(72, 165, 234));
         setUndecorated(true);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnNuevaCuenta.setBackground(new java.awt.Color(72, 165, 234));
+        jpnNuevaCuenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jpnNuevaCuentaFocusGained(evt);
+            }
+        });
         jpnNuevaCuenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAgregar1.setBackground(new java.awt.Color(57, 137, 186));
@@ -251,7 +265,6 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         frmCuentas.lblSeleccionarCuentas.setForeground(java.awt.Color.black);
         frmCuentas.lblNuevaCuenta.setForeground(java.awt.Color.lightGray);
-        
         this.dispose();
         
     }//GEN-LAST:event_lblCerrarMouseClicked
@@ -307,6 +320,14 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_txtCuentaKeyTyped
+
+    private void jpnNuevaCuentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jpnNuevaCuentaFocusGained
+
+    }//GEN-LAST:event_jpnNuevaCuentaFocusGained
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
