@@ -3,9 +3,10 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="parametroAnio" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT cuenta.IdCuenta,cuenta.Cuenta,cuentasanio.Valor FROM Cuenta INNER JOIN cuentasanio ON cuenta.IdCuenta=cuentasanio.IdCuenta WHERE
-cuentasanio.Anio='2015']]>
+cuentasanio.Anio=$P{parametroAnio}]]>
 	</queryString>
 	<field name="IdCuenta" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
