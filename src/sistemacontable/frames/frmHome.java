@@ -107,8 +107,8 @@ public class frmHome extends javax.swing.JFrame {
             fila[5]= SistemaContable.ComprasNetas;
             fila[6]= SistemaContable.DisponibilidadMercanciasPeriodo;
             fila[7]= SistemaContable.CostoVendido;
-            fila[8]= SistemaContable.UtilidadBruta;
-            fila[9]= SistemaContable.GastosOperativos;    
+            fila[9]= SistemaContable.UtilidadBruta;
+            fila[8]= SistemaContable.GastosOperativos;    
             fila[10]= SistemaContable.UtilidadOperativa; 
             fila[11]= SistemaContable.OtrosGastos;
             fila[12]= SistemaContable.OtrosIngresos;
@@ -350,10 +350,10 @@ public class frmHome extends javax.swing.JFrame {
             salir = false;
             break;
         }else{
-            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
             salir = true;
             }g++;
         }if(salir==true){
+            SistemaContable.UtilidadBruta = SistemaContable.VentasNetas-SistemaContable.CostoVendido;
             ObtenerUtilidadOperativa();
         }
              
@@ -364,6 +364,7 @@ public class frmHome extends javax.swing.JFrame {
                     
         //    U T I L I D A D   O P E R A T I V A
         if(tblMisEstados.getValueAt(h, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS DE OPERACION")){
+            SistemaContable.GastosOperativos= Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
             SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-(Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString()));
             ObtenerUtilidadNeta();
             h=tblMisEstados.getRowCount()-1;
@@ -378,7 +379,7 @@ public class frmHome extends javax.swing.JFrame {
             }else if(tblMisEstados.getValueAt(h, 0).equals("GASTO ADMINISTRATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS ADMINISTRATIVOS")){
                 SistemaContable.GastoAdministrativo=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
             }
-            SistemaContable.UtilidadOperativa = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
+            SistemaContable.GastosOperativos = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
             salir2=true;
         }   
         if(tblMisEstados.getValueAt(h, 0).equals("UTILIDAD OPERATIVA")){
@@ -387,6 +388,7 @@ public class frmHome extends javax.swing.JFrame {
             salir2=false;
             }h++;
         }if(salir2==true){
+            SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-SistemaContable.GastoVentas;
             ObtenerUtilidadNeta();
         }
     }
