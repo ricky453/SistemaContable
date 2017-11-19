@@ -236,8 +236,6 @@ public class frmHome extends javax.swing.JFrame {
                 if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
                     salir3=true;
-                    c=tblMisEstados.getRowCount()-1;
-                    break;
                     }c++;   
                 }
             }a++;
@@ -358,6 +356,8 @@ public class frmHome extends javax.swing.JFrame {
     }
     public void ObtenerUtilidadOperativa(){
         int h = 0;
+        SistemaContable.Gast1=0;
+        SistemaContable.Gast2=0;
         while(h<tblMisEstados.getRowCount()){
         //    U T I L I D A D   O P E R A T I V A
         if(tblMisEstados.getValueAt(h, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS DE OPERACION")){
@@ -372,6 +372,7 @@ public class frmHome extends javax.swing.JFrame {
         
         else if(tblMisEstados.getValueAt(h, 2).toString().equals("4")){
             SistemaContable.Gast1 = SistemaContable.Gast1 + Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            System.out.println(tblMisEstados.getValueAt(h, 0).toString());
             salir2=true;            
         }else{
             if(tblMisEstados.getValueAt(h, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS EN VENTAS")){
@@ -442,10 +443,10 @@ public class frmHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblEstadosReporte = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblMisEstados = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEstadosReporte = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
@@ -483,16 +484,6 @@ public class frmHome extends javax.swing.JFrame {
         lblEmpresa = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
 
-        tblEstadosReporte.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "RebajasDevVenta", "VentasNetas", "GastosCompras", "ComprasTotales", "RebajasDevCompras", "ComprasNetas", "Disponibilidad", "CostoVendido", "UtilidadBruta", "GastoOperativo", "UtilidadOperativa", "OtrosGastos", "OtrosIngresos", "UtilidadNeta", "ReservaLegal", "Impuestos", "UtilidadDistribuir"
-            }
-        ));
-        jScrollPane1.setViewportView(tblEstadosReporte);
-
         tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -502,6 +493,16 @@ public class frmHome extends javax.swing.JFrame {
             }
         ));
         jScrollPane4.setViewportView(tblMisEstados);
+
+        tblEstadosReporte.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "RebajasDevVenta", "VentasNetas", "GastosCompras", "ComprasTotales", "RebajasDevCompras", "ComprasNetas", "Disponibilidad", "CostoVendido", "UtilidadBruta", "GastoOperativo", "UtilidadOperativa", "OtrosGastos", "OtrosIngresos", "UtilidadNeta", "ReservaLegal", "Impuestos", "UtilidadDistribuir"
+            }
+        ));
+        jScrollPane1.setViewportView(tblEstadosReporte);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
