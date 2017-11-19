@@ -257,6 +257,7 @@ public class frmHome extends javax.swing.JFrame {
         SistemaContable.ComprasNetas=0;
         SistemaContable.RebajasSobreCompras=0;
         SistemaContable.DevolucionesSobreCompras=0;
+        salir5=true;
         while(d<tblMisEstados.getRowCount()){
         //       C O M P R A S    N E T A S
         if(tblMisEstados.getValueAt(d, 0).equals("COMPRAS NETAS")){
