@@ -46,9 +46,12 @@ public class frmHome extends javax.swing.JFrame {
         pnlComparar.setVisible(false);
         pnlNuevos.setVisible(false);
         pnlVer.setVisible(false);
+        pnlAnalisis.setVisible(false);
+        pnlAnalisisVertical.setVisible(false);
         lbl1.setVisible(false);
         lbl2.setVisible(false);
         lbl3.setVisible(false);
+        lbl4.setVisible(false);
         pnlVerEstados.setVisible(false);
         lblEmpresa.setText(sistemacontable.SistemaContable.empresa);
         modeloMisEstados = (DefaultTableModel) tblMisEstados.getModel();
@@ -58,7 +61,7 @@ public class frmHome extends javax.swing.JFrame {
     }
 
     public  void CargarFechas() throws ErrorSistemaContable{
-        cmbFecha.removeAll();
+        cmbFecha.removeAllItems();
         fechas = ControladorCuenta.ObtenerFechas(lblEmpresa.getText());
         miFechas = new Object[fechas.size()/1][1];
         
@@ -491,6 +494,14 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida8 = new javax.swing.JLabel();
         lblBienvenida9 = new javax.swing.JLabel();
         lblBienvenida10 = new javax.swing.JLabel();
+        pnlAnalisis = new javax.swing.JPanel();
+        lblBienvenida11 = new javax.swing.JLabel();
+        lblBienvenida12 = new javax.swing.JLabel();
+        lblBienvenida13 = new javax.swing.JLabel();
+        lblBienvenida14 = new javax.swing.JLabel();
+        pnlAnalisisVertical = new javax.swing.JPanel();
+        lblCerrar2 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnlVerEstados = new javax.swing.JPanel();
         lblIndices = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
@@ -502,6 +513,8 @@ public class frmHome extends javax.swing.JFrame {
         lblComparar = new javax.swing.JLabel();
         lblCrearEstados = new javax.swing.JLabel();
         lblVerEstados = new javax.swing.JLabel();
+        lblAnalisis = new javax.swing.JLabel();
+        lbl4 = new javax.swing.JLabel();
         lblBienvenida = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
@@ -538,16 +551,16 @@ public class frmHome extends javax.swing.JFrame {
 
         lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
-        jPanel1.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 30, 20));
+        jPanel1.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 210, 20));
 
         lbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
-        jPanel1.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 40, 20));
+        jPanel1.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 140, 20));
 
         lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
-        jPanel1.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 30, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 640, 10));
+        jPanel1.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 140, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 10));
 
         pnlComparar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -555,25 +568,25 @@ public class frmHome extends javax.swing.JFrame {
         lblBienvenida15.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBienvenida15.setText("eficiente.");
-        pnlComparar.add(lblBienvenida15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, 390, 20));
+        pnlComparar.add(lblBienvenida15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, 370, 20));
 
         lblBienvenida16.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida16.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBienvenida16.setText("Al tener 2 o más estados financieros en fechas distintas de tu empresa,");
-        pnlComparar.add(lblBienvenida16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 390, 20));
+        pnlComparar.add(lblBienvenida16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 370, 20));
 
         lblBienvenida17.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida17.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBienvenida17.setText("podrás hacer una comparación por medio de todos los índices y así");
-        pnlComparar.add(lblBienvenida17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 390, 20));
+        pnlComparar.add(lblBienvenida17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 370, 20));
 
         lblBienvenida18.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblBienvenida18.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBienvenida18.setText("poder conocer los períodos de fecha en los que la empresa fue más");
-        pnlComparar.add(lblBienvenida18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
+        pnlComparar.add(lblBienvenida18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 370, 20));
 
         jPanel1.add(pnlComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 410, 90));
 
@@ -633,6 +646,54 @@ public class frmHome extends javax.swing.JFrame {
 
         jPanel1.add(pnlVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 90, 410, 90));
 
+        pnlAnalisis.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBienvenida11.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblBienvenida11.setForeground(new java.awt.Color(51, 51, 51));
+        lblBienvenida11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBienvenida11.setText("Antes es necesario poseer estados financieros para la empresa.");
+        pnlAnalisis.add(lblBienvenida11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, 390, 20));
+
+        lblBienvenida12.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblBienvenida12.setForeground(new java.awt.Color(51, 51, 51));
+        lblBienvenida12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBienvenida12.setText("Podrás generar el análisis vertical de los estados financieros de tu empresa.");
+        pnlAnalisis.add(lblBienvenida12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 390, 20));
+
+        lblBienvenida13.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblBienvenida13.setForeground(new java.awt.Color(51, 51, 51));
+        lblBienvenida13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBienvenida13.setText("Se generará el Balance General y el Estado de resultados como forma");
+        pnlAnalisis.add(lblBienvenida13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 390, 20));
+
+        lblBienvenida14.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblBienvenida14.setForeground(new java.awt.Color(51, 51, 51));
+        lblBienvenida14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBienvenida14.setText("del análisis vertical.");
+        pnlAnalisis.add(lblBienvenida14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 390, 20));
+
+        jPanel1.add(pnlAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 410, 90));
+
+        pnlAnalisisVertical.setBackground(new java.awt.Color(72, 165, 234));
+        pnlAnalisisVertical.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCerrar2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblCerrar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar2.setText("x");
+        lblCerrar2.setToolTipText("Cerrar");
+        lblCerrar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrar2MouseClicked(evt);
+            }
+        });
+        pnlAnalisisVertical.add(lblCerrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 30, 30));
+
+        jLabel2.setText("ESTO ES DEL ANALISIS");
+        pnlAnalisisVertical.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 280, 100));
+
+        jPanel1.add(pnlAnalisisVertical, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 620));
+
         pnlVerEstados.setBackground(new java.awt.Color(72, 165, 234));
         pnlVerEstados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -653,7 +714,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblIndicesMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 230, 50));
+        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 230, 50));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(255, 255, 255));
@@ -672,10 +733,10 @@ public class frmHome extends javax.swing.JFrame {
                 lblEstadoMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 230, 50));
+        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 230, 50));
 
         cmbFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        pnlVerEstados.add(cmbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 190, 30));
+        pnlVerEstados.add(cmbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 190, 30));
 
         lblBalance.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblBalance.setForeground(new java.awt.Color(255, 255, 255));
@@ -694,7 +755,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblBalanceMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 230, 50));
+        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 230, 50));
 
         jLabel1.setBackground(new java.awt.Color(72, 165, 234));
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -711,13 +772,17 @@ public class frmHome extends javax.swing.JFrame {
                 lblCerrar1MouseClicked(evt);
             }
         });
-        pnlVerEstados.add(lblCerrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 30, 20));
-        pnlVerEstados.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 640, -1));
+        pnlVerEstados.add(lblCerrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 30, 30));
 
-        jPanel1.add(pnlVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 640, 620));
+        jSeparator3.setBackground(new java.awt.Color(240, 240, 240));
+        jSeparator3.setForeground(new java.awt.Color(240, 240, 240));
+        pnlVerEstados.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 700, 10));
+
+        jPanel1.add(pnlVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 620));
 
         lblComparar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblComparar.setForeground(new java.awt.Color(51, 51, 51));
+        lblComparar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblComparar.setText("Comparar Años");
         lblComparar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblComparar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -731,10 +796,11 @@ public class frmHome extends javax.swing.JFrame {
                 lblCompararMouseExited(evt);
             }
         });
-        jPanel1.add(lblComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, 40));
+        jPanel1.add(lblComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 140, 40));
 
         lblCrearEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblCrearEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblCrearEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCrearEstados.setText("Crear Estados Financieros");
         lblCrearEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCrearEstados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -748,10 +814,11 @@ public class frmHome extends javax.swing.JFrame {
                 lblCrearEstadosMouseExited(evt);
             }
         });
-        jPanel1.add(lblCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 40));
+        jPanel1.add(lblCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 210, 40));
 
         lblVerEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblVerEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblVerEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVerEstados.setText("Ver mis Estados");
         lblVerEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblVerEstados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -765,29 +832,51 @@ public class frmHome extends javax.swing.JFrame {
                 lblVerEstadosMouseExited(evt);
             }
         });
-        jPanel1.add(lblVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, 40));
+        jPanel1.add(lblVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 140, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 640, 700));
+        lblAnalisis.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
+        lblAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAnalisis.setText("Análisis Vertical");
+        lblAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAnalisis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 140, 40));
+
+        lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
+        jPanel1.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 140, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 700, 700));
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         lblBienvenida.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida.setText("2017");
-        getContentPane().add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 150, 60));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 360, 20));
+        getContentPane().add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 150, 60));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 300, 20));
 
         lblBienvenida1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblBienvenida1.setForeground(new java.awt.Color(51, 51, 51));
         lblBienvenida1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBienvenida1.setText("SISTEMA CONTABLE");
-        getContentPane().add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 250, 50));
+        getContentPane().add(lblBienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 210, 50));
 
         lblEmpresa.setBackground(new java.awt.Color(72, 165, 234));
         lblEmpresa.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         lblEmpresa.setForeground(new java.awt.Color(72, 165, 234));
         lblEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmpresa.setText("CASA");
-        getContentPane().add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 360, 40));
+        getContentPane().add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 300, 40));
 
         lblCerrar.setFont(new java.awt.Font("Segoe UI Light", 1, 16)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(72, 165, 234));
@@ -801,7 +890,7 @@ public class frmHome extends javax.swing.JFrame {
                 lblCerrarMouseClicked(evt);
             }
         });
-        getContentPane().add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 660, 150, -1));
+        getContentPane().add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, 150, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -826,6 +915,7 @@ public class frmHome extends javax.swing.JFrame {
     private void lblVerEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerEstadosMouseClicked
         try {
             CargarFechas();
+            pnlAnalisisVertical.setVisible(false);
             pnlVerEstados.setVisible(true);
         } catch (ErrorSistemaContable ex) {
             Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
@@ -929,6 +1019,25 @@ public class frmHome extends javax.swing.JFrame {
         lblIndices.setForeground(java.awt.Color.white);
     }//GEN-LAST:event_lblIndicesMouseExited
 
+    private void lblAnalisisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalisisMouseClicked
+        pnlVerEstados.setVisible(false);
+        pnlAnalisisVertical.setVisible(true);
+    }//GEN-LAST:event_lblAnalisisMouseClicked
+
+    private void lblAnalisisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalisisMouseEntered
+        pnlAnalisis.setVisible(true);
+        lbl4.setVisible(true);
+    }//GEN-LAST:event_lblAnalisisMouseEntered
+
+    private void lblAnalisisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnalisisMouseExited
+        pnlAnalisis.setVisible(false);
+        lbl4.setVisible(false);
+    }//GEN-LAST:event_lblAnalisisMouseExited
+
+    private void lblCerrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrar2MouseClicked
+        pnlAnalisisVertical.setVisible(false);
+    }//GEN-LAST:event_lblCerrar2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -967,6 +1076,7 @@ public class frmHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbFecha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
@@ -976,10 +1086,16 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    public static javax.swing.JLabel lblAnalisis;
     public static javax.swing.JLabel lblBalance;
     public static javax.swing.JLabel lblBienvenida;
     public static javax.swing.JLabel lblBienvenida1;
     public static javax.swing.JLabel lblBienvenida10;
+    public static javax.swing.JLabel lblBienvenida11;
+    public static javax.swing.JLabel lblBienvenida12;
+    public static javax.swing.JLabel lblBienvenida13;
+    public static javax.swing.JLabel lblBienvenida14;
     public static javax.swing.JLabel lblBienvenida15;
     public static javax.swing.JLabel lblBienvenida16;
     public static javax.swing.JLabel lblBienvenida17;
@@ -993,12 +1109,15 @@ public class frmHome extends javax.swing.JFrame {
     public static javax.swing.JLabel lblBienvenida9;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblCerrar1;
+    private javax.swing.JLabel lblCerrar2;
     public static javax.swing.JLabel lblComparar;
     public static javax.swing.JLabel lblCrearEstados;
     public static javax.swing.JLabel lblEmpresa;
     public static javax.swing.JLabel lblEstado;
     public static javax.swing.JLabel lblIndices;
     public static javax.swing.JLabel lblVerEstados;
+    private javax.swing.JPanel pnlAnalisis;
+    private javax.swing.JPanel pnlAnalisisVertical;
     private javax.swing.JPanel pnlComparar;
     private javax.swing.JPanel pnlNuevos;
     private javax.swing.JPanel pnlVer;
