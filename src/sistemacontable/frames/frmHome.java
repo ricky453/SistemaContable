@@ -178,7 +178,6 @@ public class frmHome extends javax.swing.JFrame {
                         System.out.println("Rebajas de "+SistemaContable.RebajasSobreVentas);
                         System.out.println("Devoluciones de "+SistemaContable.DevolucionesSobreVentas);
                         ObtenerComprasTotales();
-                        i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
                     }b++;
@@ -190,7 +189,6 @@ public class frmHome extends javax.swing.JFrame {
                     if(tblMisEstados.getValueAt(b, 0).equals("VENTAS")||tblMisEstados.getValueAt(b, 0).equals("VENTAS TOTALES")){
                         SistemaContable.VentasNetas= (Double.parseDouble(tblMisEstados.getValueAt(b, 1).toString()))-(SistemaContable.RebajasSobreVentas+SistemaContable.DevolucionesSobreVentas);
                         ObtenerComprasTotales();
-                        i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
                         
@@ -495,11 +493,6 @@ public class frmHome extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblEstadosReporte);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -510,7 +503,10 @@ public class frmHome extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblMisEstados);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(72, 165, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
