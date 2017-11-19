@@ -57,7 +57,7 @@ public class frmHome extends javax.swing.JFrame {
        
     }
 
-    public void CargarFechas() throws ErrorSistemaContable{
+    public  void CargarFechas() throws ErrorSistemaContable{
         cmbFecha.removeAll();
         fechas = ControladorCuenta.ObtenerFechas(lblEmpresa.getText());
         miFechas = new Object[fechas.size()/1][1];
@@ -141,6 +141,9 @@ public class frmHome extends javax.swing.JFrame {
     public void ObtenerDatosEstado(){
         actualizarMisEstados();
         int i = 0;
+        SistemaContable.VentasNetas=0;
+        SistemaContable.RebajasSobreVentas=0;
+        SistemaContable.DevolucionesSobreVentas=0;
         while(i<tblMisEstados.getRowCount()){
             
         //    V E N T A S    N E T A S    
@@ -205,6 +208,8 @@ public class frmHome extends javax.swing.JFrame {
     }
     public void ObtenerComprasTotales(){
         //     C O M P R A S    T O T A L E S
+        SistemaContable.ComprasTotales=0;
+        SistemaContable.GastosCompras=0;
         int a = 0;
         while(a<tblMisEstados.getRowCount()){
                   
@@ -246,6 +251,9 @@ public class frmHome extends javax.swing.JFrame {
     
     public void ObtenerComprasNetas(){
         int d = 0;
+        SistemaContable.ComprasNetas=0;
+        SistemaContable.RebajasSobreCompras=0;
+        SistemaContable.DevolucionesSobreCompras=0;
         while(d<tblMisEstados.getRowCount()){
         //       C O M P R A S    N E T A S
         if(tblMisEstados.getValueAt(d, 0).equals("COMPRAS NETAS")){
@@ -284,6 +292,7 @@ public class frmHome extends javax.swing.JFrame {
    
     public void ObtenerDisponibilidad(){
         int e = 0;
+        SistemaContable.DisponibilidadMercanciasPeriodo=0;
         salir6=true;
         while(e<tblMisEstados.getRowCount()){
         //   D I S P O N I B I L I D A D    D E    M E R C A N C I A S    P A R A     E L    P E R I O D O
@@ -312,6 +321,7 @@ public class frmHome extends javax.swing.JFrame {
     public void ObtenerCostoVendido(){
         int f = 0;
         salir7=false;
+        SistemaContable.CostoVendido=0;
         while(f<tblMisEstados.getRowCount()){
         //    C O S T O   D E   L O   V E N D I D O
         if(tblMisEstados.getValueAt(f, 0).equals("COSTO DE LO VENDIDO")){
@@ -338,6 +348,7 @@ public class frmHome extends javax.swing.JFrame {
     }
     public void ObtenerUtilidadBruta(){
         int g = 0;
+        SistemaContable.UtilidadBruta=0;
         while(g<tblMisEstados.getRowCount()){
         //    U T I L I D A D   B R U T A     
         if(tblMisEstados.getValueAt(g, 0).equals("UTILIDAD BRUTA")||tblMisEstados.getValueAt(g, 0).equals("MARGEN BRUTO EN VENTAS")||tblMisEstados.getValueAt(g, 0).equals("MARGEN BRUTO DE UTILIDAD")){
@@ -359,6 +370,12 @@ public class frmHome extends javax.swing.JFrame {
         int h = 0;
         SistemaContable.Gast1=0;
         SistemaContable.Gast2=0;
+        SistemaContable.GastosOperativos=0;
+        SistemaContable.UtilidadOperativa=0;
+        SistemaContable.GastoAdministrativo=0;
+        SistemaContable.GastoFinanciero=0;
+        SistemaContable.GastoVentas=0;
+        
         while(h<tblMisEstados.getRowCount()){
         //    U T I L I D A D   O P E R A T I V A
         if(tblMisEstados.getValueAt(h, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS DE OPERACION")){
@@ -399,6 +416,9 @@ public class frmHome extends javax.swing.JFrame {
     }
     public void ObtenerUtilidadNeta(){
         int j = 0;
+        SistemaContable.UtilidadNeta=0;
+        SistemaContable.OtrosGastos=0;
+        SistemaContable.OtrosIngresos=0;
         while(j<tblMisEstados.getRowCount()){
         //   U T I L I D A D    N E T A
         if(tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA")||tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA ANTES DE IMPUESTOS")||tblMisEstados.getValueAt(j, 0).equals("UTILIDAD NETA ANTES DE IMPUESTO")){
@@ -422,6 +442,9 @@ public class frmHome extends javax.swing.JFrame {
     }        
     public void ObtenerUtilidadDistribuir(){
         int k = 0;
+        SistemaContable.UtilidadPorDistribuir=0;
+        SistemaContable.Impuestos=0;
+        SistemaContable.ReservaLegal=0;
         while(k<tblMisEstados.getRowCount()){
         //   U T I L I D A D   P O R   D I S T R I B U I R    
         if(tblMisEstados.getValueAt(k, 0).equals("UTILIDAD DEL EJERCICIO")||tblMisEstados.getValueAt(k, 0).equals("UTILIDAD POR DISTRIBUIR")){

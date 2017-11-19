@@ -442,6 +442,7 @@ public class frmCuentas extends javax.swing.JFrame {
                 frmHome ho = new frmHome();
                 ho.setVisible(true);
                 ho.pnlVerEstados.setVisible(true);
+                ho.CargarFechas();
                 this.setVisible(false);
 
             } catch (ErrorSistemaContable ex) {
