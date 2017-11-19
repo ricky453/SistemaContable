@@ -27,6 +27,8 @@ public class SistemaContable {
     public static double GastoFinanciero=0;
     public static double GastoAdministrativo=0;
     public static double GastosOperativos=0;
+    public static double Gast1=0;
+    public static double Gast2=0;
     public static double UtilidadOperativa=0;
     public static double UtilidadNeta=0;
     public static double OtrosGastos=0;

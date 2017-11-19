@@ -122,11 +122,13 @@ public class ControladorCuenta {
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta`  LEFT JOIN `empresa` ON `cuentasanio`.`IdEmpresa`=`empresa`.`IdEmpresa` WHERE `cuenta`.IdEstadoFinanciero='"+idEstado+"' AND `cuentasanio`.Anio= '"+anio+"' AND `empresa`.`Empresa`='"+Empresa+"' ");
+            rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `cuentasanio`.`Valor`, `cuenta`.`IdTipoCuenta` FROM `cuenta` LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta`=`cuenta`.`IdCuenta`  LEFT JOIN `empresa` ON `cuentasanio`.`IdEmpresa`=`empresa`.`IdEmpresa` WHERE `cuenta`.IdEstadoFinanciero='"+idEstado+"' AND `cuentasanio`.Anio= '"+anio+"' AND `empresa`.`Empresa`='"+Empresa+"' ");
             while (rs.next()) {
  
                 cuenta.add(rs.getString(1));
                 cuenta.add(rs.getString(2));
+                cuenta.add(rs.getString(3));
+                
             }
             
             

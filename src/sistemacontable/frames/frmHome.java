@@ -123,12 +123,13 @@ public class frmHome extends javax.swing.JFrame {
         try {           
             modeloMisEstados.setRowCount(0);
             ArrayList<Cuenta> listaMisEstados=new ArrayList();
-            Object fila[]=new Object[2];
+            Object fila[]=new Object[3];
             listaMisEstados=ControladorCuenta.MisEstados(2, cmbFecha.getSelectedItem().toString(), SistemaContable.empresa);
             Iterator<Cuenta> MisEstados=listaMisEstados.iterator();
             while(MisEstados.hasNext()){
                 fila[0]= MisEstados.next();
                 fila[1]= MisEstados.next();
+                fila[2]= MisEstados.next();
                 modeloMisEstados.addRow(fila);
                 tblMisEstados.setModel(modeloMisEstados);
             }
@@ -180,7 +181,6 @@ public class frmHome extends javax.swing.JFrame {
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
-                        break;
                     }b++;
                 }                
             }else if(tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES SOBRE VENTAS")||tblMisEstados.getValueAt(i, 0).equals("DEVOLUCIONES EN VENTAS")){
@@ -193,7 +193,7 @@ public class frmHome extends javax.swing.JFrame {
                         i=tblMisEstados.getRowCount()-1;
                         b=tblMisEstados.getRowCount()-1;
                         salir3=false;
-                        break;
+                        
                     }b++;
                 }
             }else if(tblMisEstados.getValueAt(i, 0).equals("VENTAS")||tblMisEstados.getValueAt(i, 0).equals("VENTAS TOTALES")){
@@ -361,7 +361,6 @@ public class frmHome extends javax.swing.JFrame {
     public void ObtenerUtilidadOperativa(){
         int h = 0;
         while(h<tblMisEstados.getRowCount()){
-                    
         //    U T I L I D A D   O P E R A T I V A
         if(tblMisEstados.getValueAt(h, 0).equals("GASTO OPERATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS OPERATIVOS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS DE OPERACION")){
             SistemaContable.GastosOperativos= Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
@@ -371,6 +370,11 @@ public class frmHome extends javax.swing.JFrame {
             salir2=false;
             break;
             
+        }
+        
+        else if(tblMisEstados.getValueAt(h, 2).toString().equals("4")){
+            SistemaContable.Gast1 = SistemaContable.Gast1 + Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
+            salir2=true;            
         }else{
             if(tblMisEstados.getValueAt(h, 0).equals("GASTO DE VENTAS")||tblMisEstados.getValueAt(h, 0).equals("GASTOS EN VENTAS")){
                 SistemaContable.GastoVentas=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
@@ -379,7 +383,7 @@ public class frmHome extends javax.swing.JFrame {
             }else if(tblMisEstados.getValueAt(h, 0).equals("GASTO ADMINISTRATIVO")||tblMisEstados.getValueAt(h, 0).equals("GASTOS ADMINISTRATIVOS")){
                 SistemaContable.GastoAdministrativo=Double.parseDouble(tblMisEstados.getValueAt(h, 1).toString());
             }
-            SistemaContable.GastosOperativos = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
+            SistemaContable.Gast2 = SistemaContable.GastoVentas+SistemaContable.GastoFinanciero+SistemaContable.GastoAdministrativo;
             salir2=true;
         }   
         if(tblMisEstados.getValueAt(h, 0).equals("UTILIDAD OPERATIVA")){
@@ -388,7 +392,8 @@ public class frmHome extends javax.swing.JFrame {
             salir2=false;
             }h++;
         }if(salir2==true){
-            SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-SistemaContable.GastoVentas;
+            SistemaContable.GastosOperativos=(SistemaContable.Gast1+SistemaContable.Gast2);
+            SistemaContable.UtilidadOperativa=SistemaContable.UtilidadBruta-(SistemaContable.Gast1+SistemaContable.Gast2);
             ObtenerUtilidadNeta();
         }
     }
@@ -439,10 +444,10 @@ public class frmHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblMisEstados = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadosReporte = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMisEstados = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
@@ -480,16 +485,6 @@ public class frmHome extends javax.swing.JFrame {
         lblEmpresa = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
 
-        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane4.setViewportView(tblMisEstados);
-
         tblEstadosReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -504,6 +499,18 @@ public class frmHome extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3"
+            }
+        ));
+        jScrollPane4.setViewportView(tblMisEstados);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(72, 165, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

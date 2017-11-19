@@ -161,7 +161,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
                            agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
                            agregado.setIdTipoSubCuenta(SubTipo[cmbSubTipo.getSelectedIndex()][0].toString());
                      }else{
-                         
+                         agregado.setIdTipoCuenta("0");
                      }
                 }else{
                 agregado.setIdTipoCuenta(Tipo[cmbTipo.getSelectedIndex()][0].toString());
