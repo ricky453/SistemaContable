@@ -257,6 +257,7 @@ public class frmHome extends javax.swing.JFrame {
         }else{
             if(tblMisEstados.getValueAt(d, 0).equals("REBAJAS EN COMPRAS")||tblMisEstados.getValueAt(d, 0).equals("REBAJAS SOBRE COMPRAS")){
                 SistemaContable.RebajasSobreCompras = Double.parseDouble(tblMisEstados.getValueAt(d, 1).toString());
+                salir5=true;
                 int a=0;
                 while(a<tblMisEstados.getRowCount()){
                    if(tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES SOBRE COMPRAS")||tblMisEstados.getValueAt(a, 0).equals("DEVOLUCIONES EN COMPRAS")){
