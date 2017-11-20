@@ -8,6 +8,7 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="empresa" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT `cuenta`.`Cuenta`, `financieros`.`Nombre` AS financieros, `subtipocuenta`.`Nombre` as subtipocuenta, `tipocuenta`.`Nombre` as tipocuenta, `cuentasanio`.`Anio`, `cuentasanio`.`Valor`
 FROM `cuenta`
@@ -36,10 +37,12 @@ FROM `cuenta`
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="pasivo" class="java.lang.Double" resetType="None" incrementType="Report">
-		<variableExpression><![CDATA[( $F{tipocuenta}.equals( "PASIVO" ) ? +$F{Valor} : +0.0)]]></variableExpression>
+		<variableExpression><![CDATA[($F{tipocuenta}.equals("PASIVO")?$V{ACTIVO}:$V{pasivo})]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
 	</variable>
 	<variable name="capital" class="java.lang.Double" resetType="None" incrementType="Report">
-		<variableExpression><![CDATA[( $F{tipocuenta}.equals("PATRIMONIO") ? +$F{Valor} : 0.0)]]></variableExpression>
+		<variableExpression><![CDATA[( $F{tipocuenta}.equals("PATRIMONIO") ? +$V{ACTIVO} : $V{capital})]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
 	</variable>
 	<variable name="suma" class="java.lang.Double">
 		<variableExpression><![CDATA[$V{pasivo}+$V{capital}]]></variableExpression>
@@ -111,6 +114,13 @@ FROM `cuenta`
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="11" width="115" height="35" uuid="7ea45b87-6d56-4131-b200-f51bdf024849"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
