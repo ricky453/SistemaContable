@@ -73,6 +73,31 @@ public class ControladorCuenta {
         ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
         return cuentas;
     }
+    public static ArrayList<Cuenta> ObtenerBG(String anio, String Empresa) throws ErrorSistemaContable{
+        ArrayList<Object> cuenta = new ArrayList<Object>();
+                
+                cn=new Conexion();
+                try {
+                    rs = null;
+                    rs=cn.st.executeQuery("SELECT `cuenta`.`Cuenta`, `tipocuenta`.`IdTipoCuenta` as tipocuenta, `subtipocuenta`.`IdTipoSubCuenta` as subtipocuenta, `cuentasanio`.`Valor`\n" +
+                                          "FROM `cuenta`\n" +
+                                          "    LEFT JOIN `tipocuenta` ON `cuenta`.`IdTipoCuenta` = `tipocuenta`.`IdTipoCuenta`\n" +
+                                          "    LEFT JOIN `financieros` ON `cuenta`.`IdEstadoFinanciero` = `financieros`.`IdEstadoFinanciero`\n" +
+                                          "    LEFT JOIN `subtipocuenta` ON `cuenta`.`IdTipoSubCuenta` = `subtipocuenta`.`IdTipoSubCuenta`\n" +
+                                          "    LEFT JOIN `cuentasanio` ON `cuentasanio`.`IdCuenta` = `cuenta`.`IdCuenta` LEFT JOIN `empresa` ON `cuentasanio`.`IdEmpresa`=`empresa`.`IdEmpresa`\n" +
+                                          "    WHERE financieros.IdEstadoFinanciero = 1 AND `cuentasanio`.`Anio` = '"+anio+"' AND `empresa`.`Empresa`='"+Empresa+"' ");
+                    while (rs.next()) {
+                        cuenta.add(rs.getString(1));
+                        cuenta.add(rs.getString(2));
+                        cuenta.add(rs.getString(3));
+                        cuenta.add(rs.getString(4));
+                    }
+            
+        } catch (Exception e) {
+        }
+        ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
+        return cuentas;
+    }
     
     public static ArrayList<Cuenta> ObtenerCuentas(int IdEstadoFinanciero)throws ErrorSistemaContable{
         ArrayList<Object> cuenta = new ArrayList<Object>();

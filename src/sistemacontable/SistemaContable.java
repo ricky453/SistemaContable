@@ -15,6 +15,20 @@ public class SistemaContable {
 
     public static int posCuenta;
     public static String empresa;
+    //BALACE GENERAL
+    public static double ActivosCorrientes=0;
+    public static double ActivosNoCorrientes=0;
+    public static double ActivosTotales=0;
+    public static double PasivosCorrientes=0;
+    public static double PasivosNoCorrientes=0;
+    public static double PasivosTotales=0;
+    public static double Capital=0;
+    public static double Inventario=0;
+    public static double CuentasXCobrar=0;
+    public static double CuentasXPagar=0;
+    public static double ValorEnLibros=0;
+    
+    public static double Ventas=0;
     
     //ESTADO DE RESULTADOS
     public static double VentasNetas=0;
