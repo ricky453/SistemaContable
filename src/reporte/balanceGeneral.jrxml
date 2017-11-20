@@ -45,7 +45,8 @@ FROM `cuenta`
 		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
 	</variable>
 	<variable name="suma" class="java.lang.Double">
-		<variableExpression><![CDATA[$V{pasivo}+$V{capital}]]></variableExpression>
+		<variableExpression><![CDATA[new Double($V{pasivo}.doubleValue() + $V{capital}.doubleValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
 	</variable>
 	<group name="tipocuenta">
 		<groupExpression><![CDATA[$F{tipocuenta}]]></groupExpression>
