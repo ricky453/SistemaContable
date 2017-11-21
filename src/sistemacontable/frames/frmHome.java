@@ -1709,6 +1709,10 @@ public class frmHome extends javax.swing.JFrame {
             String archivo = getClass().getResource("/reporte/balanceGeneral.jasper").getPath();
             parametro.put("parameter1", cmbFecha.getSelectedItem().toString());
             parametro.put("empresa", lblEmpresa.getText());
+            actualizarMisEstados();
+            ObtenerDatosEstado();
+            parametro.put("Utilidad", SistemaContable.UtilidadPorDistribuir);
+            parametro.put("Reserva", SistemaContable.ReservaLegal);
             Conexion cn = new Conexion();
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(archivo);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn.conexion);
