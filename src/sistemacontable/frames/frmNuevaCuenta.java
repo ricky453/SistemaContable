@@ -321,7 +321,7 @@ public class frmNuevaCuenta extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         frmCuentas.lblSeleccionarCuentas.setForeground(java.awt.Color.black);
-        frmCuentas.lblNuevaCuenta.setForeground(java.awt.Color.lightGray);
+        frmCuentas.lblModificarCuenta.setForeground(java.awt.Color.lightGray);
         this.dispose();
         
     }//GEN-LAST:event_lblCerrarMouseClicked

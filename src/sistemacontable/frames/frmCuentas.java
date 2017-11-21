@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -46,6 +48,8 @@ public class frmCuentas extends javax.swing.JFrame {
     frmValor va = new frmValor();
     boolean encontrado;
     Date date = new Date();
+    DefaultComboBoxModel modeloEstadosFinancieros = new DefaultComboBoxModel();
+    
 
     public frmCuentas() {
         initComponents();
@@ -79,6 +83,30 @@ public class frmCuentas extends javax.swing.JFrame {
              Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);        
          }
     } 
+    
+    
+    //----------------llenandoComboBoxEstadosFinancieros----------
+    public void llenandoCmbEstados(JComboBox cm){
+        Object[] seleccion=new Object[2];
+        
+        
+        try {
+            ArrayList<Cuenta> micuenta=ControladorCuenta.ObtenerEstados2();
+            Iterator iterador=micuenta.iterator();
+            while(iterador.hasNext()){
+                
+                
+                modeloEstadosFinancieros.addElement(iterador.next());
+                modeloEstadosFinancieros.addElement(iterador.next());
+                
+                
+            }
+            
+            cm.setModel(modeloEstadosFinancieros);
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     
     public void colorTablaActivos(){
@@ -166,7 +194,7 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtAnio = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        lblNuevaCuenta = new javax.swing.JLabel();
+        lblModificarCuenta = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadoResultados = new javax.swing.JTable();
@@ -175,6 +203,7 @@ public class frmCuentas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblSeleccionarCuentas = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
+        lblNuevaCuenta = new javax.swing.JLabel();
 
         tblMisEstados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -289,16 +318,16 @@ public class frmCuentas extends javax.swing.JFrame {
         getContentPane().add(jpnSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 330, 700));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, 30));
 
-        lblNuevaCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblNuevaCuenta.setForeground(new java.awt.Color(153, 153, 153));
-        lblNuevaCuenta.setText("Nueva Cuenta");
-        lblNuevaCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblNuevaCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblModificarCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblModificarCuenta.setForeground(new java.awt.Color(153, 153, 153));
+        lblModificarCuenta.setText("Modificar Cuenta");
+        lblModificarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblModificarCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNuevaCuentaMouseClicked(evt);
+                lblModificarCuentaMouseClicked(evt);
             }
         });
-        getContentPane().add(lblNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, 80));
+        getContentPane().add(lblModificarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, -1, 80));
 
         jLabel1.setBackground(new java.awt.Color(72, 165, 234));
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
@@ -395,21 +424,35 @@ public class frmCuentas extends javax.swing.JFrame {
         });
         getContentPane().add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 80));
 
+        lblNuevaCuenta.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblNuevaCuenta.setForeground(new java.awt.Color(153, 153, 153));
+        lblNuevaCuenta.setText("Nueva Cuenta");
+        lblNuevaCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNuevaCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNuevaCuentaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, -1, 80));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblNuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNuevaCuentaMouseClicked
-        try {
-            lblNuevaCuenta.setForeground(java.awt.Color.black);
+    private void lblModificarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarCuentaMouseClicked
+        
+            lblModificarCuenta.setForeground(java.awt.Color.black);
             lblSeleccionarCuentas.setForeground(java.awt.Color.lightGray);
-            frmNuevaCuenta nc = new frmNuevaCuenta();
+            lblNuevaCuenta.setForeground(java.awt.Color.lightGray);
+            frmModificarCuentas nc = new frmModificarCuentas();
             nc.setVisible(true);
+            this.setVisible(false);
             //this.setEnabled(false);
-        } catch (ErrorSistemaContable ex) {
-            Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_lblNuevaCuentaMouseClicked
+            llenandoCmbEstados(nc.cmbEstados);
+            nc.lblNombreEmpresa.setText(lblEmpresa.getText());
+            nc.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_lblModificarCuentaMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         frmHome home = new frmHome();
@@ -516,6 +559,10 @@ public class frmCuentas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblEstadoResultadosMouseClicked
 
+    private void lblNuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNuevaCuentaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblNuevaCuentaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -567,6 +614,7 @@ public class frmCuentas extends javax.swing.JFrame {
     private javax.swing.JPanel jpnSeleccion;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblEmpresa;
+    public static javax.swing.JLabel lblModificarCuenta;
     public static javax.swing.JLabel lblNuevaCuenta;
     public static javax.swing.JLabel lblSeleccionarCuentas;
     public static javax.swing.JTable tblBalanceGeneral;

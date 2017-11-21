@@ -14,6 +14,7 @@ public class Cuenta {
     private int IdCuenta;
     private String Cuenta;
     private int IdEstadoFinanciero;
+    private String estadoFinanciero;
     private String IdTipoCuenta;
     private String IdTipoSubCuenta;
     private int IdEmpresa;
@@ -22,6 +23,14 @@ public class Cuenta {
     private String Fecha;
     private String Usuario;
     private String Password;
+    
+    public String getEstadoFinanciero() {
+        return estadoFinanciero;
+    }
+
+    public void setEstadoFinanciero(String estadoFinanciero) {
+        this.estadoFinanciero = estadoFinanciero;
+    }
 
     public String getUsuario() {
         return Usuario;

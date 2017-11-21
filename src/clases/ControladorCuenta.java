@@ -186,6 +186,26 @@ public class ControladorCuenta {
         return estadosfinancieros;
     }
     
+    public static ArrayList<Cuenta> ObtenerEstados2()throws ErrorSistemaContable{
+    ArrayList<Object> estados = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT nombre FROM financieros");
+            while (rs.next()) {
+ 
+                estados.add(rs.getString(1));
+            }
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerEstados2",e.getMessage());
+        }
+        
+        ArrayList<Cuenta> estadosfinancieros=(ArrayList) estados;
+        return estadosfinancieros;
+    }
+    
     public static ArrayList<Cuenta> ObtenerTipo(int id1, int id2, int id3)throws ErrorSistemaContable{
     ArrayList<Object> tipo = new ArrayList<Object>();
     
@@ -337,6 +357,38 @@ public class ControladorCuenta {
         
         ArrayList<Cuenta> proveedores=(ArrayList) proveedor;
         return proveedores;
+    }
+        
+        public static ArrayList<Cuenta> FiltroCuentas(String cuenta,int idFinanciero, int anio,int idEmpresa) throws ErrorSistemaContable{
+            ArrayList<Object> cuentas = new ArrayList<Object>();
+            
+            cn=new Conexion();
+            try {
+                rs=null;
+                rs=cn.st.executeQuery("Select cuenta.IdCuenta, cuenta.Cuenta,cuentasanio.Valor FROM cuenta INNER JOIN cuentasanio ON cuenta.IdCuenta=cuentasanio.IdCuenta WHERE (cuenta.Cuenta LIKE '%"+cuenta+"%' and cuenta.IdEstadoFinanciero='"+idFinanciero+"') and cuentasanio.Anio='"+anio+"' and cuentasanio.IdEmpresa='"+idEmpresa+"'");
+                while (rs.next()) {
+                    cuentas.add(rs.getString(1));
+                    cuentas.add(rs.getString(2));
+                    cuentas.add(rs.getString(3));
+                }
+            
+            } catch (Exception e) {
+                
+            }
+            
+            ArrayList<Cuenta> cuent=(ArrayList) cuentas;
+            return cuent;
+            
+        }
+        
+        public static void Modificar(Cuenta pr) throws ErrorSistemaContable{
+        try {
+            cn=new Conexion();
+            cn.st.execute("UPDATE cuenta as c INNER JOIN cuentasanio as ca SET c.Cuenta='"+pr.getCuenta()+"',ca.Valor='"+pr.getValor()+"' WHERE c.IdCuenta='"+pr.getIdCuenta()+"'");
+            
+        } catch (SQLException e) {
+            throw new ErrorSistemaContable("Class ControladorProducto/Modificar",e.getMessage());
+        }
     }
     
 
