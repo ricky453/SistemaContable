@@ -9,6 +9,8 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="parameter1" class="java.lang.String"/>
 	<parameter name="empresa" class="java.lang.String"/>
+	<parameter name="Utilidad" class="java.lang.String"/>
+	<parameter name="Reserva" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT `cuenta`.`Cuenta`, `financieros`.`Nombre` AS financieros, `subtipocuenta`.`Nombre` as subtipocuenta, `tipocuenta`.`Nombre` as tipocuenta, `cuentasanio`.`Anio`, `cuentasanio`.`Valor`
 FROM `cuenta`
@@ -165,7 +167,7 @@ FROM `cuenta`
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="0c3987b9-a2a0-4ff4-ac00-27651cca9898"/>
 				<graphicElement>
@@ -173,18 +175,46 @@ FROM `cuenta`
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="4" width="100" height="20" uuid="71086b50-a5f2-4329-af99-3a39922e160f"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="4" width="100" height="20" isRemoveLineWhenBlank="true" uuid="71086b50-a5f2-4329-af99-3a39922e160f"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[TOTAL P+C]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="370" y="4" width="100" height="20" uuid="8bd7b8a5-5ae5-4894-adac-9ae70970ce5b"/>
+				<reportElement positionType="FixRelativeToBottom" x="370" y="4" width="100" height="20" isRemoveLineWhenBlank="true" uuid="8bd7b8a5-5ae5-4894-adac-9ae70970ce5b"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="100" height="20" isRemoveLineWhenBlank="true" uuid="03f23507-63b0-4937-a6d3-15c7feffc18b"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
+				<text><![CDATA[Utilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="dddeda35-b677-402b-8682-35f3e2d9c73b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Reserva Legal]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="370" y="35" width="100" height="20" isRemoveLineWhenBlank="true" uuid="2e762cd5-9776-44cd-8198-c30fc255741e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Utilidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="370" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="2577b1c1-363c-49d7-8744-eb5324e275c7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Reserva}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
