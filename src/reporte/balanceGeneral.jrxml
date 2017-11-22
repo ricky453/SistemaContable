@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2ca5f428-f9a9-410c-ba81-5389bcb85d98">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="2ca5f428-f9a9-410c-ba81-5389bcb85d98">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -57,7 +57,7 @@ FROM `cuenta`
 				<textField>
 					<reportElement style="SubTitle" x="63" y="13" width="506" height="24" forecolor="#000000" uuid="9430279a-f702-4d68-8cd4-4243c4e82744"/>
 					<textElement>
-						<font isBold="true"/>
+						<font fontName="Times New Roman" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{tipocuenta}]]></textFieldExpression>
 				</textField>
@@ -71,14 +71,14 @@ FROM `cuenta`
 				<textField>
 					<reportElement x="370" y="1" width="100" height="20" uuid="628bf0c6-a6fd-4d96-b649-89e6a2e4b84e"/>
 					<textElement>
-						<font size="12"/>
+						<font fontName="Times New Roman" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{ACTIVO}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="0" y="1" width="100" height="20" uuid="3037e6dd-8083-4478-a686-9bc894f6e11f"/>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Times New Roman" size="10"/>
 					</textElement>
 					<text><![CDATA[TOTAL]]></text>
 				</staticText>
@@ -92,7 +92,7 @@ FROM `cuenta`
 				<textField>
 					<reportElement style="SubTitle" x="10" y="10" width="460" height="20" uuid="bfbe0a00-d978-427b-9b93-b18d2a4049f3"/>
 					<textElement>
-						<font size="16" isBold="true"/>
+						<font fontName="Times New Roman" size="16" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{subtipocuenta}]]></textFieldExpression>
 				</textField>
@@ -109,12 +109,15 @@ FROM `cuenta`
 		<band height="70" splitType="Stretch">
 			<staticText>
 				<reportElement style="SubTitle" x="63" y="48" width="186" height="22" uuid="80f26126-0aca-4de0-8982-e60f79c68332"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[BALANCE GENERAL]]></text>
 			</staticText>
 			<textField>
 				<reportElement style="Detail" x="0" y="11" width="185" height="35" uuid="eba87eda-e451-4bc4-90f5-f6da7038a31b"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Anio}]]></textFieldExpression>
 			</textField>
@@ -140,10 +143,16 @@ FROM `cuenta`
 			</line>
 			<staticText>
 				<reportElement style="Column header" x="0" y="19" width="185" height="15" uuid="8a8ea79f-bab4-4a66-9db2-8e13feba40de"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Cuenta]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="370" y="19" width="185" height="15" uuid="7a1e570f-64f1-451e-adad-7d20af2fa570"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Valor ($)]]></text>
 			</staticText>
 		</band>
@@ -158,16 +167,22 @@ FROM `cuenta`
 			</line>
 			<textField>
 				<reportElement style="Detail" x="0" y="0" width="185" height="15" uuid="360852e3-d008-45c8-afbf-270be42c6dca"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Cuenta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="370" y="0" width="185" height="15" uuid="2eeece1e-f0dc-4e64-a92d-3b9f1c07ebf7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Valor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="105" splitType="Stretch">
+		<band height="75" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="0c3987b9-a2a0-4ff4-ac00-27651cca9898"/>
 				<graphicElement>
@@ -175,44 +190,44 @@ FROM `cuenta`
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="4" width="100" height="20" isRemoveLineWhenBlank="true" uuid="71086b50-a5f2-4329-af99-3a39922e160f"/>
+				<reportElement x="0" y="4" width="100" height="20" uuid="71086b50-a5f2-4329-af99-3a39922e160f"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<text><![CDATA[TOTAL P+C]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="370" y="4" width="100" height="20" isRemoveLineWhenBlank="true" uuid="8bd7b8a5-5ae5-4894-adac-9ae70970ce5b"/>
+				<reportElement x="370" y="4" width="100" height="20" uuid="8bd7b8a5-5ae5-4894-adac-9ae70970ce5b"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="100" height="20" isRemoveLineWhenBlank="true" uuid="03f23507-63b0-4937-a6d3-15c7feffc18b"/>
+				<reportElement x="0" y="24" width="100" height="20" uuid="03f23507-63b0-4937-a6d3-15c7feffc18b"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<text><![CDATA[Utilidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="dddeda35-b677-402b-8682-35f3e2d9c73b"/>
+				<reportElement x="0" y="44" width="100" height="20" uuid="dddeda35-b677-402b-8682-35f3e2d9c73b"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<text><![CDATA[Reserva Legal]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="370" y="35" width="100" height="20" isRemoveLineWhenBlank="true" uuid="2e762cd5-9776-44cd-8198-c30fc255741e"/>
+				<reportElement x="370" y="24" width="100" height="20" uuid="2e762cd5-9776-44cd-8198-c30fc255741e"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Utilidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="370" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="2577b1c1-363c-49d7-8744-eb5324e275c7"/>
+				<reportElement x="370" y="44" width="100" height="20" uuid="2577b1c1-363c-49d7-8744-eb5324e275c7"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Reserva}]]></textFieldExpression>
 			</textField>
