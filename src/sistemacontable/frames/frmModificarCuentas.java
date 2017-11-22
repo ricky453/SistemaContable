@@ -62,9 +62,9 @@ public class frmModificarCuentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblNombreEmpresa = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
         fechaAnio = new com.toedter.calendar.JYearChooser();
@@ -83,16 +83,16 @@ public class frmModificarCuentas extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(72, 165, 234));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblNombreEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 220, 30));
+        jPanel1.add(lblNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 220, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("EMPRESA");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(72, 165, 234));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

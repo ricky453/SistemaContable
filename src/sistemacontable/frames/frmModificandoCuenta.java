@@ -35,43 +35,32 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtValor = new javax.swing.JTextField();
-        txtId = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnCancela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Valor:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 30, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel4.setText("ID CUENTA:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 20));
 
-        jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorActionPerformed(evt);
-            }
-        });
-        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValorKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 210, -1));
-
-        txtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 40, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
+        jLabel3.setText("MODIFICANDO CUENTA");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 20));
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,31 +72,69 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
                 txtNombreKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 210, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 210, 30));
 
-        jLabel3.setText("MODIFICANDO CUENTA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, 20));
-
-        jLabel4.setText("ID CUENTA:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 20));
-
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        txtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                txtValorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
-
-        btnAceptar.setText("ACEPTAR");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        jPanel1.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 210, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel2.setText("Nombre:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel1.setText("Valor:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 30, 30));
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 40, 30));
+
+        btnGuardar.setBackground(new java.awt.Color(57, 137, 186));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(72, 165, 234));
+        btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setFocusPainted(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 90, 30));
+
+        btnCancela.setBackground(new java.awt.Color(57, 137, 186));
+        btnCancela.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancela.setForeground(new java.awt.Color(72, 165, 234));
+        btnCancela.setText("Cancelar");
+        btnCancela.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
+        btnCancela.setContentAreaFilled(false);
+        btnCancela.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancela.setFocusPainted(false);
+        btnCancela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancela, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 90, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 280));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
@@ -121,30 +148,6 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-       if (txtNombre.getText().equals("")||txtValor.getText().equals("")) {
-            
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos por favor");
-           
-        }else{
-           frmModificarCuentas fm=new frmModificarCuentas();
-           Cuenta c=new Cuenta();
-           c.setIdCuenta(Integer.parseInt(txtId.getText()));
-           c.setCuenta(txtNombre.getText());
-           c.setValor(txtValor.getText());
-           try {
-               ControladorCuenta.Modificar(c);
-               
-               fm.txtCuenta.setText("");
-               JOptionPane.showMessageDialog(null, "Se ha hecho la modificacion con exito");
-
-           } catch (ErrorSistemaContable ex) {
-               Logger.getLogger(frmModificandoCuenta.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
-       }
-    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char mayu=evt.getKeyChar();
@@ -180,10 +183,34 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtValorKeyTyped
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       if (txtNombre.getText().equals("")||txtValor.getText().equals("")) {
+            
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos por favor");
+           
+        }else{
+           frmModificarCuentas fm=new frmModificarCuentas();
+           Cuenta c=new Cuenta();
+           c.setIdCuenta(Integer.parseInt(txtId.getText()));
+           c.setCuenta(txtNombre.getText());
+           c.setValor(txtValor.getText());
+           try {
+               ControladorCuenta.Modificar(c);
+               
+               fm.txtCuenta.setText("");
+               JOptionPane.showMessageDialog(null, "Se ha hecho la modificacion con exito");
+
+           } catch (ErrorSistemaContable ex) {
+               Logger.getLogger(frmModificandoCuenta.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+       }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaActionPerformed
+                this.setVisible(false);
+    }//GEN-LAST:event_btnCancelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,12 +249,13 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCancela;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     public javax.swing.JTextField txtId;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtValor;
