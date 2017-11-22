@@ -10,6 +10,7 @@ import clases.ControladorCuenta;
 import clases.Cuenta;
 import clases.ErrorSistemaContable;
 import clases.Estado;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
@@ -45,6 +48,7 @@ public class frmHome extends javax.swing.JFrame {
     private static DefaultTableModel AnalisisVerticalBGTableModel;
     DecimalFormat df = new DecimalFormat("#.00");
     boolean salir, salir2,salir3,salir4, salir5, salir6, salir7, salir8;
+    DefaultComboBoxModel modeloEstadosFinancieros = new DefaultComboBoxModel();
             
     public frmHome() {
         initComponents();
@@ -87,6 +91,29 @@ public class frmHome extends javax.swing.JFrame {
         }
        
     }
+        //----------------llenandoComboBoxEstadosFinancieros----------
+    public void llenandoCmbEstados(JComboBox cm){
+        Object[] seleccion=new Object[2];
+        
+        
+        try {
+            ArrayList<Cuenta> micuenta=ControladorCuenta.ObtenerEstados2();
+            Iterator iterador=micuenta.iterator();
+            while(iterador.hasNext()){
+                
+                
+                modeloEstadosFinancieros.addElement(iterador.next());
+                modeloEstadosFinancieros.addElement(iterador.next());
+                
+                
+            }
+            
+            cm.setModel(modeloEstadosFinancieros);
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void generarEstado(){
         Estado em;// Instaciamos la clase empleado
         List <Estado>lista = new ArrayList<>(); //Creamos una lista de empleados con ArrayList para obtener cada empleado
@@ -229,6 +256,24 @@ public class frmHome extends javax.swing.JFrame {
             }
         i++;}        
     }
+    public void CuentasPorCobrar(){
+        int i = 0;
+        SistemaContable.Inventario=0;
+        while(i<tblBG.getRowCount()){
+        if(tblBG.getValueAt(i, 0).equals("CUENTAS POR COBRAR")){
+            SistemaContable.CuentasXCobrar=SistemaContable.Inventario+Double.parseDouble(tblBG.getValueAt(i, 3).toString());
+            }
+        i++;}        
+    }
+    public void CuentasPorPagar(){
+        int i = 0;
+        SistemaContable.Inventario=0;
+        while(i<tblBG.getRowCount()){
+        if(tblBG.getValueAt(i, 0).equals("CUENTAS POR PAGAR")){
+            SistemaContable.CuentasXPagar=SistemaContable.Inventario+Double.parseDouble(tblBG.getValueAt(i, 3).toString());
+            }
+        i++;}        
+    }
         
     public void generarBG(){
         actualizarMiBG();
@@ -285,7 +330,7 @@ public class frmHome extends javax.swing.JFrame {
 
     public void ObtenerDatosEstado(){
         actualizarMisEstados();
-        actualizarMisEstados2();
+        //actualizarMisEstados2();
         int i = 0;
         SistemaContable.VentasNetas=0;
         SistemaContable.RebajasSobreVentas=0;
@@ -723,19 +768,34 @@ public class frmHome extends javax.swing.JFrame {
         tblMisEstados = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadosReporte = new javax.swing.JTable();
+        btnModificarEstados = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         pnlVerEstados = new javax.swing.JPanel();
-        lblIndices = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         cmbFecha = new javax.swing.JComboBox<>();
         lblBalance = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblCerrar1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        lblComprasAnuales = new javax.swing.JLabel();
+        lblNAccionesComunes = new javax.swing.JLabel();
+        lblPagosPrincipal = new javax.swing.JLabel();
+        lblGastosArrendamiento = new javax.swing.JLabel();
+        lblAccPref = new javax.swing.JLabel();
+        txtComprasAnuales = new javax.swing.JTextField();
+        txtPrecioMercado = new javax.swing.JTextField();
+        txtNAccionesComunes = new javax.swing.JTextField();
+        txtPagosPrincipal = new javax.swing.JTextField();
+        txtGastosArrendamiento = new javax.swing.JTextField();
+        txtAccPreferentes = new javax.swing.JTextField();
+        lblPrecioMercado = new javax.swing.JLabel();
+        lblIndices = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         pnlComparar = new javax.swing.JPanel();
         lblBienvenida15 = new javax.swing.JLabel();
         lblBienvenida16 = new javax.swing.JLabel();
@@ -764,7 +824,6 @@ public class frmHome extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         lblR3 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -784,6 +843,7 @@ public class frmHome extends javax.swing.JFrame {
         lblR6 = new javax.swing.JLabel();
         lblR5 = new javax.swing.JLabel();
         lblR4 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         pnlIndices2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -797,7 +857,6 @@ public class frmHome extends javax.swing.JFrame {
         lblR13 = new javax.swing.JLabel();
         lblR12 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         lblR11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lblVolver1 = new javax.swing.JLabel();
@@ -806,6 +865,7 @@ public class frmHome extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         lblR17 = new javax.swing.JLabel();
         lblR18 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         pnlAnalisisVertical = new javax.swing.JPanel();
         lblCerrar2 = new javax.swing.JLabel();
         cmbFecha1 = new javax.swing.JComboBox<>();
@@ -868,6 +928,25 @@ public class frmHome extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnModificarEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        btnModificarEstados.setForeground(new java.awt.Color(72, 165, 234));
+        btnModificarEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnModificarEstados.setText("Modificar mis Estados");
+        btnModificarEstados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
+        btnModificarEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificarEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModificarEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModificarEstadosMouseExited(evt);
+            }
+        });
+        getContentPane().add(btnModificarEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 230, 50));
+
         jPanel1.setBackground(new java.awt.Color(72, 165, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -887,25 +966,6 @@ public class frmHome extends javax.swing.JFrame {
         pnlVerEstados.setBackground(new java.awt.Color(72, 165, 234));
         pnlVerEstados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIndices.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblIndices.setForeground(new java.awt.Color(255, 255, 255));
-        lblIndices.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIndices.setText("Indices");
-        lblIndices.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        lblIndices.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblIndices.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblIndicesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblIndicesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblIndicesMouseExited(evt);
-            }
-        });
-        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 230, 50));
-
         lblEstado.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(255, 255, 255));
         lblEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -923,10 +983,10 @@ public class frmHome extends javax.swing.JFrame {
                 lblEstadoMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 230, 50));
+        pnlVerEstados.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 230, 50));
 
         cmbFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        pnlVerEstados.add(cmbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 190, 30));
+        pnlVerEstados.add(cmbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 190, 30));
 
         lblBalance.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblBalance.setForeground(new java.awt.Color(255, 255, 255));
@@ -945,12 +1005,12 @@ public class frmHome extends javax.swing.JFrame {
                 lblBalanceMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 230, 50));
+        pnlVerEstados.add(lblBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 230, 50));
 
         jLabel1.setBackground(new java.awt.Color(72, 165, 234));
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabel1.setText("Selecciona el año a realizar los reportes:");
-        pnlVerEstados.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, 30));
+        pnlVerEstados.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 280, 30));
 
         lblCerrar1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblCerrar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -966,7 +1026,113 @@ public class frmHome extends javax.swing.JFrame {
 
         jSeparator3.setBackground(new java.awt.Color(240, 240, 240));
         jSeparator3.setForeground(new java.awt.Color(240, 240, 240));
-        pnlVerEstados.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 700, 10));
+        pnlVerEstados.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 700, 10));
+
+        jPanel4.setBackground(new java.awt.Color(72, 165, 234));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblComprasAnuales.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblComprasAnuales.setForeground(new java.awt.Color(255, 255, 255));
+        lblComprasAnuales.setText("Compras Anuales");
+        jPanel4.add(lblComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 220, 30));
+
+        lblNAccionesComunes.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblNAccionesComunes.setForeground(new java.awt.Color(255, 255, 255));
+        lblNAccionesComunes.setText("Nº Acciones Comunes en Circul.:");
+        jPanel4.add(lblNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 220, 30));
+
+        lblPagosPrincipal.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblPagosPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        lblPagosPrincipal.setText("Pagos del Principal:");
+        jPanel4.add(lblPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 220, 30));
+
+        lblGastosArrendamiento.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblGastosArrendamiento.setForeground(new java.awt.Color(255, 255, 255));
+        lblGastosArrendamiento.setText("Pagos/Gastos de Arrendamiento:");
+        jPanel4.add(lblGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, 30));
+
+        lblAccPref.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblAccPref.setForeground(new java.awt.Color(255, 255, 255));
+        lblAccPref.setText("Dividendos de Acciones Preferentes:");
+        jPanel4.add(lblAccPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 220, 30));
+
+        txtComprasAnuales.setText("0");
+        txtComprasAnuales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtComprasAnualesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 100, 30));
+
+        txtPrecioMercado.setText("0");
+        txtPrecioMercado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioMercadoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 100, 30));
+
+        txtNAccionesComunes.setText("0");
+        txtNAccionesComunes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNAccionesComunesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 100, 30));
+
+        txtPagosPrincipal.setText("0");
+        txtPagosPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPagosPrincipalActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 100, 30));
+
+        txtGastosArrendamiento.setText("0");
+        txtGastosArrendamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGastosArrendamientoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 100, 30));
+
+        txtAccPreferentes.setText("0");
+        txtAccPreferentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAccPreferentesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtAccPreferentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 100, 30));
+
+        lblPrecioMercado.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblPrecioMercado.setForeground(new java.awt.Color(255, 255, 255));
+        lblPrecioMercado.setText("Precio de Mercado por Acción:");
+        jPanel4.add(lblPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 220, 30));
+
+        pnlVerEstados.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 400, 300));
+
+        lblIndices.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblIndices.setForeground(new java.awt.Color(255, 255, 255));
+        lblIndices.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIndices.setText("Indices");
+        lblIndices.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblIndices.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblIndices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIndicesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblIndicesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblIndicesMouseExited(evt);
+            }
+        });
+        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 170, 50));
+
+        jSeparator4.setBackground(new java.awt.Color(240, 240, 240));
+        jSeparator4.setForeground(new java.awt.Color(240, 240, 240));
+        pnlVerEstados.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 700, 10));
 
         jPanel1.add(pnlVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 620));
 
@@ -1118,11 +1284,6 @@ public class frmHome extends javax.swing.JFrame {
         jLabel16.setText("Razón cargo interés fijo:");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 170, 30));
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel19.setText("Índice de Endeudamiento:");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 30));
-
         jLabel25.setFont(new java.awt.Font("Segoe UI Light", 1, 16)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("Endeudamiento:");
@@ -1156,6 +1317,11 @@ public class frmHome extends javax.swing.JFrame {
         lblR9.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblR9.setForeground(new java.awt.Color(72, 165, 234));
         lblR9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblR9.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lblR9PropertyChange(evt);
+            }
+        });
         jPanel2.add(lblR9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 170, 30));
 
         lblR10.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
@@ -1230,6 +1396,11 @@ public class frmHome extends javax.swing.JFrame {
         lblR4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel2.add(lblR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 170, 30));
 
+        jLabel30.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel30.setText("Índice de Endeudamiento:");
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 30));
+
         pnlIndices.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 620));
 
         jPanel1.add(pnlIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 620));
@@ -1298,11 +1469,6 @@ public class frmHome extends javax.swing.JFrame {
         jLabel21.setText("Margen Utilidad Operativa:");
         jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 170, 30));
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel20.setText("Margen Utilidad Bruta:");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 170, 30));
-
         lblR11.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblR11.setForeground(new java.awt.Color(72, 165, 234));
         lblR11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1350,6 +1516,11 @@ public class frmHome extends javax.swing.JFrame {
         lblR18.setForeground(new java.awt.Color(72, 165, 234));
         lblR18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel3.add(lblR18, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 170, 30));
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel32.setText("Margen Utilidad Bruta:");
+        jPanel3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 170, 30));
 
         pnlIndices2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 620));
 
@@ -1665,12 +1836,22 @@ public class frmHome extends javax.swing.JFrame {
         actualizarMisEstados();
         ObtenerDatosEstado();
         generarTablaReporteEstado();
+        SistemaContable.GananciasAccionistas = SistemaContable.UtilidadPorDistribuir + Double.parseDouble(txtAccPreferentes.getText().toString()); 
+        SistemaContable.GastosArrendamiento = Double.parseDouble(txtGastosArrendamiento.getText().toString()); 
+        SistemaContable.PagoPrincipal = Double.parseDouble(txtPagosPrincipal.getText().toString()); 
+        SistemaContable.NAccionesComunes = Double.parseDouble(txtNAccionesComunes.getText().toString()); 
+        SistemaContable.PrecioMercado = Double.parseDouble(txtPrecioMercado.getText().toString()); 
+        if(txtComprasAnuales.getText().equals("")||txtComprasAnuales.getText().equals("0")){
+            SistemaContable.ComprasAnuales = (SistemaContable.CostoVendido * 0.70)/360;
+        }else{
+            SistemaContable.ComprasAnuales = (Double.parseDouble(txtComprasAnuales.getText().toString())/360); 
+        }
         lblR1.setText(""+(SistemaContable.ActivosCorrientes/SistemaContable.PasivosCorrientes));
         lblR2.setText(""+((SistemaContable.ActivosCorrientes-SistemaContable.Inventario)/SistemaContable.PasivosCorrientes));
         lblR3.setText(""+(SistemaContable.ActivosCorrientes-SistemaContable.PasivosCorrientes));
         lblR4.setText(""+(SistemaContable.CostoVendido/SistemaContable.Inventario));
         lblR5.setText(""+(SistemaContable.CuentasXCobrar)/(SistemaContable.Ventas/360));
-        //lblR6.setText(""+);
+        lblR6.setText(""+SistemaContable.ComprasAnuales);
         lblR7.setText(""+(SistemaContable.Ventas/SistemaContable.ActivosTotales));
         lblR8.setText(""+(SistemaContable.PasivosTotales/SistemaContable.ActivosTotales));
         lblR9.setText(""+(SistemaContable.UtilidadOperativa/SistemaContable.OtrosGastos));
@@ -1678,12 +1859,13 @@ public class frmHome extends javax.swing.JFrame {
         lblR11.setText(""+(SistemaContable.UtilidadBruta/SistemaContable.Ventas));
         lblR12.setText(""+(SistemaContable.UtilidadOperativa/SistemaContable.Ventas));
         lblR13.setText(""+(SistemaContable.UtilidadNeta/SistemaContable.Ventas));
-        //lblR14.setText(""+(SistemaContable.UtilidadPorDistribuir/SistemaContable.Ventas));
-        lblR15.setText(""+(SistemaContable.UtilidadPorDistribuir/SistemaContable.ActivosTotales));
-        lblR16.setText(""+(SistemaContable.UtilidadPorDistribuir/SistemaContable.Capital));
-        //lblR17.setText(""+(SistemaContable.UtilidadNeta/SistemaContable.Ventas));
-        //lblR18.setText(""+(SistemaContable.UtilidadNeta/SistemaContable.Ventas));
-        
+        lblR14.setText(""+(SistemaContable.GananciasAccionistas/SistemaContable.NAccionesComunes));
+        lblR15.setText(""+(SistemaContable.GananciasAccionistas/SistemaContable.ActivosTotales));
+        lblR16.setText(""+(SistemaContable.GananciasAccionistas/SistemaContable.Capital));
+        lblR17.setText(""+(SistemaContable.PrecioMercado/(SistemaContable.GananciasAccionistas/SistemaContable.NAccionesComunes)));
+        lblR18.setText(""+(SistemaContable.PrecioMercado/(SistemaContable.Capital/SistemaContable.NAccionesComunes)));
+
+
         
     }//GEN-LAST:event_lblIndicesMouseClicked
 
@@ -1692,15 +1874,15 @@ public class frmHome extends javax.swing.JFrame {
         ObtenerDatosEstado();
         generarTablaReporteEstado();
         generarEstado();        
-                        System.out.println("VENTAS NETAS "+SistemaContable.VentasNetas);
-                        System.out.println("COMPRAS TOTALES "+ SistemaContable.ComprasTotales);
-                        System.out.println("COMPRAS NETAS "+ SistemaContable.ComprasNetas);
-                        System.out.println("DISPONIBILIDAD "+SistemaContable.DisponibilidadMercanciasPeriodo);
-                        System.out.println("COSTO DE LO VENDIDO "+SistemaContable.CostoVendido);
-                        System.out.println("UTILIDAD BRUTA "+SistemaContable.UtilidadBruta);
-                        System.out.println("UTILIDAD OPERATIVA "+SistemaContable.UtilidadOperativa);
-                        System.out.println("UTILIDAD NETA "+SistemaContable.UtilidadNeta);
-                        System.out.println("UTILIDAD POR DISTRIBUIR "+SistemaContable.UtilidadPorDistribuir);
+        System.out.println("VENTAS NETAS "+SistemaContable.VentasNetas);
+        System.out.println("COMPRAS TOTALES "+ SistemaContable.ComprasTotales);
+        System.out.println("COMPRAS NETAS "+ SistemaContable.ComprasNetas);
+        System.out.println("DISPONIBILIDAD "+SistemaContable.DisponibilidadMercanciasPeriodo);
+        System.out.println("COSTO DE LO VENDIDO "+SistemaContable.CostoVendido);
+        System.out.println("UTILIDAD BRUTA "+SistemaContable.UtilidadBruta);
+        System.out.println("UTILIDAD OPERATIVA "+SistemaContable.UtilidadOperativa);
+        System.out.println("UTILIDAD NETA "+SistemaContable.UtilidadNeta);
+        System.out.println("UTILIDAD POR DISTRIBUIR "+SistemaContable.UtilidadPorDistribuir);
     }//GEN-LAST:event_lblEstadoMouseClicked
 
     private void lblBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalanceMouseClicked
@@ -1834,6 +2016,52 @@ public class frmHome extends javax.swing.JFrame {
         pnlAnalisisVerticalER.setVisible(false);
     }//GEN-LAST:event_lblCerrar4MouseClicked
 
+    private void btnModificarEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseClicked
+            frmModificarCuentas nc = new frmModificarCuentas();
+            nc.setVisible(true);
+            this.setVisible(false);
+            //this.setEnabled(false);
+            llenandoCmbEstados(nc.cmbEstados);
+            nc.lblNombreEmpresa.setText(lblEmpresa.getText());
+            nc.setLocationRelativeTo(null);   
+    }//GEN-LAST:event_btnModificarEstadosMouseClicked
+
+    private void btnModificarEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarEstadosMouseEntered
+
+    private void btnModificarEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarEstadosMouseExited
+
+    private void lblR9PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblR9PropertyChange
+
+    }//GEN-LAST:event_lblR9PropertyChange
+
+    private void txtComprasAnualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComprasAnualesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtComprasAnualesActionPerformed
+
+    private void txtPrecioMercadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioMercadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioMercadoActionPerformed
+
+    private void txtNAccionesComunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNAccionesComunesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNAccionesComunesActionPerformed
+
+    private void txtPagosPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagosPrincipalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagosPrincipalActionPerformed
+
+    private void txtGastosArrendamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGastosArrendamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGastosArrendamientoActionPerformed
+
+    private void txtAccPreferentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccPreferentesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAccPreferentesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1870,6 +2098,7 @@ public class frmHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel btnModificarEstados;
     private javax.swing.JComboBox<String> cmbFecha;
     private javax.swing.JComboBox<String> cmbFecha1;
     private javax.swing.JLabel jLabel1;
@@ -1882,12 +2111,10 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
+    public static javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1895,6 +2122,8 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1904,6 +2133,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1912,10 +2142,12 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
     private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lblAccPref;
     public static javax.swing.JLabel lblAnalisis;
     public static javax.swing.JLabel lblBalance;
     public static javax.swing.JLabel lblBalance1;
@@ -1943,29 +2175,34 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblCerrar3;
     private javax.swing.JLabel lblCerrar4;
     public static javax.swing.JLabel lblComparar;
+    private javax.swing.JLabel lblComprasAnuales;
     public static javax.swing.JLabel lblCrearEstados;
     public static javax.swing.JLabel lblEmpresa;
     public static javax.swing.JLabel lblEstado;
     public static javax.swing.JLabel lblEstado1;
+    private javax.swing.JLabel lblGastosArrendamiento;
     public static javax.swing.JLabel lblIndices;
-    private javax.swing.JLabel lblR1;
-    private javax.swing.JLabel lblR10;
-    private javax.swing.JLabel lblR11;
-    private javax.swing.JLabel lblR12;
-    private javax.swing.JLabel lblR13;
-    private javax.swing.JLabel lblR14;
-    private javax.swing.JLabel lblR15;
-    private javax.swing.JLabel lblR16;
-    private javax.swing.JLabel lblR17;
-    private javax.swing.JLabel lblR18;
-    private javax.swing.JLabel lblR2;
-    private javax.swing.JLabel lblR3;
-    private javax.swing.JLabel lblR4;
-    private javax.swing.JLabel lblR5;
-    private javax.swing.JLabel lblR6;
-    private javax.swing.JLabel lblR7;
-    private javax.swing.JLabel lblR8;
-    private javax.swing.JLabel lblR9;
+    private javax.swing.JLabel lblNAccionesComunes;
+    private javax.swing.JLabel lblPagosPrincipal;
+    private javax.swing.JLabel lblPrecioMercado;
+    public static javax.swing.JLabel lblR1;
+    public static javax.swing.JLabel lblR10;
+    public static javax.swing.JLabel lblR11;
+    public static javax.swing.JLabel lblR12;
+    public static javax.swing.JLabel lblR13;
+    public static javax.swing.JLabel lblR14;
+    public static javax.swing.JLabel lblR15;
+    public static javax.swing.JLabel lblR16;
+    public static javax.swing.JLabel lblR17;
+    public static javax.swing.JLabel lblR18;
+    public static javax.swing.JLabel lblR2;
+    public static javax.swing.JLabel lblR3;
+    public static javax.swing.JLabel lblR4;
+    public static javax.swing.JLabel lblR5;
+    public static javax.swing.JLabel lblR6;
+    public static javax.swing.JLabel lblR7;
+    public static javax.swing.JLabel lblR8;
+    public static javax.swing.JLabel lblR9;
     private javax.swing.JLabel lblSiguiente;
     public static javax.swing.JLabel lblVerEstados;
     private javax.swing.JLabel lblVolver;
@@ -1985,5 +2222,11 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JTable tblBG;
     private javax.swing.JTable tblEstadosReporte;
     private javax.swing.JTable tblMisEstados;
+    private javax.swing.JTextField txtAccPreferentes;
+    private javax.swing.JTextField txtComprasAnuales;
+    private javax.swing.JTextField txtGastosArrendamiento;
+    private javax.swing.JTextField txtNAccionesComunes;
+    private javax.swing.JTextField txtPagosPrincipal;
+    private javax.swing.JTextField txtPrecioMercado;
     // End of variables declaration//GEN-END:variables
 }
