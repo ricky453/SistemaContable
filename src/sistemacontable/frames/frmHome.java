@@ -42,7 +42,9 @@ public class frmHome extends javax.swing.JFrame {
     Object miFechas[][];
     ArrayList<Cuenta> fechas = new ArrayList();
     private static DefaultTableModel modeloMisEstados;
+    private static DefaultTableModel modeloMisEstados2;
     private static DefaultTableModel modeloBG;
+    private static DefaultTableModel modeloBG2;
     private static DefaultTableModel EstadosParaReporte;
     private static DefaultTableModel AnalisisVerticalERTableModel;
     private static DefaultTableModel AnalisisVerticalBGTableModel;
@@ -162,12 +164,12 @@ public class frmHome extends javax.swing.JFrame {
             tblEstadosReporte.setModel(EstadosParaReporte);
     }
     //OBTENER DATOS DEL BALANCE GENERAL
-        public void actualizarMiBG(){
+        public void actualizarMiBG(String fecha){
         try {           
             modeloBG.setRowCount(0);
             ArrayList<Cuenta> listaBG=new ArrayList();
             Object fila[]=new Object[4];
-            listaBG=ControladorCuenta.ObtenerBG(cmbFecha.getSelectedItem().toString(), SistemaContable.empresa);
+            listaBG=ControladorCuenta.ObtenerBG(fecha, SistemaContable.empresa);
             Iterator<Cuenta> MisEstados=listaBG.iterator();
             while(MisEstados.hasNext()){
                 fila[0]= MisEstados.next();
@@ -182,25 +184,6 @@ public class frmHome extends javax.swing.JFrame {
         }
     }
         
-        public void actualizarMiBG2(){
-        try {           
-            modeloBG.setRowCount(0);
-            ArrayList<Cuenta> listaBG=new ArrayList();
-            Object fila[]=new Object[4];
-            listaBG=ControladorCuenta.ObtenerBG(cmbFecha1.getSelectedItem().toString(), SistemaContable.empresa);
-            Iterator<Cuenta> MisEstados=listaBG.iterator();
-            while(MisEstados.hasNext()){
-                fila[0]= MisEstados.next();
-                fila[1]= MisEstados.next();
-                fila[2]= MisEstados.next();
-                fila[3]= MisEstados.next();
-                modeloBG.addRow(fila);
-//                tblMisEstados.setModel(modeloBG);
-            }
-        } catch (ErrorSistemaContable ex) {
-            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
         
     public void ActivosCorrientes(){
         int i = 0;
@@ -258,26 +241,26 @@ public class frmHome extends javax.swing.JFrame {
     }
     public void CuentasPorCobrar(){
         int i = 0;
-        SistemaContable.Inventario=0;
+        SistemaContable.CuentasXCobrar=0;
         while(i<tblBG.getRowCount()){
         if(tblBG.getValueAt(i, 0).equals("CUENTAS POR COBRAR")){
-            SistemaContable.CuentasXCobrar=SistemaContable.Inventario+Double.parseDouble(tblBG.getValueAt(i, 3).toString());
+            SistemaContable.CuentasXCobrar=Double.parseDouble(tblBG.getValueAt(i, 3).toString());
             }
         i++;}        
     }
     public void CuentasPorPagar(){
         int i = 0;
-        SistemaContable.Inventario=0;
+        SistemaContable.CuentasXPagar=0;
         while(i<tblBG.getRowCount()){
         if(tblBG.getValueAt(i, 0).equals("CUENTAS POR PAGAR")){
-            SistemaContable.CuentasXPagar=SistemaContable.Inventario+Double.parseDouble(tblBG.getValueAt(i, 3).toString());
+            SistemaContable.CuentasXPagar=Double.parseDouble(tblBG.getValueAt(i, 3).toString());
             }
         i++;}        
     }
         
     public void generarBG(){
-        actualizarMiBG();
-        actualizarMiBG2();
+        //actualizarMiBG();
+        //actualizarMiBG2();
         ActivosCorrientes();
         ActivosNoCorrientes();
         SistemaContable.ActivosTotales = SistemaContable.ActivosCorrientes+SistemaContable.ActivosNoCorrientes;
@@ -286,16 +269,18 @@ public class frmHome extends javax.swing.JFrame {
         SistemaContable.PasivosTotales = SistemaContable.PasivosCorrientes+SistemaContable.PasivosNoCorrientes;
         Capital();
         Inventario();
+        CuentasPorCobrar();
+        CuentasPorPagar();
         //SistemaContable.ValorEnLibros = SistemaContable.Capital/;
                 
     }
     //OBTENER DATOS DEL ESTADO DE RESULTADOS    
-    public void actualizarMisEstados(){
+    public void actualizarMisEstados(String fecha){
         try {           
             modeloMisEstados.setRowCount(0);
             ArrayList<Cuenta> listaMisEstados=new ArrayList();
             Object fila[]=new Object[3];
-            listaMisEstados=ControladorCuenta.MisEstados(2, cmbFecha.getSelectedItem().toString(), SistemaContable.empresa);
+            listaMisEstados=ControladorCuenta.MisEstados(2, fecha, SistemaContable.empresa);
             Iterator<Cuenta> MisEstados=listaMisEstados.iterator();
             while(MisEstados.hasNext()){
                 fila[0]= MisEstados.next();
@@ -309,28 +294,10 @@ public class frmHome extends javax.swing.JFrame {
         }
     }
     
-    public void actualizarMisEstados2(){ 
-        try {           
-            modeloMisEstados.setRowCount(0);
-            ArrayList<Cuenta> listaMisEstados2=new ArrayList();
-            Object fila[]=new Object[3];
-            listaMisEstados2=ControladorCuenta.MisEstados(2, cmbFecha1.getSelectedItem().toString(), SistemaContable.empresa);
-            Iterator<Cuenta> MisEstados=listaMisEstados2.iterator();
-            while(MisEstados.hasNext()){
-                fila[0]= MisEstados.next();
-                fila[1]= MisEstados.next();
-                fila[2]= MisEstados.next();
-                modeloMisEstados.addRow(fila);
-               //tblAnalisisVerticalER.setModel(modeloMisEstados);
-            }
-        } catch (ErrorSistemaContable ex) {
-            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
 
     public void ObtenerDatosEstado(){
-        actualizarMisEstados();
-        //actualizarMisEstados2();
+
         int i = 0;
         SistemaContable.VentasNetas=0;
         SistemaContable.RebajasSobreVentas=0;
@@ -768,11 +735,16 @@ public class frmHome extends javax.swing.JFrame {
         tblMisEstados = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadosReporte = new javax.swing.JTable();
-        btnModificarEstados = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        exit = new javax.swing.JLabel();
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
+        lblModificarEstados = new javax.swing.JLabel();
+        lblCrearEstados = new javax.swing.JLabel();
+        lblVerEstados = new javax.swing.JLabel();
+        lblAnalisis = new javax.swing.JLabel();
+        lbl4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         pnlVerEstados = new javax.swing.JPanel();
         lblEstado = new javax.swing.JLabel();
@@ -782,11 +754,13 @@ public class frmHome extends javax.swing.JFrame {
         lblCerrar1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
+        lblIntereses = new javax.swing.JLabel();
         lblComprasAnuales = new javax.swing.JLabel();
         lblNAccionesComunes = new javax.swing.JLabel();
         lblPagosPrincipal = new javax.swing.JLabel();
         lblGastosArrendamiento = new javax.swing.JLabel();
         lblAccPref = new javax.swing.JLabel();
+        txtIntereses = new javax.swing.JTextField();
         txtComprasAnuales = new javax.swing.JTextField();
         txtPrecioMercado = new javax.swing.JTextField();
         txtNAccionesComunes = new javax.swing.JTextField();
@@ -882,11 +856,6 @@ public class frmHome extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblAnalisisVerticalER = new javax.swing.JTable();
-        lblComparar = new javax.swing.JLabel();
-        lblCrearEstados = new javax.swing.JLabel();
-        lblVerEstados = new javax.swing.JLabel();
-        lblAnalisis = new javax.swing.JLabel();
-        lbl4 = new javax.swing.JLabel();
         lblBienvenida = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida1 = new javax.swing.JLabel();
@@ -928,27 +897,21 @@ public class frmHome extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnModificarEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        btnModificarEstados.setForeground(new java.awt.Color(72, 165, 234));
-        btnModificarEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnModificarEstados.setText("Modificar mis Estados");
-        btnModificarEstados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 165, 234)));
-        btnModificarEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnModificarEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnModificarEstadosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnModificarEstadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnModificarEstadosMouseExited(evt);
-            }
-        });
-        getContentPane().add(btnModificarEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 230, 50));
-
         jPanel1.setBackground(new java.awt.Color(72, 165, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        exit.setBackground(new java.awt.Color(72, 165, 234));
+        exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        exit.setForeground(new java.awt.Color(255, 255, 255));
+        exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exit.setText("X");
+        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMouseClicked(evt);
+            }
+        });
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 30, 30));
 
         lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
@@ -961,6 +924,82 @@ public class frmHome extends javax.swing.JFrame {
         lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
         jPanel1.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 140, 20));
+
+        lblModificarEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblModificarEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblModificarEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModificarEstados.setText("Modificar Estados");
+        lblModificarEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblModificarEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblModificarEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblModificarEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblModificarEstadosMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblModificarEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 140, 40));
+
+        lblCrearEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblCrearEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblCrearEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCrearEstados.setText("Crear Estados Financieros");
+        lblCrearEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCrearEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCrearEstadosMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 210, 40));
+
+        lblVerEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblVerEstados.setForeground(new java.awt.Color(51, 51, 51));
+        lblVerEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVerEstados.setText("Ver mis Estados");
+        lblVerEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblVerEstados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblVerEstadosMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 140, 40));
+
+        lblAnalisis.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
+        lblAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAnalisis.setText("Análisis Vertical");
+        lblAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAnalisis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAnalisisMouseExited(evt);
+            }
+        });
+        jPanel1.add(lblAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 140, 40));
+
+        lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
+        jPanel1.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 140, 20));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 10));
 
         pnlVerEstados.setBackground(new java.awt.Color(72, 165, 234));
@@ -1031,30 +1070,43 @@ public class frmHome extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(72, 165, 234));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblIntereses.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        lblIntereses.setForeground(new java.awt.Color(255, 255, 255));
+        lblIntereses.setText("Intereses:");
+        jPanel4.add(lblIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 220, 30));
+
         lblComprasAnuales.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblComprasAnuales.setForeground(new java.awt.Color(255, 255, 255));
         lblComprasAnuales.setText("Compras Anuales");
-        jPanel4.add(lblComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 220, 30));
+        jPanel4.add(lblComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 220, 30));
 
         lblNAccionesComunes.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblNAccionesComunes.setForeground(new java.awt.Color(255, 255, 255));
         lblNAccionesComunes.setText("Nº Acciones Comunes en Circul.:");
-        jPanel4.add(lblNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 220, 30));
+        jPanel4.add(lblNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 220, 30));
 
         lblPagosPrincipal.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblPagosPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         lblPagosPrincipal.setText("Pagos del Principal:");
-        jPanel4.add(lblPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 220, 30));
+        jPanel4.add(lblPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 220, 30));
 
         lblGastosArrendamiento.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblGastosArrendamiento.setForeground(new java.awt.Color(255, 255, 255));
         lblGastosArrendamiento.setText("Pagos/Gastos de Arrendamiento:");
-        jPanel4.add(lblGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, 30));
+        jPanel4.add(lblGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 220, 30));
 
         lblAccPref.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblAccPref.setForeground(new java.awt.Color(255, 255, 255));
         lblAccPref.setText("Dividendos de Acciones Preferentes:");
-        jPanel4.add(lblAccPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 220, 30));
+        jPanel4.add(lblAccPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 30));
+
+        txtIntereses.setText("0");
+        txtIntereses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInteresesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 70, 30));
 
         txtComprasAnuales.setText("0");
         txtComprasAnuales.addActionListener(new java.awt.event.ActionListener() {
@@ -1062,7 +1114,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtComprasAnualesActionPerformed(evt);
             }
         });
-        jPanel4.add(txtComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 100, 30));
+        jPanel4.add(txtComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 70, 30));
 
         txtPrecioMercado.setText("0");
         txtPrecioMercado.addActionListener(new java.awt.event.ActionListener() {
@@ -1070,7 +1122,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtPrecioMercadoActionPerformed(evt);
             }
         });
-        jPanel4.add(txtPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 100, 30));
+        jPanel4.add(txtPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 70, 30));
 
         txtNAccionesComunes.setText("0");
         txtNAccionesComunes.addActionListener(new java.awt.event.ActionListener() {
@@ -1078,7 +1130,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtNAccionesComunesActionPerformed(evt);
             }
         });
-        jPanel4.add(txtNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 100, 30));
+        jPanel4.add(txtNAccionesComunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 70, 30));
 
         txtPagosPrincipal.setText("0");
         txtPagosPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -1086,7 +1138,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtPagosPrincipalActionPerformed(evt);
             }
         });
-        jPanel4.add(txtPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 100, 30));
+        jPanel4.add(txtPagosPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 70, 30));
 
         txtGastosArrendamiento.setText("0");
         txtGastosArrendamiento.addActionListener(new java.awt.event.ActionListener() {
@@ -1094,7 +1146,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtGastosArrendamientoActionPerformed(evt);
             }
         });
-        jPanel4.add(txtGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 100, 30));
+        jPanel4.add(txtGastosArrendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 70, 30));
 
         txtAccPreferentes.setText("0");
         txtAccPreferentes.addActionListener(new java.awt.event.ActionListener() {
@@ -1102,14 +1154,12 @@ public class frmHome extends javax.swing.JFrame {
                 txtAccPreferentesActionPerformed(evt);
             }
         });
-        jPanel4.add(txtAccPreferentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 100, 30));
+        jPanel4.add(txtAccPreferentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 70, 30));
 
         lblPrecioMercado.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblPrecioMercado.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecioMercado.setText("Precio de Mercado por Acción:");
-        jPanel4.add(lblPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 220, 30));
-
-        pnlVerEstados.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 400, 300));
+        jPanel4.add(lblPrecioMercado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 220, 30));
 
         lblIndices.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblIndices.setForeground(new java.awt.Color(255, 255, 255));
@@ -1128,7 +1178,9 @@ public class frmHome extends javax.swing.JFrame {
                 lblIndicesMouseExited(evt);
             }
         });
-        pnlVerEstados.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 170, 50));
+        jPanel4.add(lblIndices, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 170, 50));
+
+        pnlVerEstados.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 680, 320));
 
         jSeparator4.setBackground(new java.awt.Color(240, 240, 240));
         jSeparator4.setForeground(new java.awt.Color(240, 240, 240));
@@ -1557,11 +1609,11 @@ public class frmHome extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBalance1MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBalance1MouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBalance1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBalance1MouseExited(evt);
             }
         });
         pnlAnalisisVertical.add(lblBalance1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 230, 50));
@@ -1576,11 +1628,11 @@ public class frmHome extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblEstado1MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblEstado1MouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblEstado1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblEstado1MouseExited(evt);
             }
         });
         pnlAnalisisVertical.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 230, 50));
@@ -1657,82 +1709,6 @@ public class frmHome extends javax.swing.JFrame {
 
         jPanel1.add(pnlAnalisisVerticalER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 700, 620));
 
-        lblComparar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblComparar.setForeground(new java.awt.Color(51, 51, 51));
-        lblComparar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblComparar.setText("Comparar Años");
-        lblComparar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblComparar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCompararMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblCompararMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblCompararMouseExited(evt);
-            }
-        });
-        jPanel1.add(lblComparar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 140, 40));
-
-        lblCrearEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblCrearEstados.setForeground(new java.awt.Color(51, 51, 51));
-        lblCrearEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCrearEstados.setText("Crear Estados Financieros");
-        lblCrearEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCrearEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCrearEstadosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblCrearEstadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblCrearEstadosMouseExited(evt);
-            }
-        });
-        jPanel1.add(lblCrearEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 210, 40));
-
-        lblVerEstados.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblVerEstados.setForeground(new java.awt.Color(51, 51, 51));
-        lblVerEstados.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVerEstados.setText("Ver mis Estados");
-        lblVerEstados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblVerEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblVerEstadosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblVerEstadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblVerEstadosMouseExited(evt);
-            }
-        });
-        jPanel1.add(lblVerEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 140, 40));
-
-        lblAnalisis.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
-        lblAnalisis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAnalisis.setText("Análisis Vertical");
-        lblAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAnalisis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAnalisisMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblAnalisisMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblAnalisisMouseEntered(evt);
-            }
-        });
-        jPanel1.add(lblAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 140, 40));
-
-        lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_25be(0)_48.png"))); // NOI18N
-        jPanel1.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 140, 20));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 700, 700));
 
         lblBienvenida.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
@@ -1779,9 +1755,14 @@ public class frmHome extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
-    private void lblCompararMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblCompararMouseClicked
+    private void lblModificarEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarEstadosMouseClicked
+            frmModificarCuentas nc = new frmModificarCuentas();
+            nc.setVisible(true);
+            this.setVisible(false);
+            //this.setEnabled(false);
+            llenandoCmbEstados(nc.cmbEstados);
+            nc.lblNombreEmpresa.setText(lblEmpresa.getText());
+    }//GEN-LAST:event_lblModificarEstadosMouseClicked
 
     private void lblCrearEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearEstadosMouseClicked
         frmCuentas cuentas = new frmCuentas();
@@ -1819,21 +1800,22 @@ public class frmHome extends javax.swing.JFrame {
         lbl2.setVisible(false);
     }//GEN-LAST:event_lblVerEstadosMouseExited
 
-    private void lblCompararMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseEntered
+    private void lblModificarEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarEstadosMouseEntered
         pnlComparar.setVisible(true);
         lbl3.setVisible(true);
-    }//GEN-LAST:event_lblCompararMouseEntered
+    }//GEN-LAST:event_lblModificarEstadosMouseEntered
 
-    private void lblCompararMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompararMouseExited
+    private void lblModificarEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblModificarEstadosMouseExited
         pnlComparar.setVisible(false);
         lbl3.setVisible(false);
-    }//GEN-LAST:event_lblCompararMouseExited
+    }//GEN-LAST:event_lblModificarEstadosMouseExited
 
     private void lblIndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIndicesMouseClicked
         pnlVerEstados.setVisible(false);
         pnlIndices.setVisible(true);
+        actualizarMiBG(cmbFecha.getSelectedItem().toString());
         generarBG();
-        actualizarMisEstados();
+        actualizarMisEstados(cmbFecha.getSelectedItem().toString());
         ObtenerDatosEstado();
         generarTablaReporteEstado();
         SistemaContable.GananciasAccionistas = SistemaContable.UtilidadPorDistribuir + Double.parseDouble(txtAccPreferentes.getText().toString()); 
@@ -1846,16 +1828,19 @@ public class frmHome extends javax.swing.JFrame {
         }else{
             SistemaContable.ComprasAnuales = (Double.parseDouble(txtComprasAnuales.getText().toString())/360); 
         }
+        SistemaContable.Intereses = Double.parseDouble(txtIntereses.getText().toString()); 
         lblR1.setText(""+(SistemaContable.ActivosCorrientes/SistemaContable.PasivosCorrientes));
         lblR2.setText(""+((SistemaContable.ActivosCorrientes-SistemaContable.Inventario)/SistemaContable.PasivosCorrientes));
         lblR3.setText(""+(SistemaContable.ActivosCorrientes-SistemaContable.PasivosCorrientes));
         lblR4.setText(""+(SistemaContable.CostoVendido/SistemaContable.Inventario));
-        lblR5.setText(""+(SistemaContable.CuentasXCobrar)/(SistemaContable.Ventas/360));
-        lblR6.setText(""+SistemaContable.ComprasAnuales);
+        lblR5.setText(""+(SistemaContable.CuentasXCobrar)/((SistemaContable.Ventas/360)));
+        System.out.println(SistemaContable.Ventas);
+        System.out.println(SistemaContable.CuentasXCobrar+"CUENTAS X COBRAR");
+        lblR6.setText(""+(SistemaContable.CuentasXPagar/SistemaContable.ComprasAnuales));
         lblR7.setText(""+(SistemaContable.Ventas/SistemaContable.ActivosTotales));
         lblR8.setText(""+(SistemaContable.PasivosTotales/SistemaContable.ActivosTotales));
-        lblR9.setText(""+(SistemaContable.UtilidadOperativa/SistemaContable.OtrosGastos));
-        //lbR10.setText();
+        lblR9.setText(""+(SistemaContable.UtilidadOperativa/SistemaContable.Intereses));
+        lblR10.setText(""+(SistemaContable.UtilidadOperativa+SistemaContable.GastosArrendamiento)/(SistemaContable.Intereses+SistemaContable.GastosArrendamiento+(SistemaContable.PagoPrincipal+Double.parseDouble(txtAccPreferentes.getText().toString())*(1/(1-SistemaContable.Intereses)))));
         lblR11.setText(""+(SistemaContable.UtilidadBruta/SistemaContable.Ventas));
         lblR12.setText(""+(SistemaContable.UtilidadOperativa/SistemaContable.Ventas));
         lblR13.setText(""+(SistemaContable.UtilidadNeta/SistemaContable.Ventas));
@@ -1870,7 +1855,7 @@ public class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_lblIndicesMouseClicked
 
     private void lblEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstadoMouseClicked
-        actualizarMisEstados();
+        actualizarMisEstados(cmbFecha.getSelectedItem().toString());
         ObtenerDatosEstado();
         generarTablaReporteEstado();
         generarEstado();        
@@ -1891,7 +1876,7 @@ public class frmHome extends javax.swing.JFrame {
             String archivo = getClass().getResource("/reporte/balanceGeneral.jasper").getPath();
             parametro.put("parameter1", cmbFecha.getSelectedItem().toString());
             parametro.put("empresa", lblEmpresa.getText());
-            actualizarMisEstados();
+            actualizarMisEstados(cmbFecha.getSelectedItem().toString());
             ObtenerDatosEstado();
             parametro.put("Utilidad", SistemaContable.UtilidadPorDistribuir);
             parametro.put("Reserva", SistemaContable.ReservaLegal);
@@ -1979,7 +1964,8 @@ public class frmHome extends javax.swing.JFrame {
     private void lblBalance1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBalance1MouseClicked
         pnlAnalisisVertical.setVisible(false);
         pnlAnalisisVerticalBG.setVisible(true);
-        generarBG();
+        actualizarMiBG(cmbFecha1.getSelectedItem().toString());
+        generarBG();        
         generarTablaAnálisisVerticalBG();
     }//GEN-LAST:event_lblBalance1MouseClicked
 
@@ -1995,6 +1981,7 @@ public class frmHome extends javax.swing.JFrame {
         pnlAnalisisVertical.setVisible(false);
         pnlAnalisisVerticalBG.setVisible(false);
         pnlAnalisisVerticalER.setVisible(true);
+        actualizarMisEstados(cmbFecha1.getSelectedItem().toString());
         ObtenerDatosEstado();
         generarTablaAnálisisVerticalER();
     }//GEN-LAST:event_lblEstado1MouseClicked
@@ -2015,24 +2002,6 @@ public class frmHome extends javax.swing.JFrame {
         pnlAnalisisVerticalBG.setVisible(false);
         pnlAnalisisVerticalER.setVisible(false);
     }//GEN-LAST:event_lblCerrar4MouseClicked
-
-    private void btnModificarEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseClicked
-            frmModificarCuentas nc = new frmModificarCuentas();
-            nc.setVisible(true);
-            this.setVisible(false);
-            //this.setEnabled(false);
-            llenandoCmbEstados(nc.cmbEstados);
-            nc.lblNombreEmpresa.setText(lblEmpresa.getText());
-            nc.setLocationRelativeTo(null);   
-    }//GEN-LAST:event_btnModificarEstadosMouseClicked
-
-    private void btnModificarEstadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarEstadosMouseEntered
-
-    private void btnModificarEstadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadosMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarEstadosMouseExited
 
     private void lblR9PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblR9PropertyChange
 
@@ -2061,6 +2030,15 @@ public class frmHome extends javax.swing.JFrame {
     private void txtAccPreferentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccPreferentesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAccPreferentesActionPerformed
+
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitMouseClicked
+
+    private void txtInteresesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInteresesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInteresesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2098,9 +2076,9 @@ public class frmHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JLabel btnModificarEstados;
     private javax.swing.JComboBox<String> cmbFecha;
     private javax.swing.JComboBox<String> cmbFecha1;
+    private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2174,7 +2152,6 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblCerrar2;
     private javax.swing.JLabel lblCerrar3;
     private javax.swing.JLabel lblCerrar4;
-    public static javax.swing.JLabel lblComparar;
     private javax.swing.JLabel lblComprasAnuales;
     public static javax.swing.JLabel lblCrearEstados;
     public static javax.swing.JLabel lblEmpresa;
@@ -2182,6 +2159,8 @@ public class frmHome extends javax.swing.JFrame {
     public static javax.swing.JLabel lblEstado1;
     private javax.swing.JLabel lblGastosArrendamiento;
     public static javax.swing.JLabel lblIndices;
+    private javax.swing.JLabel lblIntereses;
+    public static javax.swing.JLabel lblModificarEstados;
     private javax.swing.JLabel lblNAccionesComunes;
     private javax.swing.JLabel lblPagosPrincipal;
     private javax.swing.JLabel lblPrecioMercado;
@@ -2225,6 +2204,7 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JTextField txtAccPreferentes;
     private javax.swing.JTextField txtComprasAnuales;
     private javax.swing.JTextField txtGastosArrendamiento;
+    private javax.swing.JTextField txtIntereses;
     private javax.swing.JTextField txtNAccionesComunes;
     private javax.swing.JTextField txtPagosPrincipal;
     private javax.swing.JTextField txtPrecioMercado;

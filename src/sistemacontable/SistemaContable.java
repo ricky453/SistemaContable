@@ -35,6 +35,7 @@ public class SistemaContable {
     public static double NAccionesComunes=0;
     public static double PrecioMercado=0;
     public static double ComprasAnuales=0;
+    public static double Intereses=0;
     
     //ESTADO DE RESULTADOS
     public static double VentasNetas=0;

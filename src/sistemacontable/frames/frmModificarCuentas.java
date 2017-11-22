@@ -63,50 +63,36 @@ public class frmModificarCuentas extends javax.swing.JFrame {
     private void initComponents() {
 
         lblNombreEmpresa = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cmbEstados = new javax.swing.JComboBox<>();
-        fechaAnio = new com.toedter.calendar.JYearChooser();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtCuenta = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
-        btnModificar = new javax.swing.JButton();
+        fechaAnio = new com.toedter.calendar.JYearChooser();
+        jLabel2 = new javax.swing.JLabel();
+        txtCuenta = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtModificar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblCerrar = new javax.swing.JLabel();
+        cmbEstados = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(72, 165, 234));
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNombreEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 220, 30));
 
-        jLabel2.setText("AÑO:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("EMPRESA");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
 
-        cmbEstados.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbEstadosItemStateChanged(evt);
-            }
-        });
-        getContentPane().add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 200, -1));
-        getContentPane().add(fechaAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 80, -1));
-
-        jLabel3.setText("ESTADOS FINANCIEROS: ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
-
-        jLabel4.setText("BUSCAR CUENTA:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
-
-        txtCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCuentaKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCuentaKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 450, -1));
+        jPanel1.setBackground(new java.awt.Color(72, 165, 234));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,23 +115,78 @@ public class frmModificarCuentas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCuentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 880, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 880, 190));
+        jPanel1.add(fechaAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 80, 30));
 
-        btnModificar.setText("MODIFICAR");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel2.setText("AÑO:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, 30));
+
+        txtCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCuentaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuentaKeyTyped(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
+        jPanel1.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel4.setText("BUSCAR CUENTA:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, 30));
+
+        txtModificar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        txtModificar.setForeground(new java.awt.Color(255, 255, 255));
+        txtModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtModificar.setText("Modificar");
+        txtModificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtModificarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtModificarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtModificarMouseExited(evt);
+            }
+        });
+        jPanel1.add(txtModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, 180, 40));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabel5.setText("MODIFICAR CUENTAS");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, 30));
 
-        jLabel6.setText("EMPRESA");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
+        lblCerrar.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e4ad(0)_482.png"))); // NOI18N
+        lblCerrar.setToolTipText("Cerrar");
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 50));
+
+        cmbEstados.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbEstadosItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 200, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        jLabel3.setText("ESTADOS FINANCIEROS: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 520));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCuentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuentaKeyReleased
@@ -179,7 +220,7 @@ public class frmModificarCuentas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cmbEstadosItemStateChanged
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    private void txtModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseClicked
         if(tblCuentas.getSelectedRow()!=-1){
             int seleccion; 
             frmModificandoCuenta pm = new frmModificandoCuenta();
@@ -198,7 +239,21 @@ public class frmModificarCuentas extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Selecciones un dato de la tabla por favor" );
         }
-    }//GEN-LAST:event_btnModificarActionPerformed
+    }//GEN-LAST:event_txtModificarMouseClicked
+
+    private void txtModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseEntered
+        txtModificar.setForeground(java.awt.Color.black);
+    }//GEN-LAST:event_txtModificarMouseEntered
+
+    private void txtModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtModificarMouseExited
+        txtModificar.setForeground(java.awt.Color.white);
+    }//GEN-LAST:event_txtModificarMouseExited
+
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -236,7 +291,6 @@ public class frmModificarCuentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnModificar;
     public javax.swing.JComboBox<String> cmbEstados;
     private com.toedter.calendar.JYearChooser fechaAnio;
     private javax.swing.JLabel jLabel2;
@@ -244,9 +298,12 @@ public class frmModificarCuentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCerrar;
     public javax.swing.JLabel lblNombreEmpresa;
     private javax.swing.JTable tblCuentas;
     public javax.swing.JTextField txtCuenta;
+    public static javax.swing.JLabel txtModificar;
     // End of variables declaration//GEN-END:variables
 }
