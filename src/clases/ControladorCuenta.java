@@ -384,7 +384,7 @@ public class ControladorCuenta {
         public static void Modificar(Cuenta pr) throws ErrorSistemaContable{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE cuenta as c INNER JOIN cuentasanio as ca SET c.Cuenta='"+pr.getCuenta()+"',ca.Valor='"+pr.getValor()+"' WHERE c.IdCuenta='"+pr.getIdCuenta()+"'");
+            cn.st.execute("UPDATE cuenta INNER JOIN cuentasanio ON cuenta.IdCuenta=cuentasanio.IdCuenta SET cuenta.Cuenta='"+pr.getCuenta()+"',cuentasanio.Valor='"+pr.getValor()+"' WHERE cuenta.IdCuenta='"+pr.getIdCuenta()+"' ");
             
         } catch (SQLException e) {
             throw new ErrorSistemaContable("Class ControladorProducto/Modificar",e.getMessage());
