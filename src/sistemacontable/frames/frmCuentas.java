@@ -510,7 +510,12 @@ public class frmCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEstadoResultadosMouseClicked
 
     private void lblNuevaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNuevaCuentaMouseClicked
-        // TODO add your handling code here:
+        try {
+            frmNuevaCuenta nc = new frmNuevaCuenta();
+            nc.setVisible(true);
+        } catch (ErrorSistemaContable ex) {
+            Logger.getLogger(frmCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblNuevaCuentaMouseClicked
 
     /**
