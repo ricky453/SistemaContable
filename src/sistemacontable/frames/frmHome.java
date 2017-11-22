@@ -1878,8 +1878,10 @@ public class frmHome extends javax.swing.JFrame {
             parametro.put("empresa", lblEmpresa.getText());
             actualizarMisEstados(cmbFecha.getSelectedItem().toString());
             ObtenerDatosEstado();
-            parametro.put("Utilidad", SistemaContable.UtilidadPorDistribuir);
-            parametro.put("Reserva", SistemaContable.ReservaLegal);
+            System.out.println(SistemaContable.UtilidadPorDistribuir);
+            System.out.println(SistemaContable.ReservaLegal);
+            parametro.put("utilidad", SistemaContable.UtilidadPorDistribuir);
+            parametro.put("reserva", SistemaContable.ReservaLegal);
             Conexion cn = new Conexion();
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(archivo);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn.conexion);
