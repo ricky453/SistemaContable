@@ -57,7 +57,7 @@ FROM `cuenta`
 				<textField>
 					<reportElement style="SubTitle" x="63" y="13" width="506" height="24" forecolor="#000000" uuid="9430279a-f702-4d68-8cd4-4243c4e82744"/>
 					<textElement>
-						<font fontName="Times New Roman" isBold="true"/>
+						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{tipocuenta}]]></textFieldExpression>
 				</textField>
@@ -92,7 +92,7 @@ FROM `cuenta`
 				<textField>
 					<reportElement style="SubTitle" x="10" y="10" width="460" height="20" uuid="bfbe0a00-d978-427b-9b93-b18d2a4049f3"/>
 					<textElement>
-						<font fontName="Times New Roman" size="16" isBold="true"/>
+						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{subtipocuenta}]]></textFieldExpression>
 				</textField>
