@@ -19,9 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class frmModificandoCuenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificandoCuenta
-     */
+    int anio=0;
+    int id=0;
     public frmModificandoCuenta() {
         initComponents();
     }
@@ -194,6 +193,8 @@ public class frmModificandoCuenta extends javax.swing.JFrame {
            c.setIdCuenta(Integer.parseInt(txtId.getText()));
            c.setCuenta(txtNombre.getText());
            c.setValor(txtValor.getText());
+           c.setFecha(String.valueOf(anio));
+           c.setIdEmpresa(id);
            try {
                ControladorCuenta.Modificar(c);
                

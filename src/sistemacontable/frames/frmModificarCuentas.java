@@ -230,6 +230,8 @@ public class frmModificarCuentas extends javax.swing.JFrame {
             pm.txtId.setText(tblCuentas.getValueAt(seleccion, 0).toString());
             pm.txtNombre.setText((tblCuentas.getValueAt(seleccion, 1).toString()));
             pm.txtValor.setText((tblCuentas.getValueAt(seleccion, 2).toString()));
+            pm.anio=fechaAnio.getYear();
+            pm.id=idEmpresa;
             
             
             pm.txtNombre.requestFocus();
@@ -292,7 +294,7 @@ public class frmModificarCuentas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> cmbEstados;
-    private com.toedter.calendar.JYearChooser fechaAnio;
+    public com.toedter.calendar.JYearChooser fechaAnio;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
