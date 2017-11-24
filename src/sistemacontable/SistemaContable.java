@@ -29,6 +29,7 @@ public class SistemaContable {
     public static double ValorEnLibros=0;
     
     public static double Ventas=0;
+    public static double Compras=0;
     public static double GananciasAccionistas=0;
     public static double GastosArrendamiento=0;
     public static double PagoPrincipal=0;
