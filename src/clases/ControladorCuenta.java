@@ -8,6 +8,8 @@ package clases;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +28,11 @@ public class ControladorCuenta {
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarCuentas", ex.getMessage());
         }
+        try {
+            cn.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public static void AgregarEmpresa(Cuenta cu)throws ErrorSistemaContable{ 
         try {
@@ -34,6 +41,11 @@ public class ControladorCuenta {
             
         } catch (SQLException ex) { 
             throw new ErrorSistemaContable("Class ControladorCuenta/AgregarEmpresa", ex.getMessage());
+        }
+        try {
+            cn.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void Agregar(Cuenta cu)throws ErrorSistemaContable{ 
@@ -44,6 +56,11 @@ public class ControladorCuenta {
             
         } catch (SQLException ex) {
             throw new ErrorSistemaContable("Class ControladorCuenta/Agregar", ex.getMessage());
+        }
+        try {
+            cn.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -69,6 +86,7 @@ public class ControladorCuenta {
         } catch (SQLException e) {
             throw new ErrorSistemaContable("Class ControladorCuenta/ObtenerCuentas",e.getMessage());
         }
+
         
         ArrayList<Cuenta> cuentas=(ArrayList) cuenta;
         return cuentas;
@@ -388,6 +406,11 @@ public class ControladorCuenta {
             
         } catch (SQLException e) {
             throw new ErrorSistemaContable("Class ControladorProducto/Modificar",e.getMessage());
+        }
+        try {
+            cn.conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
