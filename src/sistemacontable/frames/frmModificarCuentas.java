@@ -22,15 +22,16 @@ import javax.swing.table.DefaultTableModel;
 public class frmModificarCuentas extends javax.swing.JFrame {
 
     int idEmpresa=0;
+ 
     public frmModificarCuentas() {
-        initComponents();
+        initComponents();        
+
 //        cargandoTabla("",cmbEstados.getSelectedIndex()+1,fechaAnio.getYear(),idEmpresa);
     }
     
     public void cargandoTabla(String cuenta,int idFinanciero,int anio,int idEmpresa){
-        
-        
-        DefaultTableModel modeloTabla=new DefaultTableModel();
+        DefaultTableModel modeloTabla=new DefaultTableModel();   
+        //modeloTabla = (DefaultTableModel) tblCuentas.getModel();
         
         ArrayList<Cuenta> misCuentas=new ArrayList<Cuenta>();
         Object [] fila=new Object[3];
@@ -96,10 +97,7 @@ public class frmModificarCuentas extends javax.swing.JFrame {
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id Cuenta", "Cuenta", "Valor"
@@ -108,12 +106,24 @@ public class frmModificarCuentas extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.String.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(tblCuentas);
+        if (tblCuentas.getColumnModel().getColumnCount() > 0) {
+            tblCuentas.getColumnModel().getColumn(0).setResizable(false);
+            tblCuentas.getColumnModel().getColumn(1).setResizable(false);
+            tblCuentas.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 880, 190));
         jPanel1.add(fechaAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 80, 30));

@@ -1761,7 +1761,12 @@ public class frmHome extends javax.swing.JFrame {
         try {
             CargarFechas();
             pnlAnalisisVertical.setVisible(false);
+            pnlAnalisisVerticalBG.setVisible(false);
+            pnlAnalisisVerticalER.setVisible(false);
+            pnlIndices.setVisible(false);
+            pnlIndices2.setVisible(false);
             pnlVerEstados.setVisible(true);
+            
         } catch (ErrorSistemaContable ex) {
             Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1915,7 +1920,12 @@ public class frmHome extends javax.swing.JFrame {
         try {
             CargarFechas();
             pnlVerEstados.setVisible(false);
+            pnlAnalisisVerticalBG.setVisible(false);
+            pnlAnalisisVerticalER.setVisible(false);
+            pnlIndices.setVisible(false);
+            pnlIndices2.setVisible(false);
             pnlAnalisisVertical.setVisible(true);
+            
         } catch (ErrorSistemaContable ex) {
             Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
         }
