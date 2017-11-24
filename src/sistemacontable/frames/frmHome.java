@@ -387,6 +387,7 @@ public class frmHome extends javax.swing.JFrame {
                 int c=0;
                 while(c<tblMisEstados.getRowCount()){
                 if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
+                    SistemaContable.Compras = (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()));
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
                     ObtenerComprasNetas();
                     System.out.println("Gastos de Compras de "+SistemaContable.GastosCompras);
@@ -401,6 +402,7 @@ public class frmHome extends javax.swing.JFrame {
             int c=0;
             while(c<tblMisEstados.getRowCount()){
                 if(tblMisEstados.getValueAt(c, 0).equals("COMPRAS")){
+                    SistemaContable.Compras = (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()));
                     SistemaContable.ComprasTotales= (Double.parseDouble(tblMisEstados.getValueAt(c, 1).toString()))+SistemaContable.GastosCompras;
                     salir3=true;
                     }c++;   
@@ -755,13 +757,11 @@ public class frmHome extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         lblIntereses = new javax.swing.JLabel();
-        lblComprasAnuales = new javax.swing.JLabel();
         lblNAccionesComunes = new javax.swing.JLabel();
         lblPagosPrincipal = new javax.swing.JLabel();
         lblGastosArrendamiento = new javax.swing.JLabel();
         lblAccPref = new javax.swing.JLabel();
         txtIntereses = new javax.swing.JTextField();
-        txtComprasAnuales = new javax.swing.JTextField();
         txtPrecioMercado = new javax.swing.JTextField();
         txtNAccionesComunes = new javax.swing.JTextField();
         txtPagosPrincipal = new javax.swing.JTextField();
@@ -1073,12 +1073,7 @@ public class frmHome extends javax.swing.JFrame {
         lblIntereses.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblIntereses.setForeground(new java.awt.Color(255, 255, 255));
         lblIntereses.setText("Intereses:");
-        jPanel4.add(lblIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 220, 30));
-
-        lblComprasAnuales.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        lblComprasAnuales.setForeground(new java.awt.Color(255, 255, 255));
-        lblComprasAnuales.setText("Compras Anuales");
-        jPanel4.add(lblComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 220, 30));
+        jPanel4.add(lblIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 220, 30));
 
         lblNAccionesComunes.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lblNAccionesComunes.setForeground(new java.awt.Color(255, 255, 255));
@@ -1106,15 +1101,7 @@ public class frmHome extends javax.swing.JFrame {
                 txtInteresesActionPerformed(evt);
             }
         });
-        jPanel4.add(txtIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 70, 30));
-
-        txtComprasAnuales.setText("0");
-        txtComprasAnuales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtComprasAnualesActionPerformed(evt);
-            }
-        });
-        jPanel4.add(txtComprasAnuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 70, 30));
+        jPanel4.add(txtIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 70, 30));
 
         txtPrecioMercado.setText("0");
         txtPrecioMercado.addActionListener(new java.awt.event.ActionListener() {
@@ -1823,10 +1810,10 @@ public class frmHome extends javax.swing.JFrame {
         SistemaContable.PagoPrincipal = Double.parseDouble(txtPagosPrincipal.getText().toString()); 
         SistemaContable.NAccionesComunes = Double.parseDouble(txtNAccionesComunes.getText().toString()); 
         SistemaContable.PrecioMercado = Double.parseDouble(txtPrecioMercado.getText().toString()); 
-        if(txtComprasAnuales.getText().equals("")||txtComprasAnuales.getText().equals("0")){
+        if(SistemaContable.Compras==0){
             SistemaContable.ComprasAnuales = (SistemaContable.CostoVendido * 0.70)/360;
         }else{
-            SistemaContable.ComprasAnuales = (Double.parseDouble(txtComprasAnuales.getText().toString())/360); 
+            SistemaContable.ComprasAnuales = (SistemaContable.Compras/360); 
         }
         SistemaContable.Intereses = Double.parseDouble(txtIntereses.getText().toString()); 
         lblR1.setText(""+(SistemaContable.ActivosCorrientes/SistemaContable.PasivosCorrientes));
@@ -2009,10 +1996,6 @@ public class frmHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lblR9PropertyChange
 
-    private void txtComprasAnualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComprasAnualesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtComprasAnualesActionPerformed
-
     private void txtPrecioMercadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioMercadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioMercadoActionPerformed
@@ -2154,7 +2137,6 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblCerrar2;
     private javax.swing.JLabel lblCerrar3;
     private javax.swing.JLabel lblCerrar4;
-    private javax.swing.JLabel lblComprasAnuales;
     public static javax.swing.JLabel lblCrearEstados;
     public static javax.swing.JLabel lblEmpresa;
     public static javax.swing.JLabel lblEstado;
@@ -2204,7 +2186,6 @@ public class frmHome extends javax.swing.JFrame {
     private javax.swing.JTable tblEstadosReporte;
     private javax.swing.JTable tblMisEstados;
     private javax.swing.JTextField txtAccPreferentes;
-    private javax.swing.JTextField txtComprasAnuales;
     private javax.swing.JTextField txtGastosArrendamiento;
     private javax.swing.JTextField txtIntereses;
     private javax.swing.JTextField txtNAccionesComunes;
